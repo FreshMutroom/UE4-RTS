@@ -164,6 +164,19 @@
    TestTrie.insert("bat");
    TestTrie.insert("boom");
    
+   hideSearchBoxDropdownMenu();
+   
+   function hideSearchBoxDropdownMenu()
+   {
+      var ul =  document.getElementById("searchBoxDropdownList");
+      var li = ul.getElementsByTagName("li");
+      
+       for (var i = 0; i < li.length; ++i)
+      {
+         li[i].style.display = "none";
+      }
+   }
+   
    function onSearchBoxTextChanged()
    {
       var input = document.getElementById("searchBoxInput");

@@ -5,9 +5,9 @@
  */
 TrieNode = function()
 {
-	this.letter = '\0';
-    this.bIsWord = false;
-    this.children = [];
+	var letter = '\0';
+    var bIsWord = false;
+    var children = [];
 };
 
 /** 

@@ -10,7 +10,7 @@
       
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
-    <input type="text" onkeyup="onSearchBoxTextChanged()" id="myInput" placeholder="Search...">
+    <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
     
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">
@@ -34,27 +34,27 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
 <script>
    function onSearchBoxTextChanged()
    {
-      var input = document.getElementById("myInput");
+      var input = document.getElementById("searchBoxInput");
       var enteredText = input.value;
       var ul =  document.getElementById("searchBoxDropdownList");
-      var li = ul.getElementsByTagName('li');
+      var li = ul.getElementsByTagName("li");
       // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
       // or something (similar to C++ #include)
-      var prefixedWords = getPrefixedWords(enteredText);
+      var prefixedWords = [];//getPrefixedWords(enteredText);
       
       for (var i = 0; i < li.length; ++i)
       {
          if (prefixedWords.length > i)
          {
             // Show the list item 
-            li[i].style.display = "none";
+            li[i].style.display = "";
             // Set it's text
             li[i].textContent = prefixedWords[i];
          }
          else
          {
             // Hide the list item
-            li[i].style.display = "";
+            li[i].style.display = "none";
          }
       }
    }

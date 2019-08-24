@@ -226,6 +226,12 @@
       }
    }
    
+   function performSearch(searchText)
+   {
+      // Navigate to the search results page
+      location.href = "SearchResults.html";
+   }
+   
    function onSearchBoxTextBoxKeyUp(keyEvent, textArea)
    {
       var input = document.getElementById("searchBoxInput");
@@ -260,12 +266,6 @@
             li[i].style.visibility = "hidden";
          }
       }
-   }
-   
-   function performSearch(searchText)
-   {
-      // Navigate to the search results page
-      location.href = "SearchResults.html";
    }
    
    // Root node of trie for testing only

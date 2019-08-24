@@ -13,6 +13,20 @@
    // get the linking to the other file to work
    
    
+   /** 
+    *	Class declaration 
+    */
+   class TrieNode 
+   {
+      constructor() 
+      {
+         this.letter = '\0';
+         this.bIsWord = false;
+         this.children = [];
+      }
+  };
+   
+   
    /* Class declaration: a trie. Contains a hashset and a root node */
    class Trie
    {
@@ -49,20 +63,6 @@
    {
       return RootNode.getPrefixedWords(str);
    };
-
-
-   /** 
-    *	Class declaration 
-    */
-   class TrieNode 
-   {
-      constructor() 
-      {
-         this.letter = '\0';
-         this.bIsWord = false;
-         this.children = [];
-      }
-  };
    
    
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)

@@ -87,7 +87,7 @@
       {
          for (var i = 0; i < this.children.length; ++i)
          {
-            if (this.children[i].letter == str[index])
+            if (this.children[i].letter.toUpperCase() == str[index].toUpperCase())
             {
                this.children[i].recursiveGetPrefixedWords(str, index, words);
                return;

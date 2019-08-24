@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<!-- The html version of #include -->
+<script type="text/javascript" src="SearchBoxImpl.js"></script>
+
 <style>
    
 </style>
@@ -32,6 +35,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
 </html>
 
 <script>
+   // Root node of trie for testing only
+   var TestTrieRoot = new TrieNode();
+   
    function onSearchBoxTextChanged()
    {
       var input = document.getElementById("searchBoxInput");
@@ -40,7 +46,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
       var li = ul.getElementsByTagName("li");
       // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
       // or something (similar to C++ #include)
-      var prefixedWords = ["cat", "Apple", "Boom", "apple"];//getPrefixedWords(enteredText); 
+      var prefixedWords = TestTrieRoot.getPrefixedWords(enteredText); 
       
       for (var i = 0; i < li.length; ++i)
       {

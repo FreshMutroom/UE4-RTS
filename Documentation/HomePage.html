@@ -72,7 +72,7 @@
       /* Check if this node is a word. If yes then add it */
       if (this.bIsWord == true)
       {
-         words[words.length] = str.substring(0, index + 1);
+         words.push(str.substring(0, index + 1));
       }
 
       index++;

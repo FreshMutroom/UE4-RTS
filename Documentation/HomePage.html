@@ -157,15 +157,6 @@
    // End trie implementation
    //------------------------------------------------------
    
-   // Root node of trie for testing only
-   var TestTrie = new Trie();
-   TestTrie.insert("Apple");
-   TestTrie.insert("apple");
-   TestTrie.insert("bat");
-   TestTrie.insert("boom");
-   
-   hideSearchBoxDropdownMenu();
-   
    function hideSearchBoxDropdownMenu()
    {
       var ul =  document.getElementById("searchBoxDropdownList");
@@ -203,6 +194,17 @@
          }
       }
    }
+   
+   
+   // Root node of trie for testing only
+   var TestTrie = new Trie();
+   TestTrie.insert("Apple");
+   TestTrie.insert("apple");
+   TestTrie.insert("bat");
+   TestTrie.insert("boom");
+   
+   // Initially hide drop down list
+   hideSearchBoxDropdownMenu();
    
 </script>
 

@@ -31,7 +31,7 @@
    {
       for (var i = 0; i < this.children.length; ++i)
       {
-         if (this.children[i].letter == str[index])
+         if (this.children[i].letter == str.charAt(index))
          {
             // assert(index < str.length);
             index++;
@@ -42,7 +42,7 @@
 
       /* If here then none of the children had the letter. Create a new node with the letter */
       var newNode = new TrieNode();
-      newNode.letter = str[index];
+      newNode.letter = str.charAt(index);
       this.children.push(newNode);
       
       // ------- Begin debugging code -------

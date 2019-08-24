@@ -235,7 +235,7 @@
       }
    }
    
-   function onSearchBoxTextBoxKeyPress(keyEvent, textArea)
+   function onSearchBoxTextBoxKeyUp(keyEvent, textArea)
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value;
@@ -296,7 +296,7 @@
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
      <form class="searchBarForm">
-        <input type="text" onkeypress="onSearchBoxTextBoxKeyPress(event, this)" id="searchBoxInput" placeholder="Search..." autocomplete="off">
+        <input type="text" onkeyup="onSearchBoxTextBoxKeyUp(event, this)" id="searchBoxInput" placeholder="Search..." autocomplete="off">
         <button type="submit">Search</button>
      </form>
      <!-- Dropdown list that predicts what you could be searching for -->

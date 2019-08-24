@@ -90,8 +90,6 @@
     */
    TrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words)
    {
-      console.log(this.children.length);
-      
       index++;
       /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
       if (this.bIsWord == true && str.length <= index)
@@ -250,7 +248,8 @@
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
      <form>
-      <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
+        <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
+        <button type="submit">Search</button>
      </form>
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">

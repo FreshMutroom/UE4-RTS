@@ -5,40 +5,6 @@
 </style>
 
 <script>
-   // Root node of trie for testing only
-   var TestTrie = new Trie();
-   TestTrie.insert("Apple");
-   TestTrie.insert("apple");
-   TestTrie.insert("bat");
-   TestTrie.insert("boom");
-   
-   function onSearchBoxTextChanged()
-   {
-      var input = document.getElementById("searchBoxInput");
-      var enteredText = input.value;
-      var ul =  document.getElementById("searchBoxDropdownList");
-      var li = ul.getElementsByTagName("li");
-      // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
-      // or something (similar to C++ #include)
-      var prefixedWords = window.TestTrie.getPrefixedWords(enteredText); 
-      
-      for (var i = 0; i < li.length; ++i)
-      {
-         if (prefixedWords.length > i)
-         {
-            // Show the list item 
-            li[i].style.display = "";
-            // Set it's text
-            li[i].textContent = prefixedWords[i];
-         }
-         else
-         {
-            // Hide the list item
-            li[i].style.display = "none";
-         }
-      }
-   }
-   
    
    //------------------------------------------------
    // ------- Trie Implementation -------
@@ -187,6 +153,43 @@
 
       return words;
    };
+   
+   // End trie implementation
+   //------------------------------------------------------
+   
+   // Root node of trie for testing only
+   var TestTrie = new Trie();
+   TestTrie.insert("Apple");
+   TestTrie.insert("apple");
+   TestTrie.insert("bat");
+   TestTrie.insert("boom");
+   
+   function onSearchBoxTextChanged()
+   {
+      var input = document.getElementById("searchBoxInput");
+      var enteredText = input.value;
+      var ul =  document.getElementById("searchBoxDropdownList");
+      var li = ul.getElementsByTagName("li");
+      // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
+      // or something (similar to C++ #include)
+      var prefixedWords = window.TestTrie.getPrefixedWords(enteredText); 
+      
+      for (var i = 0; i < li.length; ++i)
+      {
+         if (prefixedWords.length > i)
+         {
+            // Show the list item 
+            li[i].style.display = "";
+            // Set it's text
+            li[i].textContent = prefixedWords[i];
+         }
+         else
+         {
+            // Hide the list item
+            li[i].style.display = "none";
+         }
+      }
+   }
    
 </script>
 

@@ -109,9 +109,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
     */
    function TrieNode()
    {
-      var letter = '\0';
-       var bIsWord = false;
-       var children = [];
+       this.letter = '\0';
+       this.bIsWord = false;
+       this.children = [];
    };
 
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)

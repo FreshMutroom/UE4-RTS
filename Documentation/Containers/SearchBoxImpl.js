@@ -1,11 +1,31 @@
 
-/* Class declaration: the root node of the trie */
-function RootTrieNode()
+/* Class declaration: a trie. Contains a hashset and a root node */
+function Trie()
 {
 	// Should I be using new here? Or is there a better way?
 	this.wordsSet = new Set();
-	this.Node = new TrieNode();
+	this.RootNode = new TrieNode();
 };
+
+
+/** 
+ *	@return - true if the string has already been added to the trie.
+ */
+Trie.prototype.contains = function(str)
+{
+	return wordsSet.has(str);
+};
+
+Trie.prototype.insert = function(str)
+{
+	RootNode.insert(str);
+};
+
+Trie.prototype.getPrefixedWords = function(str)
+{
+	return RootNode.getPrefixedWords(str);
+};
+
 
 /** 
  *	Class declaration 
@@ -17,15 +37,7 @@ function TrieNode()
     var children = [];
 };
 
-/** 
- *	@return - true if the string has already been added to the trie.
- */
-RootTrieNode.prototype.contains = function(str)
-{
-	return wordsSet.has(str);
-};
-
-TrieNode.prototype.recursiveFindChildThenAdd(str, index)
+TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
 {
 	for (var i = 0; i < this.children.length; ++i)
 	{

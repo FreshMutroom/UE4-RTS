@@ -78,7 +78,7 @@
 
       for (var i = 0; i < this.children.length; ++i)
       {
-         if (str.length < index || this.children[i].letter == str[index])
+         if (str.length < index || this.children[i].letter == str[index - 1])
          {
             this.children[i].recursiveGetPrefixedWords(str, index, words);
             return;

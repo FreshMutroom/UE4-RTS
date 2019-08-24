@@ -249,8 +249,9 @@
       
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
-    <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
-    
+     <form>
+      <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
+     </form>
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">
         <li style.display="none"><a href="#"></a></li>

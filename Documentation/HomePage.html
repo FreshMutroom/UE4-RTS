@@ -85,15 +85,6 @@
       newNode.letter = str.charAt(index);
       this.children.push(newNode);
       
-      // ------- Begin debugging code -------
-      if (typeof TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount == 'undefined')
-      {
-         TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount = 0;
-      }
-      TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount++;
-      console.log(newNode.letter);
-      // ------- End debugging code -------
-      
       // Check if at end of string
       if (index + 1 == str.length)
       {

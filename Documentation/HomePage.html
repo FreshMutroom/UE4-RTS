@@ -33,7 +33,11 @@
       {
          if (this.children[i].letter == str.charAt(index))
          {
-            // assert(index < str.length);
+            if (index >= str.length)
+            {
+               console.error("recursiveFindChildThenAdd(): index >= str.length");
+            }
+            
             index++;
             this.recursiveFindChildThenAdd(str, index);
             return;

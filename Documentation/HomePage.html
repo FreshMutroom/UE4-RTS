@@ -72,11 +72,9 @@
       /* Check if this node is a word. If yes then add it */
       if (this.bIsWord == true)
       {
-         words.push(str.substring(0, index + 1));
+         words[words.length] = str.substring(0, index + 1);
       }
 
-      alert("AA");
-      
       index++;
       for (var i = 0; i < this.children.length; ++i)
       {

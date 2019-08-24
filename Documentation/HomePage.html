@@ -73,6 +73,17 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    // Really wanted this in its own file but I could not
    // get the linking to the other file to work
    
+   
+   /** 
+    *	Class declaration 
+    */
+   function TrieNode()
+   {
+       this.letter = '\0';
+       this.bIsWord = false;
+       this.children = [];
+   };
+   
    /* Class declaration: a trie. Contains a hashset and a root node */
    function Trie()
    {
@@ -107,16 +118,6 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
       return RootNode.getPrefixedWords(str);
    };
 
-
-   /** 
-    *	Class declaration 
-    */
-   function TrieNode()
-   {
-       this.letter = '\0';
-       this.bIsWord = false;
-       this.children = [];
-   };
 
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
    {

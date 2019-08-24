@@ -8,8 +8,9 @@
   <body>
     <h1>Documentation</h1>
       
-    <!-- Search box -->
-    <input type="text" id="myInput" placeholder="Search...">
+    <!-- Search box. 
+Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
+    <input type="text" onkeyup="onSearchBoxTextChanged()" id="myInput" placeholder="Search...">
     
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">

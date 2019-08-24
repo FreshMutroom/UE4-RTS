@@ -39,7 +39,7 @@
             }
             
             index++;
-            this.recursiveFindChildThenAdd(str, index);
+            this.children[i].recursiveFindChildThenAdd(str, index);
             return;
          }
       }
@@ -214,7 +214,6 @@
    var TestTrie = new Trie();
    TestTrie.insert("apple");
    TestTrie.insert("apples");
-   TestTrie.insert("applePie");
    
 </script>
 

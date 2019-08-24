@@ -66,6 +66,8 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    //------------------------------------------------
    // ------- Trie Implementation -------
    //------------------------------------------------
+   // Really wanted this in its own file but I could not
+   // get the linking to the other file to work
    
    /* Class declaration: a trie. Contains a hashset and a root node */
    function Trie()
@@ -156,8 +158,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
       recursiveFindChildThenAdd(str, 0);
    };
 
-   /* Hoping here that words is pass by reference */
-   TrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words[])
+   /* Hoping here that words is pass by reference
+   @param str - string to get words for 
+   @param index - current position in str 
+   @param words - array of words that str is a prefix for */
+   TrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words)
    {
       /* Check if this node is a word. If yes then add it */
       if (this.bIsWord == true)

@@ -15,7 +15,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">
         <li><a href="#"></a></li>
-        <li>a href="#"></a></li>
+        <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
         <li><a href="#"></a></li>
@@ -35,7 +35,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    function onSearchBoxTextChanged()
    {
       var input = document.getElementById("myInput");
-      var enteredText = input.value.toUpperCase();
+      var enteredText = input.value;
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName('li');
       // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 

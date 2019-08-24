@@ -226,11 +226,7 @@
       }
    }
    
-   function performSearch(searchText)
-   {
-      // Navigate to the search results page
-      window.location = "SearchResults.html";
-   }
+  
    
    function onSearchBoxTextBoxKeyUp(keyEvent, textArea)
    {
@@ -242,7 +238,7 @@
       if (keyCode == 13) 
       {
          // Navigate to the search results page
-         window.location = "SearchResults.html";
+         location.href = "SearchResults.html";
          return;
       }
       

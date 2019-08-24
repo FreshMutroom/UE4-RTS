@@ -74,25 +74,18 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    // get the linking to the other file to work
    
    
-   /** 
-    *	Class declaration 
-    */
-   function TrieNode()
-   {
-       this.letter = '\0';
-       this.bIsWord = false;
-       this.children = [];
-   };
-   
    /* Class declaration: a trie. Contains a hashset and a root node */
-   function Trie()
+   class Trie
    {
-      // Should I be using new here? Or is there a better way?
+      constructor()
+      {
+         // Should I be using new here? Or is there a better way?
 
-      // A container that holds all the words in the trie
-      this.wordsSet = new Set();
-      // The root node of the trie
-      this.RootNode = new TrieNode();
+         // A container that holds all the words in the trie
+         this.wordsSet = new Set();
+         // The root node of the trie
+         this.RootNode = new TrieNode();
+      }
    };
 
 
@@ -119,6 +112,20 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    };
 
 
+   /** 
+    *	Class declaration 
+    */
+   class TrieNode 
+   {
+      constructor() 
+      {
+         this.letter = '\0';
+         this.bIsWord = false;
+         this.children = [];
+      }
+  };
+   
+   
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
    {
       for (var i = 0; i < this.children.length; ++i)

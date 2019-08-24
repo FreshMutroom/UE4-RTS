@@ -69,8 +69,8 @@
    @param words - array of words that str is a prefix for */
    TrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words)
    {
-      /* Check if this node is a word. If yes then add it */
-      if (this.bIsWord == true)
+      /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
+      if (this.bIsWord == true && str.length >= index + 1)
       {
          words.push(str.substring(0, index + 1));
       }

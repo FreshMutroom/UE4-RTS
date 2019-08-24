@@ -85,22 +85,6 @@
          }
       }
    };
-
-   /* This is intended to be called on the root node 
-   @param str - the prefix string */
-   TrieNode.prototype.getPrefixedWords = function(str)
-   {	
-      var words = [];
-
-      if (str.length == 0)
-      {
-         return words;
-      }
-
-      this.recursiveGetPrefixedWords(str, 0, words); 
-
-      return words;
-   };
    
    
    /* Class declaration: a trie. Contains a hashset and a root node */
@@ -146,7 +130,14 @@
 
    Trie.prototype.getPrefixedWords = function(str)
    {
-      return this.RootNode.getPrefixedWords(str);
+      var words = [];
+
+      if (str.length == 0)
+      {
+         return words;
+      }
+
+      return this.RootNode.recursiveGetPrefixedWords(str, -1, words);
    };
    
    // End trie implementation

@@ -2,6 +2,12 @@
 
 <style>
    
+   .searchBarForm input:focus {
+       outline: 0;
+       background: #fff;
+       box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+   }
+   
 </style>
 
 <script>
@@ -247,7 +253,7 @@
       
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
-     <form>
+     <form class="searchBarForm">
         <input type="text" onkeyup="onSearchBoxTextChanged()" id="searchBoxInput" placeholder="Search...">
         <button type="submit">Search</button>
      </form>

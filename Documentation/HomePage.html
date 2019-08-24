@@ -239,6 +239,15 @@
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value;
+      
+      var keyCode = (keyEvent.keyCode ? keyEvent.keyCode : keyCode.which);
+      // Check if enter was the key
+      if (keyCode == 13) 
+      {
+         performSearch(enteredText);
+         return;
+      }
+      
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName("li");
       // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
@@ -262,17 +271,11 @@
       }
    }
    
-   // This is ment to be called when the user does a search using the search box
-   function onSearch()
+   function performSearch(searchText)
    {
-      var input = document.getElementById("searchBoxInput");
-      var enteredText = input.value;
-      
       // Navigate to the search results page
       location.href = "SearchResults.html";
-      
    }
-   
    
    // Root node of trie for testing only
    var TestTrie = new Trie();

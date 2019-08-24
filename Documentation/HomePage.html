@@ -71,7 +71,7 @@
    {
       index++;
       /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
-      if (this.bIsWord == true && str.length >= index)
+      if (this.bIsWord == true && str.length < index)
       {
          words.push(str.substring(0, index));
       }

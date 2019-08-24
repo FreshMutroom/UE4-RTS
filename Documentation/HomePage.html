@@ -211,7 +211,7 @@
       
        for (var i = 0; i < li.length; ++i)
       {
-         li[i].style.display = "none";
+         li[i].style.visibility = "hidden";
       }
    }
    
@@ -230,14 +230,14 @@
          if (prefixedWords.length > i)
          {
             // Show the list item 
-            li[i].style.display = "";
+            li[i].style.visibility = "";
             // Set it's text
             li[i].textContent = prefixedWords[i];
          }
          else
          {
             // Hide the list item
-            li[i].style.display = "none";
+            li[i].style.visibility = "hidden";
          }
       }
    }
@@ -269,14 +269,14 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
      </form>
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList">
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
-        <li style.display="none"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
+        <li style.visibility="hidden"><a href="#"></a></li>
      </ul>
      
     <p>

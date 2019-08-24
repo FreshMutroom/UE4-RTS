@@ -60,18 +60,6 @@
    /* Add a word to the trie. This is intended to be called on the root node */
    TrieNode.prototype.insert = function(str) 
    {
-      if (str.length == 0)
-      {
-         // Avoid adding empty string
-         return false;
-      }
-
-      if (this.contains(str))
-      {
-         // Avoid adding string if it's already in the trie
-         return false;
-      }
-   
       this.recursiveFindChildThenAdd(str, 0);
       
       return true;
@@ -142,6 +130,18 @@
 
    Trie.prototype.insert = function(str)
    {
+      if (str.length == 0)
+      {
+         // Avoid adding empty string
+         return;
+      }
+   
+      if (this.contains(str))
+      {
+         // Avoid adding string if it's already in the trie
+         return;
+      }
+      
       var bSuccess = this.RootNode.insert(str);
       if (bSuccess)
       {

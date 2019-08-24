@@ -77,13 +77,23 @@
       {
          words.push(str.substring(0, index));
       }
-
-      for (var i = 0; i < this.children.length; ++i)
+   
+      if (str.length < index)
       {
-         if (str.length < index || this.children[i].letter == str[index])
+         for (var i = 0; i < this.children.length; ++i)
          {
-            this.children[i].recursiveGetPrefixedWords(str, index, words);
-            return;
+             this.children[i].recursiveGetPrefixedWords(str, index, words);
+         }
+      }
+      else
+      {
+         for (var i = 0; i < this.children.length; ++i)
+         {
+            if (this.children[i].letter == str[index])
+            {
+               this.children[i].recursiveGetPrefixedWords(str, index, words);
+               return;
+            }
          }
       }
    };

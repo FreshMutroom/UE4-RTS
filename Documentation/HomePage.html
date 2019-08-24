@@ -97,7 +97,7 @@
       {
          for (var i = 0; i < this.children.length; ++i)
          {
-            if (this.children[i].letter.toUpperCase() == str[index].toUpperCase())
+            if (this.children[i].letter.toLowerCase() == str[index].toLowerCase())
             {
                this.children[i].recursiveGetPrefixedWords(str, index, words);
                /* Have commented this return. Reason is the search is case insensitive so if user types "a" 

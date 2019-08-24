@@ -1,6 +1,8 @@
 
 
-/* Class declaration */
+/** 
+ *	Class declaration 
+ */
 TrieNode = function()
 {
 	this.letter = '\0';
@@ -8,12 +10,12 @@ TrieNode = function()
     this.children = [];
 };
 
-
 /** 
  *	@return - true if the string has already been added to the trie.
  */
 TrieNode.prototype.contains = function(str)
 {
+	// I haven't declared this variable anywhere yet
 	return filenamesSet.has(str);
 };
 

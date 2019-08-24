@@ -1,4 +1,12 @@
 
+/* Class declaration: the root node of the trie */
+function RootTrieNode()
+{
+	// Should I be using new here? Or is there a better way?
+	this.wordsSet = new Set();
+	this.Node = new TrieNode();
+};
+
 /** 
  *	Class declaration 
  */
@@ -12,10 +20,9 @@ function TrieNode()
 /** 
  *	@return - true if the string has already been added to the trie.
  */
-TrieNode.prototype.contains = function(str)
+RootTrieNode.prototype.contains = function(str)
 {
-	// I haven't declared this variable anywhere yet
-	return filenamesSet.has(str);
+	return wordsSet.has(str);
 };
 
 TrieNode.prototype.recursiveFindChildThenAdd(str, index)

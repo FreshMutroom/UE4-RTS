@@ -137,7 +137,9 @@
          return words;
       }
 
-      return this.RootNode.recursiveGetPrefixedWords(str, -1, words);
+      this.RootNode.recursiveGetPrefixedWords(str, -1, words);
+      
+      return words;
    };
    
    // End trie implementation

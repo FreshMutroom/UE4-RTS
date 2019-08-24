@@ -80,9 +80,6 @@
       {
          if (this.children[i].letter == str[index])
          {
-            alert(this.children[i].letter);
-            alert(str[index]);
-            
             this.children[i].recursiveGetPrefixedWords(str, index, words);
             return;
          }

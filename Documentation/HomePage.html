@@ -2,13 +2,24 @@
 
 <style>
    
+   .searchBoxDropdownList
+   {
+      list-style-type: none;
+      padding: 0;
+      border: 1px solid #ddd;
+   }
+   
    .searchBoxListElement
    {
       visibility: hidden;
-      list-style-position: outside;
-      list-style-image: none;
-      padding: 0;
+      border: 1px solid #ddd;
       margin: 0;
+      padding: 8px 16px;
+      border-bottom: 1px solid #ddd;
+   }
+   
+   .searchBoxListElement:last-child {
+      border-bottom: none
    }
    
    body

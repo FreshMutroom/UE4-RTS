@@ -2,7 +2,7 @@
 /** 
  *	Class declaration 
  */
-TrieNode = function()
+function TrieNode()
 {
 	var letter = '\0';
     var bIsWord = false;

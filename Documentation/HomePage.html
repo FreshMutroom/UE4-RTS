@@ -22,6 +22,7 @@
       {
          this.letter = "";
          this.bIsWord = false;
+         this.word = "";
          this.children = [];
       }
   };
@@ -49,6 +50,7 @@
       if (index + 1 == str.length)
       {
          newNode.bIsWord = true;
+         newNode.word = str;
       }
       else	
       {
@@ -73,7 +75,7 @@
       /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
       if (this.bIsWord == true && str.length <= index)
       {
-         words.push(str.substring(0, index));
+         words.push(this.word);
       }
    
       if (str.length < index)

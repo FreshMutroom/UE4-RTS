@@ -91,7 +91,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
 
    Trie.prototype.insert = function(str)
    {
-      RootNode.insert(str);
+      var bSuccess = RootNode.insert(str);
+      if (bSuccess)
+      {
+         wordsSet.add(str);
+      }
    };
 
    Trie.prototype.getPrefixedWords = function(str)
@@ -146,16 +150,18 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
       if (str.length == 0)
       {
          // Avoid adding empty string
-         return;
+         return false;
       }
 
       if (this.contains(str))
       {
          // Avoid adding string if it's already in the trie
-         return;
+         return false;
       }
-
-      recursiveFindChildThenAdd(str, 0);
+   
+      this.recursiveFindChildThenAdd(str, 0);
+      
+      return true;
    };
 
    /* Hoping here that words is pass by reference
@@ -192,7 +198,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
          return words;
       }
 
-      recursiveGetPrefixedWords(str, 0, words); 
+      this.recursiveGetPrefixedWords(str, 0, words); 
 
       return words;
    };

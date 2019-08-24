@@ -262,6 +262,17 @@
       }
    }
    
+   // This is ment to be called when the user does a search using the search box
+   function onSearch()
+   {
+      var input = document.getElementById("searchBoxInput");
+      var enteredText = input.value;
+      
+      // Navigate to the search results page
+      location.href = "SearchResults.html";
+      
+   }
+   
    
    // Root node of trie for testing only
    var TestTrie = new Trie();
@@ -270,6 +281,7 @@
    TestTrie.insert("Apple");
    TestTrie.insert("bat");
    TestTrie.insert("battle");
+   TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
    
 </script>
 

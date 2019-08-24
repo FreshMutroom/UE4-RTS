@@ -27,44 +27,6 @@
   };
    
    
-   /* Class declaration: a trie. Contains a hashset and a root node */
-   class Trie
-   {
-      constructor()
-      {
-         // Should I be using new here? Or is there a better way?
-
-         // A container that holds all the words in the trie
-         this.wordsSet = new Set();
-         // The root node of the trie
-         this.RootNode = new TrieNode();
-      }
-   };
-
-
-   /** 
-    *	@return - true if the string has already been added to the trie.
-    */
-   Trie.prototype.contains = function(str)
-   {
-      return wordsSet.has(str);
-   };
-
-   Trie.prototype.insert = function(str)
-   {
-      var bSuccess = RootNode.insert(str);
-      if (bSuccess)
-      {
-         wordsSet.add(str);
-      }
-   };
-
-   Trie.prototype.getPrefixedWords = function(str)
-   {
-      return RootNode.getPrefixedWords(str);
-   };
-   
-   
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
    {
       for (var i = 0; i < this.children.length; ++i)
@@ -152,6 +114,44 @@
       this.recursiveGetPrefixedWords(str, 0, words); 
 
       return words;
+   };
+   
+   
+   /* Class declaration: a trie. Contains a hashset and a root node */
+   class Trie
+   {
+      constructor()
+      {
+         // Should I be using new here? Or is there a better way?
+
+         // A container that holds all the words in the trie
+         this.wordsSet = new Set();
+         // The root node of the trie
+         this.RootNode = new TrieNode();
+      }
+   };
+
+
+   /** 
+    *	@return - true if the string has already been added to the trie.
+    */
+   Trie.prototype.contains = function(str)
+   {
+      return wordsSet.has(str);
+   };
+
+   Trie.prototype.insert = function(str)
+   {
+      var bSuccess = RootNode.insert(str);
+      if (bSuccess)
+      {
+         wordsSet.add(str);
+      }
+   };
+
+   Trie.prototype.getPrefixedWords = function(str)
+   {
+      return RootNode.getPrefixedWords(str);
    };
    
    // End trie implementation

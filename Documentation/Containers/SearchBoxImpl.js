@@ -3,7 +3,10 @@
 function Trie()
 {
 	// Should I be using new here? Or is there a better way?
+	
+	// A container that holds all the words in the trie
 	this.wordsSet = new Set();
+	// The root node of the trie
 	this.RootNode = new TrieNode();
 };
 

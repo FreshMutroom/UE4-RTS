@@ -27,7 +27,6 @@
       }
   };
    
-   
    TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
    {
       for (var i = 0; i < this.children.length; ++i)
@@ -45,7 +44,16 @@
       var newNode = new TrieNode();
       newNode.letter = str[index];
       this.children.push(newNode);
-
+      
+      // ------- Begin debugging code -------
+      if (typeof recursiveFindChildThenAdd.newNodeCount == 'undefined')
+      {
+         recursiveFindChildThenAdd.newNodeCount = 0;
+      }
+      recursiveFindChildThenAdd.newNodeCount++;
+      console.log(recursiveFindChildThenAdd.newNodeCount);
+      // ------- End debugging code -------
+      
       // Check if at end of string
       if (index + 1 == str.length)
       {
@@ -92,6 +100,8 @@
             if (this.children[i].letter.toUpperCase() == str[index].toUpperCase())
             {
                this.children[i].recursiveGetPrefixedWords(str, index, words);
+               /* Have commented this return. Reason is the search is case insensitive so if user types "a" 
+               then the entry "apple" and "Apple" are both possibilities so cannot return since one might get skipped */
                //return;
             }
          }

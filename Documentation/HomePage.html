@@ -20,7 +20,7 @@
    {
       constructor() 
       {
-         this.letter = '\0';
+         this.letter = "";
          this.bIsWord = false;
          this.children = [];
       }
@@ -61,8 +61,6 @@
    TrieNode.prototype.insert = function(str) 
    {
       this.recursiveFindChildThenAdd(str, 0);
-      
-      return true;
    };
 
    /* Hoping here that words is pass by reference
@@ -142,11 +140,8 @@
          return;
       }
       
-      var bSuccess = this.RootNode.insert(str);
-      if (bSuccess)
-      {
-         this.wordsSet.add(str);
-      }
+      this.RootNode.insert(str);
+      this.wordsSet.add(str);
    };
 
    Trie.prototype.getPrefixedWords = function(str)

@@ -35,7 +35,7 @@
          {
             // assert(index < str.length);
             index++;
-            recursiveFindChildThenAdd(str, index);
+            this.recursiveFindChildThenAdd(str, index);
             return;
          }
       }
@@ -137,21 +137,21 @@
     */
    Trie.prototype.contains = function(str)
    {
-      return wordsSet.has(str);
+      return this.wordsSet.has(str);
    };
 
    Trie.prototype.insert = function(str)
    {
-      var bSuccess = RootNode.insert(str);
+      var bSuccess = this.RootNode.insert(str);
       if (bSuccess)
       {
-         wordsSet.add(str);
+         this.wordsSet.add(str);
       }
    };
 
    Trie.prototype.getPrefixedWords = function(str)
    {
-      return RootNode.getPrefixedWords(str);
+      return this.RootNode.getPrefixedWords(str);
    };
    
    // End trie implementation

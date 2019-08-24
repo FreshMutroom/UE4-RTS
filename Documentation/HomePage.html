@@ -46,12 +46,12 @@
       this.children.push(newNode);
       
       // ------- Begin debugging code -------
-      if (typeof recursiveFindChildThenAdd.newNodeCount == 'undefined')
+      if (typeof TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount == 'undefined')
       {
-         recursiveFindChildThenAdd.newNodeCount = 0;
+         TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount = 0;
       }
-      recursiveFindChildThenAdd.newNodeCount++;
-      console.log(recursiveFindChildThenAdd.newNodeCount);
+      TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount++;
+      console.log(TrieNode.prototype.recursiveFindChildThenAdd.newNodeCount);
       // ------- End debugging code -------
       
       // Check if at end of string

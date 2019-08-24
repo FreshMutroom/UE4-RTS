@@ -47,14 +47,14 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
          if (prefixedWords.length > i)
          {
             // Show the list item 
-            li[i].style.display = "";
+            li[i].style.display = "none";
             // Set it's text
             li[i].textContent = prefixedWords[i];
          }
          else
          {
             // Hide the list item
-            li[i].style.display = "none";
+            li[i].style.display = "";
          }
       }
    }

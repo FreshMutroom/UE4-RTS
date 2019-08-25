@@ -253,6 +253,10 @@
       // Check if down arrow was the key
       else if (keyCode == 40)
       {
+         // First thing's first: stop the default behavior which is to move the blinking cursor to the end 
+         // of what has been entered cause I don't want that behavior
+         keyEvent.preventDefault();
+         
          // Check if at bottom of suggestion list
          if (window.searchBoxSuggestionHighlightedIndex + 1 == window.searchBoxSuggestions.length)
          {

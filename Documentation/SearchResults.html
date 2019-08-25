@@ -11,3 +11,19 @@
         <h1>Search Results</h1>
     </body>
 </html>
+
+<script>
+    
+    /* @param searchText - what the user searched for */
+    function onWindowLoad(searchText)
+    {
+        console.log(searchText);
+    }
+    
+    /* Probably don't want this function to be called on refresh. Is that the case? */
+    window.onload = function() 
+    {
+        onWindowLoad(window.localStorage.getItem("searchText");
+    };
+    
+</script>

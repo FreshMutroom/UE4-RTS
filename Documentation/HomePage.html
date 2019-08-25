@@ -235,7 +235,7 @@
    }
    
   
-   function onSearchBoxTextBoxKeyUp(keyEvent, textArea)
+   function onSearchBoxTextBoxKeyDown(keyEvent, textArea)
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value; 
@@ -338,11 +338,11 @@
       
       if (window.searchBoxSuggestions.length == 0)
       {
-         // Unhighlight list element
          if (window.searchBoxSuggestionHighlightedIndex != -1)
          {
+            // Unhighlight highlisted list element
             li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
-         window.searchBoxSuggestionHighlightedIndex = -1;
+            window.searchBoxSuggestionHighlightedIndex = -1;
          }
       }
       
@@ -370,7 +370,7 @@
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
      <form class="searchBarForm">
-        <input type="text" onkeyup="onSearchBoxTextBoxKeyUp(event, this)" id="searchBoxInput" placeholder="Search..." autocomplete="off">
+        <input type="text" id="searchBoxInput" placeholder="Search..." autocomplete="off">
         <button type="submit">Search</button>
      </form>
      <!-- Dropdown list that predicts what you could be searching for -->
@@ -387,8 +387,8 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
      
     <p>
       Documentation is auto generated
-    </p>
-    
+    </p>     
+     
   </body>
 </html>
 
@@ -431,5 +431,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxSuggestionOriginalColor = undefined;
    // Just using the first one - I assume they're all the same
    window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
+   
+   var searchBoxInput = document.getElementById("searchBoxInput");
+   searchBoxInput.addEventListener("keydown", onSearchBoxTextBoxKeyDown(keyEvent, searchBoxInput));
+   
    
 </script>

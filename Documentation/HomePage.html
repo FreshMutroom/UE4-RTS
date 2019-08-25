@@ -270,7 +270,7 @@
          
          // Move down one item on the list
          window.searchBoxSuggestionHighlightedIndex++;
-         li[window.searchBoxSuggestionHighlightedIndex].doAHighlight();
+         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = "#FDFF47";
          
          // Change the text in the search box to the suggestion
          var textBox = document.getElementById("searchBoxInput");
@@ -306,7 +306,7 @@
          }
          else
          {
-            li[window.searchBoxSuggestionHighlightedIndex].doAHighlight();
+            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = "#FDFF47";
          
             // Change the text in the search box to the suggestion
             var textBox = document.getElementById("searchBoxInput");

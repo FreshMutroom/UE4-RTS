@@ -249,6 +249,12 @@
          location.href = "SearchResults.html";
          return true;
       }
+      // Check if left/right arrow was the key
+      else if (keyCode == 37 || keyCode == 39)
+      {
+         // This is optional and is here for performance. Return now to save going through the process of finding prefixed words
+         return false;  
+      }
       // Check if down arrow was the key
       else if (keyCode == 40)
       {

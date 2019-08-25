@@ -265,12 +265,12 @@
          // Unhighlight the currently highlighted suggestion
          if (window.searchBoxSuggestionHighlightedIndex != -1)
          {
-            li[window.searchBoxSuggestionHighlightedIndex].doAnUnhighlight();
+            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          }
          
          // Move down one item on the list
          window.searchBoxSuggestionHighlightedIndex++;
-         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = "#FDFF47";
+         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionHighlightColor;
          
          // Change the text in the search box to the suggestion
          var textBox = document.getElementById("searchBoxInput");
@@ -293,7 +293,7 @@
          // Unhighlight the currently highlighted suggestion
          if (window.searchBoxSuggestionHighlightedIndex != -1)
          {
-            li[window.searchBoxSuggestionHighlightedIndex].doAnUnhighlight();
+            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          }
          
          // Move up one item on the list
@@ -306,7 +306,7 @@
          }
          else
          {
-            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = "#FDFF47";
+            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionHighlightColor;
          
             // Change the text in the search box to the suggestion
             var textBox = document.getElementById("searchBoxInput");
@@ -355,6 +355,14 @@
    // What the user has inputed into the search box. Does not care about suggestions
    var searchBoxUserInputedText = "";
    
+   var searchBoxSuggestionHighlightColor = "#FDFF47";
+   
+   var searchBoxSuggestionOriginalColor = undefined;
+   
+   var ul =  document.getElementById("searchBoxDropdownList");
+   var li = ul.getElementsByTagName("li");
+   // Just using the first one - I assume they're all the same
+   window.searchBoxSuggestionOriginalColor = li[0].style.backgroundColor;
 </script>
 
 

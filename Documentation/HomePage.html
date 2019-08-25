@@ -249,12 +249,17 @@
          location.href = "SearchResults.html";
          return;
       }
+      // Check if down arrow was the key
+      else if (keyCode == 40)
+      {
+         // TODO move down one suggestion if possible and highlight it and change text in box to it
+         
+         return;  
+      }
       
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName("li");
-      // This function should be implemented in Documentation/SearchBoxImpl.js. I might need to 'link' to the file 
-      // or something (similar to C++ #include)
-      var prefixedWords = window.TestTrie.getPrefixedWords(enteredText); 
+      window.searchBoxSuggestions = window.TestTrie.getPrefixedWords(enteredText); 
       
       for (var i = 0; i < li.length; ++i)
       {
@@ -281,6 +286,9 @@
    TestTrie.insert("bat");
    TestTrie.insert("battle");
    TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
+   
+   /* The list of suggestions when typing in search box */
+   var searchBoxSuggestions = [];
    
 </script>
 

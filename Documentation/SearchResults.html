@@ -119,6 +119,9 @@
 	
 	var str = searchText;
 
+	// Remove whitespace from start and end
+	str = str.trim();
+	    
 	/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
 	things like #, @, %, etc basically just leave letters and digits */
 	str = str.replace(/[^\w\s]/gi, "");
@@ -130,9 +133,15 @@
 	var tokens = [];
 	for (var i = str.length - 1; i >= 0; --i)
 	{
-		if (str.charAt(i) == " " || i == 0)
+		if (str.charAt(i) == " ")
 		{
-			var token = str.substring(i, str.length);
+			var token = str.substring(i + 1, str.length);
+			tokens.push(token);
+			str = str.substring(0, i);
+		}
+		else if (i == 0)
+		{
+			var token = str.substring(i + 1, str.length);
 			tokens.push(token);
 			str = str.substring(0, i);
 		}

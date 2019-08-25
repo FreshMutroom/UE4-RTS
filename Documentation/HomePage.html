@@ -400,6 +400,12 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    TestTrie.insert("battle");
    TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
    
+   var searchBoxList =  document.getElementById("searchBoxDropdownList");
+   var searchBoxListElements = searchBoxList.getElementsByTagName("li");
+   
+   // The maximum number of suggestions that can be shown 
+   var searchBoxNumSuggestionWidgets = searchBoxListElements.length;
+   
    /* The list of suggestions when typing in search box */
    var searchBoxSuggestions = [];
    
@@ -412,10 +418,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxSuggestionHighlightColor = "#FDFF47";
    
    var searchBoxSuggestionOriginalColor = undefined;
-   
-   var ul =  document.getElementById("searchBoxDropdownList");
-   var li = ul.getElementsByTagName("li");
    // Just using the first one - I assume they're all the same
-   window.searchBoxSuggestionOriginalColor = li[0].style.backgroundColor;
+   window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
    
 </script>

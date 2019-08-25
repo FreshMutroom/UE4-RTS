@@ -235,7 +235,7 @@
    }
    
   
-   function onSearchBoxTextBoxKeyDown(keyEvent, textArea)
+   function onSearchBoxTextBoxKeyDown(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value; 
@@ -433,7 +433,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
    
    var searchBoxInput = document.getElementById("searchBoxInput");
-   searchBoxInput.addEventListener("keydown", function(e) 
+   searchBoxInput.addEventListener("keydown", function(e), false 
    {
       onSearchBoxTextBoxKeyDown(e);
    });

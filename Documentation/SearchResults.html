@@ -97,12 +97,12 @@
     function getSearchResults(searchText)
     {
 	// Array of search results to return
-        var array = [];
+        var searchResults = [];
         
         //TODO
-        array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
+        searchResults.push("Classes/something1.html");
+        searchResults.push("Classes/building.html");
+        searchResults.push("Classes/infantry.html");
         
 	// ------- Begin my attempt at returning correct results --------
 	
@@ -119,15 +119,15 @@
 	
 	var str = searchText;
 
-	// Remove whitespace from start and end
-	str = str.trim();
-	    
 	/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
 	things like #, @, %, etc basically just leave letters and digits */
 	str = str.replace(/[^\w\s]/gi, "");
 	
 	/* Replace 2+ runs of witespace with a single space */
     	str = str.replace(/\s\s+/g, " ");
+	    
+	// Remove space from start and end if any
+	str = str.trim();
 	    
 	/* Parse the string and split it up into seperate words */
 	var tokens = [];
@@ -141,20 +141,17 @@
 		}
 		else if (i == 0)
 		{
-			var token = str.substring(i + 1, str.length);
+			var token = str.substring(i, str.length);
 			tokens.push(token);
-			str = str.substring(0, i);
 		}
 	}
 	
-	    // Begin debug code
 	for (var i = 0; i < tokens.length; ++i)
 	{
-		console.log(tokens[i]);	
+		//TODO something
 	}
-	    // End debug code
 	    
-        return array;
+        return searchResults;
     }
 	
     /** 

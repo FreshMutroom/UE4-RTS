@@ -302,6 +302,7 @@
          if (window.searchBoxSuggestionHighlightedIndex == -1)
          {
             // Need to revert text back to what user typed
+            var textBox = document.getElementById("searchBoxInput");
             textBox.value = window.searchBoxUserInputedText;
          }
          else
@@ -337,32 +338,6 @@
       }
    }
    
-   // Root node of trie for testing only
-   var TestTrie = new Trie();
-   TestTrie.insert("apple");
-   TestTrie.insert("apples");
-   TestTrie.insert("Apple");
-   TestTrie.insert("bat");
-   TestTrie.insert("battle");
-   TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
-   
-   /* The list of suggestions when typing in search box */
-   var searchBoxSuggestions = [];
-   
-   /* Which of the search box suggestions is highlighted by the user. -1 means none of them */
-   var searchBoxSuggestionHighlightedIndex = -1;
-      
-   // What the user has inputed into the search box. Does not care about suggestions
-   var searchBoxUserInputedText = "";
-   
-   var searchBoxSuggestionHighlightColor = "#FDFF47";
-   
-   var searchBoxSuggestionOriginalColor = undefined;
-   
-   var ul =  document.getElementById("searchBoxDropdownList");
-   var li = ul.getElementsByTagName("li");
-   // Just using the first one - I assume they're all the same
-   window.searchBoxSuggestionOriginalColor = li[0].style.backgroundColor;
 </script>
 
 
@@ -407,3 +382,40 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
 </html>
 
 
+<!-- *******************************************************************************************************************************
+************************************************************************************************************************************ 
+************************************************************************************************************************************
+************************************************************************************************************************************
+******************************************************************************************************************************** -->
+
+
+<script>
+   
+   // Root node of trie for testing only
+   var TestTrie = new Trie();
+   TestTrie.insert("apple");
+   TestTrie.insert("apples");
+   TestTrie.insert("Apple");
+   TestTrie.insert("bat");
+   TestTrie.insert("battle");
+   TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
+   
+   /* The list of suggestions when typing in search box */
+   var searchBoxSuggestions = [];
+   
+   /* Which of the search box suggestions is highlighted by the user. -1 means none of them */
+   var searchBoxSuggestionHighlightedIndex = -1;
+      
+   // What the user has inputed into the search box. Does not care about suggestions
+   var searchBoxUserInputedText = "";
+   
+   var searchBoxSuggestionHighlightColor = "#FDFF47";
+   
+   var searchBoxSuggestionOriginalColor = undefined;
+   
+   var ul =  document.getElementById("searchBoxDropdownList");
+   var li = ul.getElementsByTagName("li");
+   // Just using the first one - I assume they're all the same
+   window.searchBoxSuggestionOriginalColor = li[0].style.backgroundColor;
+   
+</script>

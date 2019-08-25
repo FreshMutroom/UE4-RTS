@@ -240,9 +240,9 @@
       // Check if left or right arrow was pressed
       if (keyEvent == 38 || keyEvent == 40)
       {
-         // Return false to prevent default behavior from running which is to move the blinking cursor to an edge - I 
+         // Rrevent default behavior from running which is to move the blinking cursor to an edge - I 
          // don't want that
-         return false;  
+         keyEvent.preventDefault(); 
       }
    }
    

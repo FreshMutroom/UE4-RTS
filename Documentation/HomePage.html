@@ -235,7 +235,6 @@
    }
    
   
-   
    function onSearchBoxTextBoxKeyUp(keyEvent, textArea)
    {
       var input = document.getElementById("searchBoxInput");
@@ -253,6 +252,9 @@
       // Check if down arrow was the key
       else if (keyCode == 40)
       {
+         // Prevent default behavior which is to move cursor to end of user input
+         keyEvent.preventDefault();
+         
          // Check if at bottom of suggestion list
          if (window.searchBoxSuggestionHighlightedIndex + 1 == window.searchBoxSuggestions.length)
          {
@@ -281,6 +283,9 @@
       // Check if up arrow was the key
       else if (keyCode == 38)
       {
+         // Prevent default behavior which is to move cursor to start of user input
+         keyEvent.preventDefault();
+         
          // Check if already at top
          if (window.searchBoxSuggestionHighlightedIndex == -1)
          {

@@ -252,12 +252,6 @@
       // Check if down arrow was the key
       else if (keyCode == 40)
       {
-         // Prevent default behavior which is to move cursor to end of user input
-         var pos = input.selectionStart;
-         input.selectionStart = pos; 
-         input.selectionEnd = pos;
-         keyEvent.preventDefault();
-         
          // Check if at bottom of suggestion list
          if (window.searchBoxSuggestionHighlightedIndex + 1 == window.searchBoxSuggestions.length)
          {
@@ -286,9 +280,6 @@
       // Check if up arrow was the key
       else if (keyCode == 38)
       {
-         // Prevent default behavior which is to move cursor to start of user input
-         keyEvent.preventDefault();
-         
          // Check if already at top
          if (window.searchBoxSuggestionHighlightedIndex == -1)
          {
@@ -348,8 +339,11 @@
       if (window.searchBoxSuggestions.length == 0)
       {
          // Unhighlight list element
-         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
+         if (window.searchBoxSuggestionHighlightedIndex != -1)
+         {
+            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          window.searchBoxSuggestionHighlightedIndex = -1;
+         }
       }
       
       return true;

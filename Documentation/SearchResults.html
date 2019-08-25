@@ -146,6 +146,9 @@
 		}
 	}
 	
+	/* Add "A", "U", "I" and "E" onto each token. This is so if the user searches something like "building" 
+	then "ABuilding" will be included */
+	    
 	for (var i = 0; i < tokens.length; ++i)
 	{
 		//TODO something
@@ -155,9 +158,9 @@
     }
 	
     /** 
-	 *	@param name - the name of the item e.g. "ABuilding", "EUnitType" 
-	 *	@return - the description to show for name when it is a search result 
-	 */
+     *	@param name - the name of the item e.g. "ABuilding", "EUnitType" 
+     *	@return - the description to show for name when it is a search result 
+     */
 	function getSearchResultDescription(name)
 	{
 		return "BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH sjdask lasldlsaldad;sal; " 

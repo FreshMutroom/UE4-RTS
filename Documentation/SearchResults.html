@@ -37,7 +37,8 @@
     /* @param searchText - what the user searched for */
     function onWindowLoad(searchText)
     {
-        processSearchRequest(searchText);
+        //processSearchRequest(searchText);
+	    processSearchRequest("ANN ***    	((ASDMK M   aAAA MM     $$$$ a    )"); // Just for testing TODO
     }
     
     function processSearchRequest(searchText)
@@ -116,25 +117,34 @@
 		to somthing that then has a
 	*/
 	
-		var str = searchText;
-		
-		// Remove whitespace from both ends
-		str = str.trim();
-		
-		/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
-		things like #, @, %, etc basically just leave letters and digits */
-	    str = str.replace(/[^\w\s]/gi, "")
-		
-		/* Parse the string and split it up into seperate words */
-		var tokens = [];
-		for (var i = str.length - 1; i >= 0; --i)
+	var str = searchText;
+
+	/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
+	things like #, @, %, etc basically just leave letters and digits */
+	str = str.replace(/[^\w\s]/gi, "");
+	
+	/* Replace 2+ runs of witespace with a single space */
+    	str = str.replace(/\s\s+/g, " ");
+	    
+	/* Parse the string and split it up into seperate words */
+	var tokens = [];
+	for (var i = str.length - 1; i >= 0; --i)
+	{
+		if (str.charAt(i) == " " || i == 0)
 		{
-			if (str.charAt(i) == " " || i == 0)
-			{
-				//TODO
-			}
+			var token = str.substring(i, str.length);
+			tokens.push(token);
+			str = str.substring(0, i);
 		}
-		
+	}
+	
+	    // Begin debug code
+	for (var i = 0; i < tokens.length; ++i)
+	{
+		console.log(tokens[i]);	
+	}
+	    // End debug code
+	    
         return array;
     }
 	

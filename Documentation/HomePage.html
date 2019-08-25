@@ -248,19 +248,15 @@
       {
          // Navigate to the search results page
          location.href = "SearchResults.html";
-         return;
+         return true;
       }
       // Check if down arrow was the key
       else if (keyCode == 40)
       {
-         // First thing's first: stop the default behavior which is to move the blinking cursor to the end 
-         // of what has been entered cause I don't want that behavior
-         keyEvent.preventDefault();
-         
          // Check if at bottom of suggestion list
          if (window.searchBoxSuggestionHighlightedIndex + 1 == window.searchBoxSuggestions.length)
          {
-            return;
+            return false;
          }
          
          var ul =  document.getElementById("searchBoxDropdownList");
@@ -280,7 +276,7 @@
          var textBox = document.getElementById("searchBoxInput");
          textBox.value = li[window.searchBoxSuggestionHighlightedIndex].textContent;
          
-         return;  
+         return false;  
       }
       // Check if up arrow was the key
       else if (keyCode == 38)
@@ -288,7 +284,7 @@
          // Check if already at top
          if (window.searchBoxSuggestionHighlightedIndex == -1)
          {
-            return;  
+            return false;  
          }
          
          var ul =  document.getElementById("searchBoxDropdownList");
@@ -318,7 +314,7 @@
             textBox.value = li[window.searchBoxSuggestionHighlightedIndex].textContent;
          }
             
-          return;
+          return false;
       }
       
       var ul =  document.getElementById("searchBoxDropdownList");
@@ -347,6 +343,8 @@
          li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          window.searchBoxSuggestionHighlightedIndex = -1;
       }
+      
+      return true;
    }
    
 </script>

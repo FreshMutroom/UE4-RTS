@@ -9,16 +9,13 @@
             
     <body>
         <h1>Search Results</h1>
+        <ul id="searchResultsList">
+            
+        </ul>
     </body>
 </html>
 
 <script>
-    
-    /* @param searchText - what the user searched for */
-    function onWindowLoad(searchText)
-    {
-        
-    }
     
     /* Probably don't want this function to be called on refresh. Is that the case? */
     window.onload = function() 
@@ -26,5 +23,69 @@
         var whatUserSearchedFor = window.localStorage.getItem("searchText");
         onWindowLoad(whatUserSearchedFor);
     };
+    
+    /* @param searchText - what the user searched for */
+    function onWindowLoad(searchText)
+    {
+        processSearchRequeset(searchText);
+    }
+    
+    function processSearchRequest(searchText)
+    {
+        var linksToShow = getSearchResults(searchText);
+        
+        // might need to delete previous elements first?
+        
+        for (var i = 0; i < linksToShow.length; ++i)
+        {
+            createSearchResultHTMLElement(linksToShow[i], tree);
+        }
+    }
+    
+    /* @param filename - the path of the file relative to the folder that stores all my auto-generated files in */
+    function createSearchResultHTMLElement(filePath)
+    {
+        /* Prune filePath e.g. "Classes/ABuilding.html" becomes "ABuilding" */
+        var niceName = filePath;
+        for (var i = niceName.length - 1; i >= 0; --i)
+        {
+            if (niceName.charAt(i) == ".")
+            {
+                // Remove the ".html" part
+                niceName = niceName.substring(i - 1, niceName.length);
+            }
+            else if (niceName.charAt(i) == "\/")
+            {
+                // Remove the "Classes/" part
+                niceName = niceName.substring(i - 1, niceName.length);
+                break;
+            }
+        }
+        
+        /* Spawn and add list items to the list */
+        var li = document.createElement("li");
+        var a = document.createElement("a");
+        li.setAttribute("href", "Info/" + filePath);
+        a.appendChild(document.createTextNode(niceName));
+        
+        li.appendChild(a);
+        var body = document.getElementsByTagName('body')[0];
+		body.appendChild(li);
+    }
+    
+    /* Return array of filenames to show for a search request. Lower indicies in the array will appear 
+    higher up on the page */
+    function getSearchResults(searchText)
+    {
+        var array = [];
+        
+        //TODO
+        array.push("Classes/something1.html");
+        array.push("Classes/building.html");
+        array.push("Classes/infantry.html");
+        
+        return array;
+    }
+    
     
 </script>

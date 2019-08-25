@@ -103,6 +103,38 @@
         array.push("Classes/building.html");
         array.push("Classes/infantry.html");
         
+	// ------- Begin my attempt at returning correct results --------
+	
+	/* 
+		Brainstorm:
+		- comments probably aren't going to be considered in the search - only the actual names of the classes/variables etc
+		- first check how many words the user entered e.g. if they typed "building health damage" that's 3 words 
+		- for each word perform a search through a trie 
+		- for each 2 words perform a search through a trie 
+		- lastly do all 3 words 
+		- when doing the single word searches when I reach the end of them in the trie then the end node should link 
+		to somthing that then has a
+	*/
+	
+		var str = searchText;
+		
+		// Remove whitespace from both ends
+		str = str.trim();
+		
+		/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
+		things like #, @, %, etc basically just leave letters and digits */
+	    str = str.replace(/[^\w\s]/gi, "")
+		
+		/* Parse the string and split it up into seperate words */
+		var tokens = [];
+		for (var i = str.length - 1; i >= 0; --i)
+		{
+			if (str.charAt(i) == " " || i == 0)
+			{
+				//TODO
+			}
+		}
+		
         return array;
     }
 	

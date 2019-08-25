@@ -22,7 +22,7 @@
     {
         var whatUserSearchedFor = window.localStorage.getItem("searchText");
         onWindowLoad(whatUserSearchedFor);
-    };
+    }
     
     /* @param searchText - what the user searched for */
     function onWindowLoad(searchText)
@@ -62,15 +62,18 @@
             }
         }
         
-        /* Spawn and add list items to the list */
         var li = document.createElement("li");
         var a = document.createElement("a");
         a.setAttribute("href", "Info/" + filePath);
         a.appendChild(document.createTextNode(niceName));
-        
-        li.appendChild(a);
-	var ul = document.getElementById("searchResultsList");
-	ul.appendChild(li);
+	    
+		// Add another text field that will show the class'/struct's/enum's comment 
+    	var commentText = a.appendChild(document.createTextNode("BLAH"));
+		
+		li.appendChild(a);
+		
+		var ul = document.getElementById("searchResultsList");
+		ul.appendChild(li);
     }
     
     /* Return array of filenames to show for a search request. Lower indicies in the array will appear 

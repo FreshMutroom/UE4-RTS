@@ -235,7 +235,7 @@
    }
    
   
-   function onSearchBoxTextBoxKeyDown(keyEvent)
+   function onSearchBoxTextBoxKeyUp(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value; 
@@ -441,7 +441,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxInput = document.getElementById("searchBoxInput");
    searchBoxInput.addEventListener("keyup", function(e)
    {
-      onSearchBoxTextBoxKeyDown(e);
+      onSearchBoxTextBoxKeyUp(e);
    }, false);
    
 </script>

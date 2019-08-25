@@ -63,17 +63,21 @@
         }
         
         var li = document.createElement("li");
-        var a = document.createElement("a");
+        var div1 = document.createElement("div");
+	var a = document.createElement("a");
         a.setAttribute("href", "Info/" + filePath);
         a.appendChild(document.createTextNode(niceName));
+	div1.appendChild(a);
 	    
-		// Add another text field that will show the class'/struct's/enum's comment 
-    	var commentText = a.appendChild(document.createTextNode("BLAH"));
+	// Add another text field that will show the class'/struct's/enum's comment 
+    	var div2 = document.createElement("div");
+	div2.appendChild(document.createTextNode("BLAH"));
 		
-		li.appendChild(a);
-		
-		var ul = document.getElementById("searchResultsList");
-		ul.appendChild(li);
+	li.appendChild(div1);
+	li.appendChild(div2);
+
+	var ul = document.getElementById("searchResultsList");
+	ul.appendChild(li);
     }
     
     /* Return array of filenames to show for a search request. Lower indicies in the array will appear 

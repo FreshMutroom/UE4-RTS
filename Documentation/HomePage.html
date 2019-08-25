@@ -250,6 +250,9 @@
       // Check if enter was the key
       if (keyCode == 13) 
       {
+         // Set this so the SearchResults.html page can read it to know what the user searched for
+         window.localStorage.setItem("searchText", enteredText);
+         
          // Navigate to the search results page
          location.href = "SearchResults.html";
          return true;

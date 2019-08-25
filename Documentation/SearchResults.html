@@ -57,7 +57,7 @@
             else if (niceName.charAt(i) == "\/")
             {
                 // Remove the "Classes/" part
-                niceName = niceName.substring(0, niceName.length);
+                niceName = niceName.substring(0, i + 1);
                 break;
             }
         }

@@ -45,7 +45,7 @@
     /* @param filename - the path of the file relative to the folder that stores all my auto-generated files in */
     function createSearchResultHTMLElement(filePath)
     {
-        /* Prune filePath e.g. "Classes/ABuilding.html" becomes "ABuilding" */
+        /* Prune filePath and html part e.g. "Classes/ABuilding.html" becomes "ABuilding" */
         var niceName = filePath;
         for (var i = niceName.length - 1; i >= 0; --i)
         {
@@ -86,31 +86,11 @@
     higher up on the page */
     function getSearchResults(searchText)
     {
+	// Array of search results to return
         var array = [];
         
         //TODO
         array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-    	array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
-        array.push("Classes/building.html");
-        array.push("Classes/infantry.html");
-	    array.push("Classes/something1.html");
         array.push("Classes/building.html");
         array.push("Classes/infantry.html");
         

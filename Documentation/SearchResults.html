@@ -52,12 +52,12 @@
             if (niceName.charAt(i) == ".")
             {
                 // Remove the ".html" part
-                niceName = niceName.substring(i - 1, niceName.length);
+                niceName = niceName.substring(0, i + 1);
             }
             else if (niceName.charAt(i) == "\/")
             {
                 // Remove the "Classes/" part
-                niceName = niceName.substring(0, i + 1);
+                niceName = niceName.substring(i, niceName.length);
                 break;
             }
         }

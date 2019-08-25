@@ -253,6 +253,9 @@
       else if (keyCode == 40)
       {
          // Prevent default behavior which is to move cursor to end of user input
+         var pos = input.selectionStart;
+         input.selectionStart = pos; 
+         input.selectionEnd = pos;
          keyEvent.preventDefault();
          
          // Check if at bottom of suggestion list

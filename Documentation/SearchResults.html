@@ -2,6 +2,16 @@
 
 <!-- This is the page that shows up after you perform a search -->
 
+<style>
+	
+	.searchResultsListElement
+	{
+		list-style-type: none;	
+	}
+	
+</style>
+
+
 <html>
     <head>
         <title>UE4 RTS Search Results</title> 
@@ -9,7 +19,7 @@
             
     <body>
         <h1>Search Results</h1>
-        <ul id="searchResultsList">
+        <ul id="searchResultsList" class="searchResultsList">
             
         </ul>
     </body>
@@ -33,8 +43,6 @@
     function processSearchRequest(searchText)
     {
         var linksToShow = getSearchResults(searchText);
-        
-        // might need to delete previous elements first?
         
         for (var i = 0; i < linksToShow.length; ++i)
         {
@@ -64,16 +72,17 @@
         
 	/* Create list elements to display the search results */
 	    
-        var li = document.createElement("li");
-        var div1 = document.createElement("div");
+    var li = document.createElement("li");
+	li.setAttribute("class", "searchResultsListElement");
+    var div1 = document.createElement("div");
 	var a = document.createElement("a");
-        a.setAttribute("href", "Info/" + filePath);
-        a.appendChild(document.createTextNode(niceName));
+    a.setAttribute("href", "Info/" + filePath);
+    a.appendChild(document.createTextNode(niceName));
 	div1.appendChild(a);
 	    
 	// Add another text field that will show the class'/struct's/enum's comment 
-    	var div2 = document.createElement("div");
-	div2.appendChild(document.createTextNode("BLAH"));
+    var div2 = document.createElement("div");
+	div2.appendChild(document.createTextNode(getSearchResultDescription(niceName));
 		
 	li.appendChild(div1);
 	li.appendChild(div2);
@@ -96,6 +105,16 @@
         
         return array;
     }
-    
+	
+    /** 
+	 *	@param name - the name of the item e.g. "ABuilding", "EUnitType" 
+	 *	@return - the description to show for name when it is a search result 
+	 */
+	function getSearchResultDiscription(name)
+	{
+		return "BLAH";
+	}
     
 </script>
+
+

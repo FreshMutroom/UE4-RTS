@@ -240,6 +240,7 @@
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value;
+      window.searchBoxUserInputedText = enteredText;
       
       var keyCode = (keyEvent.keyCode ? keyEvent.keyCode : keyCode.which);
       // Check if enter was the key
@@ -252,9 +253,67 @@
       // Check if down arrow was the key
       else if (keyCode == 40)
       {
-         // TODO move down one suggestion if possible and highlight it and change text in box to it
-         console.log("Down arrow registered");
+         // Check if at bottom of suggestion list
+         if (window.searchBoxSuggestionHighlightedIndex + 1 == window.searchBoxSuggestions.length)
+         {
+            return;
+         }
+         
+         var ul =  document.getElementById("searchBoxDropdownList");
+         var li = ul.getElementsByTagName("li");
+         
+         // Unhighlight the currently highlighted suggestion
+         if (window.searchBoxSuggestionHighlightedIndex != -1)
+         {
+            li[window.searchBoxSuggestionHighlightedIndex].doAnUnhighlight();
+         }
+         
+         // Move down one item on the list
+         window.searchBoxSuggestionHighlightedIndex++;
+         li[window.searchBoxSuggestionHighlightedIndex].doAHighlight();
+         
+         // Change the text in the search box to the suggestion
+         var textBox = document.getElementById("searchBoxInput");
+         textBox.value = li[window.searchBoxSuggestionHighlightedIndex];
+         
          return;  
+      }
+      // Check if up arrow was the key
+      else if (keyCode == 38)
+      {
+         // Check if already at top
+         if (window.searchBoxSuggestionHighlightedIndex == -1)
+         {
+            return;  
+         }
+         
+         var ul =  document.getElementById("searchBoxDropdownList");
+         var li = ul.getElementsByTagName("li");
+         
+         // Unhighlight the currently highlighted suggestion
+         if (window.searchBoxSuggestionHighlightedIndex != -1)
+         {
+            li[window.searchBoxSuggestionHighlightedIndex].doAnUnhighlight();
+         }
+         
+         // Move up one item on the list
+         window.searchBoxSuggestionHighlightedIndex--;
+         // Check if have moved off first suggestion and onto the search box 
+         if (window.searchBoxSuggestionHighlightedIndex == -1)
+         {
+            // Need to revert text back to what user typed
+            textBox.value = window.searchBoxUserInputedText;
+         }
+         else
+         {
+            li[window.searchBoxSuggestionHighlightedIndex].doAHighlight();
+         
+            // Change the text in the search box to the suggestion
+            var textBox = document.getElementById("searchBoxInput");
+            textBox.value = li[window.searchBoxSuggestionHighlightedIndex];
+         }
+            
+          return;
       }
       
       var ul =  document.getElementById("searchBoxDropdownList");
@@ -289,6 +348,12 @@
    
    /* The list of suggestions when typing in search box */
    var searchBoxSuggestions = [];
+   
+   /* Which of the search box suggestions is highlighted by the user. -1 means none of them */
+   var searchBoxSuggestionHighlightedIndex = -1;
+      
+   // What the user has inputed into the search box. Does not care about suggestions
+   var searchBoxUserInputedText = "";
    
 </script>
 

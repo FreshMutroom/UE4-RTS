@@ -339,6 +339,8 @@
       
       if (window.searchBoxSuggestions.length == 0)
       {
+         // Unhighlight list element
+         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          window.searchBoxSuggestionHighlightedIndex = -1;
       }
    }

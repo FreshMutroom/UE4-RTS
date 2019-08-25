@@ -235,6 +235,17 @@
    }
    
   
+   function OnSearchBoxTextBoxKeyDown(keyEvent)
+   {
+      // Check if left or right arrow was pressed
+      if (keyEvent == 38 || keyEvent == 40)
+      {
+         // Return false to prevent default behavior from running which is to move the blinking cursor to an edge - I 
+         // don't want that
+         return false;  
+      }
+   }
+   
    function onSearchBoxTextBoxKeyUp(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
@@ -439,6 +450,10 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
    
    var searchBoxInput = document.getElementById("searchBoxInput");
+   searchBoxInput.addEventListener("keydown", function(e)
+   {
+      onSearchBoxTextBoxKeyDown(e);
+   }, false);
    searchBoxInput.addEventListener("keyup", function(e)
    {
       onSearchBoxTextBoxKeyUp(e);

@@ -253,7 +253,7 @@
       else if (keyCode == 40)
       {
          // TODO move down one suggestion if possible and highlight it and change text in box to it
-         
+         console.log("Down arrow registered");
          return;  
       }
       
@@ -263,12 +263,12 @@
       
       for (var i = 0; i < li.length; ++i)
       {
-         if (prefixedWords.length > i)
+         if (window.searchBoxSuggestions.length > i)
          {
             // Show the list item 
             li[i].style.visibility = "visible";
             // Set it's text
-            li[i].textContent = prefixedWords[i];
+            li[i].textContent = window.searchBoxSuggestions[i];
          }
          else
          {

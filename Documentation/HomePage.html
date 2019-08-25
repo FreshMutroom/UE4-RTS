@@ -274,7 +274,7 @@
          
          // Change the text in the search box to the suggestion
          var textBox = document.getElementById("searchBoxInput");
-         textBox.value = li[window.searchBoxSuggestionHighlightedIndex].value;
+         textBox.value = li[window.searchBoxSuggestionHighlightedIndex].textContent;
          
          return;  
       }
@@ -311,7 +311,7 @@
          
             // Change the text in the search box to the suggestion
             var textBox = document.getElementById("searchBoxInput");
-            textBox.value = li[window.searchBoxSuggestionHighlightedIndex].value;
+            textBox.value = li[window.searchBoxSuggestionHighlightedIndex].textContent;
          }
             
           return;

@@ -26,6 +26,189 @@
 </html>
 
 <script>
+/***********************************************************************************************************************************
+************************************************************************************************************************************ 
+*********************************************** Search Result Trie Implementation **************************************************
+************************************************************************************************************************************
+************************************************************************************************************************************/
+/* Trie implementation for helping return search results */
+	
+	
+	/** 
+     *	A single node in a trie
+     */
+   class SearchResultTrieNode 
+   {
+      constructor() 
+      {
+         // The letter attached to this node. Only the root node should keep this empty
+         this.letter = "";
+         // Whether this node is the last letter of a word
+         this.bIsWord = false;
+         // if bIsWord == true then this equals the word
+         this.word = "";
+         // Child nodes
+         this.children = [];
+      }
+  };
+	
+	SearchResultTrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
+   {
+      for (var i = 0; i < this.children.length; ++i)
+      {
+         if (this.children[i].letter == str.charAt(index))
+         {
+            if (index >= str.length)
+            {
+               console.error("recursiveFindChildThenAdd(): index >= str.length");
+            }
+            
+            index++;
+            this.children[i].recursiveFindChildThenAdd(str, index);
+            return;
+         }
+      }
+
+      /* If here then none of the children had the letter. Create a new node with the letter */
+      var newNode = new TrieNode();
+      newNode.letter = str.charAt(index);
+      this.children.push(newNode);
+      
+      // Check if at end of string
+      if (index + 1 == str.length)
+      {
+         newNode.bIsWord = true;
+         newNode.word = str;
+      }
+      else	
+      {
+         index++;
+         newNode.recursiveFindChildThenAdd(str, index);
+      }
+   };
+
+   /** Add a word to the trie. This is intended to be called on the root node */
+   SearchResultTrieNode.prototype.insert = function(str) 
+   {
+      this.recursiveFindChildThenAdd(str, 0);
+   };
+
+   /**
+    * Get words in the trie that prefix a string
+    *
+    * @param str - string to get words for 
+    * @param index - current position in str 
+    * @param words - array of words that str is a prefix for 
+    */
+   SearchResultTrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words)
+   {
+      index++;
+      /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
+      if (this.bIsWord == true && str.length <= index)
+      {
+         words.push(this.word);
+      }
+   
+      if (str.length <= index)
+      {
+         for (var i = 0; i < this.children.length; ++i)
+         {
+             this.children[i].recursiveGetPrefixedWords(str, index, words);
+         }
+      }
+      else
+      {
+         for (var i = 0; i < this.children.length; ++i)
+         {
+            if (this.children[i].letter.toLowerCase() == str.charAt(index).toLowerCase())
+            {
+               this.children[i].recursiveGetPrefixedWords(str, index, words);
+               /* Have commented this return. Reason is the search is case insensitive so if user types "a" 
+               then the entry "apple" and "Apple" are both possibilities so cannot return since one might 
+               get skipped */
+               //return;
+            }
+         }
+      }
+   };
+   
+   
+   /** Class declaration: a trie. Contains a hashset and a root node */
+   class SearchResultTrie
+   {
+      constructor()
+      {
+         // Should I be using new here? Or is there a better way?
+
+         // A container that holds all the words in the trie
+         this.wordsSet = new Set();
+         // The root node of the trie
+         this.RootNode = new SearchResultTrieNode();
+      }
+   };
+
+
+   /** 
+    * Check whether a string has already been added to the trie
+    *
+    *	@return - true if the string has already been added to the trie.
+    */
+   SearchResultTrie.prototype.contains = function(str)
+   {
+      return this.wordsSet.has(str);
+   };
+
+   /**
+    * Try add a string to the trie 
+    *   
+    * @param str - the string to add to the trie 
+    */
+   SearchResultTrie.prototype.insert = function(str)
+   {
+      if (str.length == 0)
+      {
+         // Avoid adding empty string
+         return;
+      }
+   
+      if (this.contains(str))
+      {
+         // Avoid adding string if it's already in the trie
+         return;
+      }
+      
+      this.RootNode.insert(str);
+      this.wordsSet.add(str);
+   };
+
+   /** 
+    * Return all the words in the trie that have str as a prefix 
+    *   
+    * @param str - prefix string
+    * @return - array of words that have str as a prefix 
+    */
+   SearchResultTrie.prototype.getPrefixedWords = function(str)
+   {
+      var words = [];
+
+      if (str.length == 0)
+      {
+         return words;
+      }
+
+      this.RootNode.recursiveGetPrefixedWords(str, -1, words);
+      
+      return words;
+   };
+	
+/***********************************************************************************************************************************
+************************************************************************************************************************************ 
+*********************************************** End Search Result Trie Implementation **********************************************
+************************************************************************************************************************************
+************************************************************************************************************************************/	
+</script>
+	
+<script>
     
     /* Probably don't want this function to be called on refresh. Is that the case? */
     window.onload = function() 
@@ -96,7 +279,7 @@
     higher up on the page */
     function getSearchResults(searchText)
     {
-	// Array of search results to return
+		// Array of search results to return
         var searchResults = [];
         
         //TODO
@@ -104,55 +287,55 @@
         searchResults.push("Classes/building.html");
         searchResults.push("Classes/infantry.html");
         
-	// ------- Begin my attempt at returning correct results --------
-	
-	/* 
-		Brainstorm:
-		- comments probably aren't going to be considered in the search - only the actual names of the classes/variables etc
-		- first check how many words the user entered e.g. if they typed "building health damage" that's 3 words 
-		- for each word perform a search through a trie 
-		- for each 2 words perform a search through a trie 
-		- lastly do all 3 words 
-		- when doing the single word searches when I reach the end of them in the trie then the end node should link 
-		to somthing that then has a
-	*/
-	
-	var str = searchText;
+		// ------- Begin my attempt at returning correct results --------
 
-	/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
-	things like #, @, %, etc basically just leave letters and digits */
-	str = str.replace(/[^\w\s]/gi, "");
-	
-	/* Replace 2+ runs of witespace with a single space */
-    	str = str.replace(/\s\s+/g, " ");
-	    
-	// Remove space from start and end if any
-	str = str.trim();
-	    
-	/* Parse the string and split it up into seperate words */
-	var tokens = [];
-	for (var i = str.length - 1; i >= 0; --i)
-	{
-		if (str.charAt(i) == " ")
+		/* 
+			Brainstorm:
+			- comments probably aren't going to be considered in the search - only the actual names of the classes/variables etc
+			- first check how many words the user entered e.g. if they typed "building health damage" that's 3 words 
+			- for each word perform a search through a trie 
+			- for each 2 words perform a search through a trie 
+			- lastly do all 3 words 
+			- when doing the single word searches when I reach the end of them in the trie then the end node should link 
+			to somthing that then has a
+		*/
+
+		var str = searchText;
+
+		/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
+		things like #, @, %, etc basically just leave letters and digits */
+		str = str.replace(/[^\w\s]/gi, "");
+
+		/* Replace 2+ runs of witespace with a single space */
+			str = str.replace(/\s\s+/g, " ");
+
+		// Remove space from start and end if any
+		str = str.trim();
+
+		/* Parse the string and split it up into seperate words */
+		var tokens = [];
+		for (var i = str.length - 1; i >= 0; --i)
 		{
-			var token = str.substring(i + 1, str.length);
-			tokens.push(token);
-			str = str.substring(0, i);
+			if (str.charAt(i) == " ")
+			{
+				var token = str.substring(i + 1, str.length);
+				tokens.push(token);
+				str = str.substring(0, i);
+			}
+			else if (i == 0)
+			{
+				var token = str.substring(i, str.length);
+				tokens.push(token);
+			}
 		}
-		else if (i == 0)
-		{
-			var token = str.substring(i, str.length);
-			tokens.push(token);
-		}
-	}
-	
-	/* Add "A", "U", "I" and "E" onto each token. This is so if the user searches something like "building" 
-	then "ABuilding" will be included */
+
+		/* Add "A", "U", "I" and "E" onto each token. This is so if the user searches something like "building" 
+		then "ABuilding" will be included */
 	    
-	for (var i = 0; i < tokens.length; ++i)
-	{
-		//TODO something
-	}
+		for (var i = 0; i < tokens.length; ++i)
+		{
+			//TODO something
+		}
 	    
         return searchResults;
     }

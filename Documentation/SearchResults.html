@@ -220,8 +220,7 @@
     /* @param searchText - what the user searched for */
     function onWindowLoad(searchText)
     {
-        //processSearchRequest(searchText);
-	    processSearchRequest("ANN ***    	((ASDMK M   aAAA MM     $$$$ a    )"); // Just for testing TODO
+        processSearchRequest(searchText);
     }
     
     function processSearchRequest(searchText)
@@ -260,7 +259,7 @@
 	li.setAttribute("class", "searchResultsListElement");
     var div1 = document.createElement("div");
 	var a = document.createElement("a");
-    a.setAttribute("href", "Info/" + filePath);
+    a.setAttribute("href", "Docs/ClassTest.html");//TODO, filePath might help 
     a.appendChild(document.createTextNode(niceName));
 	div1.appendChild(a);
 	    

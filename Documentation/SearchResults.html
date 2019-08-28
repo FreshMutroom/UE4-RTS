@@ -93,11 +93,13 @@
     
 	class SearchResult
 	{
-		/* @param inType - e.g. "class", "struct", "enum", "function", "variable", "enumValue" 
-		@param bInKindaFuzzy - whether this is a result from adding a "A", "U", "F" or "E" 
-		@param bInExactMatch - e.g. if user searches "max health" 
-		if there is a function/class/whatever called "max" or "health" then they will have this true. 
-		But say there's a variable called "TempHealth", then this will be false */
+		/** 
+		 *	@param inType - e.g. "class", "struct", "enum", "function", "variable", "enumValue" 
+		 *	@param bInKindaFuzzy - whether this is a result from adding a "A", "U", "F" or "E" 
+		 *	@param bInExactMatch - e.g. if user searches "max health" 
+		 *	if there is a function/class/whatever called "max" or "health" then they will have this true. 
+		 *	But say there's a variable called "TempHealth", then this will be false 
+		 */
 		constructor(inType, bInKindaFuzzy, bInExactMatch, inNumTokensMatching, someOtherClass)
 		{
 			// e.g. class, struct, enumValue, etc
@@ -121,242 +123,329 @@
     higher up on the page */
     function getSearchResults(searchText)
     {
-	// Array of search results to return
+		// Array of search results to return
         var searchResults = [];
-        
-	// ------- Begin my attempt at returning correct results --------
 
-	/* 
-		Brainstorm:
-		- comments probably aren't going to be considered in the search - only the actual names of the classes/variables etc
-		- first check how many words the user entered e.g. if they typed "building health damage" that's 3 words 
-		- for each word perform a search through a trie 
-		- for each 2 words perform a search through a trie 
-		- lastly do all 3 words 
-		- when doing the single word searches when I reach the end of them in the trie then the end node should link 
-		to somthing that then has a
-	*/
+		//-------------------------------------------------------------
+		//	Creation of tokens
+		//-------------------------------------------------------------
+		
+		var str = searchText;
 
-	var str = searchText;
+		/* Replace unuseful characters from the search request with a space */
+		str = str.replace(/[^\w\s]/gi, " ");
 
-	/* Remove unuseful characters from the search request. Haven't really tested this but I want it to remove 
-	things like #, @, %, etc basically just leave letters and digits */
-	str = str.replace(/[^\w\s]/gi, "");
+		/* Replace 2+ runs of witespace with a single space */
+		str = str.replace(/\s\s+/g, " ");
 
-	/* Replace 2+ runs of witespace with a single space */
-	str = str.replace(/\s\s+/g, " ");
+		// Remove space from start and end if any
+		str = str.trim();
 
-	// Remove space from start and end if any
-	str = str.trim();
-
-	class SearchToken
-	{
-		/* @param inAppendedFirstChar - e.g. "A", "U", "F", "E". Can be left empty */
-		constructor(inToken, inAppendedFirstChar)
+		class SearchToken
 		{
-			this.token = inToken;
-			this.appendedFirstChar = inAppendedFirstChar;
-		}
-	};
-
-	/* Parse the string and split it up into seperate tokens */
-	var tokens = [];
-	for (var i = str.length - 1; i >= 0; --i)
-	{
-		if (str.charAt(i) == " ")
-		{
-			var token = str.substring(i + 1, str.length);
-			tokens.push(SearchToken(token, ""));
-			str = str.substring(0, i);
-		}
-		else if (i == 0)
-		{
-			var token = str.substring(i, str.length);
-			tokens.push(SearchToken(token, ""));
-		}
-	}
-
-	// Add "A", "U", "F" and "E" onto each token. This is so if the user searches say "building" we 
-	// will get results for "ABuilding". However I will be careful to make sure that only classes will 
-	// have "A" added e.g. user searches for "bat". Add an "a" we get "abat" which turns out to be a function. 
-	// Cause the rules of unreal say that actor classes need an a at the front. However functions have no such requirement.
-	// So we do not add it to searchResults - only if abat is a class would we add it. Similar rules will apply to "U" too and
-	// "F" for structs and "E" for enums
-	for (var i = tokens.length - 1; i >= 0; --i)
-	{
-		tokens.push(SearchToken("A" + tokens[i].token, "A"));
-		tokens.push(SearchToken("U" + tokens[i].token, "U"));
-		tokens.push(SearchToken("F" + tokens[i].token, "F"));
-		tokens.push(SearchToken("E" + tokens[i].token, "E"));
-	}
-
-	for (var i = tokens.length - 1; i >= 0; --i)
-	{
-		var tkn = tokens[i].token;
-
-		// nameToPath is declared in another file
-
-		var len;
-
-		// Add classes that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.classes.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
+			/** 
+			 *	@param inTOken - string 
+			 *	@param inAppendedFirstChar - e.g. "A", "U", "F", "E". Can be left empty 
+			 */
+			constructor(inToken, inAppendedFirstChar)
 			{
-				searchResults.push(SearchResult("class", false, true, document.nameToPath[tkn].exactMatches.classes));
+				// Save token in lower case since searches are case insensitive
+				this.token = inToken.toLowerCase();
+				this.appendedFirstChar = inAppendedFirstChar;
 			}
-			else if (tokens[i].appendedFirstChar == "A" || tokens[i].appendedFirstChar == "U")
+		};
+
+		/* Parse the string and split it up into seperate tokens */
+		var tokens = [];
+		for (var i = str.length - 1; i >= 0; --i)
+		{
+			if (str.charAt(i) == " ")
 			{
-				searchResults.push(SearchResult("class", true, true, document.nameToPath[tkn].exactMatches.classes));
+				var token = str.substring(i + 1, str.length);
+				tokens.push(SearchToken(token, ""));
+				str = str.substring(0, i);
+			}
+			else if (i == 0)
+			{
+				var token = str.substring(i, str.length);
+				tokens.push(SearchToken(token, ""));
 			}
 		}
 
-		// Add structs that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.structs.length;
-		for (var i = 0; i < len; ++i)
+		// Add "A", "U", "F" and "E" onto each token. This is so if the user searches say "building" we 
+		// will get results for "ABuilding". However I will be careful to make sure that only classes will 
+		// have "A" added e.g. user searches for "bat". Add an "a" we get "abat" which turns out to be a function. 
+		// Cause the rules of unreal say that actor classes need an a at the front. However functions have no such requirement.
+		// So we do not add it to searchResults - only if abat is a class would we add it. Similar rules will apply to "U" too and
+		// "F" for structs and "E" for enums
+		for (var i = tokens.length - 1; i >= 0; --i)
 		{
-			if (tokens[i].appenedFirstChar == "")
-			{
-				searchResults.push(SearchResult("struct", false, true, document.nameToPath[tkn].exactMatches.structs));
-			}
-			else if (tokens[i].appendedFirstChar == "F")
-			{
-				searchResults.push(SearchResult("struct", true, true, document.nameToPath[tkn].exactMatches.structs));
-			}
+			tokens.push(SearchToken("a" + tokens[i].token, "a"));
+			tokens.push(SearchToken("u" + tokens[i].token, "u"));
+			tokens.push(SearchToken("f" + tokens[i].token, "f"));
+			tokens.push(SearchToken("e" + tokens[i].token, "e"));
 		}
 
-		// Add enums that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.enums.length;
-		for (var i = 0; i < len; ++i)
+		//-----------------------------------------------------------------
+		//	Adding to searchResults
+		//-----------------------------------------------------------------
+		
+		for (var i = tokens.length - 1; i >= 0; --i)
 		{
-			if (tokens[i].appenedFirstChar == "")
+			var tkn = tokens[i].token;
+
+			// Note: nameToPath is declared in another file
+
+			var len;
+
+			// Add classes that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.classes.length;
+			for (var i = 0; i < len; ++i)
 			{
-				searchResults.push(SearchResult("enum", false, true, document.nameToPath[tkn].exactMatches.enums));
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("class", false, true, document.nameToPath[tkn].exactMatches.classes));
+				}
+				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
+				{
+					searchResults.push(SearchResult("class", true, true, document.nameToPath[tkn].exactMatches.classes));
+				}
 			}
-			else if (tokens[i].appendedFirstChar == "E")
+
+			// Add structs that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.structs.length;
+			for (var i = 0; i < len; ++i)
 			{
-				searchResults.push(SearchResult("enum", true, true, document.nameToPath[tkn].exactMatches.enums));
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("struct", false, true, document.nameToPath[tkn].exactMatches.structs));
+				}
+				else if (tokens[i].appendedFirstChar == "f")
+				{
+					searchResults.push(SearchResult("struct", true, true, document.nameToPath[tkn].exactMatches.structs));
+				}
+			}
+
+			// Add enums that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.enums.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enum", false, true, document.nameToPath[tkn].exactMatches.enums));
+				}
+				else if (tokens[i].appendedFirstChar == "e")
+				{
+					searchResults.push(SearchResult("enum", true, true, document.nameToPath[tkn].exactMatches.enums));
+				}
+			}
+
+			// Add functions that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.functions.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("function", false, true, document.nameToPath[tkn].exactMatches.functions));
+				}
+			}
+
+			// Add variables that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.variables.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("variable", false, true, document.nameToPath[tkn].exactMatches.variables));
+				}
+			}
+
+			// Add enum values that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.enumValues.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enumValue", false, true, document.nameToPath[tkn].exactMatches.enumValues));
+				}
+			}
+
+			// Do the same now for partial matches
+
+			// Maps folder path to how many tokens match it
+			// e.g. user searches "max health"
+			// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
+			// The "max" token gets a match and so does the "health" token. 
+			var pathToNumMatches = new Map();
+
+			/* Adds key to map if not there and sets value to 1. Otherwise just increments value by 1 */
+			function incrementpathToNumMatchesValue(key)
+			{
+				if (pathToNumMatches.has(key) == false)
+				{
+					pathToNumMatches.set(key, 0);
+				}
+				pathToNumMatches[key] += 1;
+			};
+
+			// classes
+			len = document.nameToPath[tkn].partialMatches.classes.length;
+			var mapRef = 
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("class", false, false, document.nameToPath[tkn].partialMatches.classes));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.classes);
+				}
+				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
+				{
+					searchResults.push(SearchResult("class", true, false, document.nameToPath[tkn].partialMatches.classes));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.classes);
+				}
+			}
+
+			// structs
+			len = document.nameToPath[tkn].partialMatches.structs.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("struct", false, false, document.nameToPath[tkn].partialMatches.structs));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.structs);
+				}
+				else if (tokens[i].appendedFirstChar == "f")
+				{
+					searchResults.push(SearchResult("struct", true, false, document.nameToPath[tkn].partialMatches.structs));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.structs);
+				}
+			}
+
+			// enums
+			len = document.nameToPath[tkn].partialMatches.enums.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enum", false, false, document.nameToPath[tkn].partialMatches.enums));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enums);
+				}
+				else if (tokens[i].appendedFirstChar == "e")
+				{
+					searchResults.push(SearchResult("enum", true, false, document.nameToPath[tkn].partialMatches.enums));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enums);
+				}
+			}
+
+			// functions
+			len = document.nameToPath[tkn].partialMatches.functions.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("function", false, false, document.nameToPath[tkn].partialMatches.functions));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.functions);
+				}
+			}
+
+			// variables
+			len = document.nameToPath[tkn].partialMatches.variables.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("variable", false, false, document.nameToPath[tkn].partialMatches.variables));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.variables);
+				}
+			}
+
+			// enum values
+			len = document.nameToPath[tkn].partialMatches.enumValues.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enumValue", false, false, document.nameToPath[tkn].partialMatches.enumValues));
+					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enumValues);
+				}
 			}
 		}
-
-		// Add functions that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.functions.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appenedFirstChar == "")
-			{
-				searchResults.push(SearchResult("function", false, true, document.nameToPath[tkn].exactMatches.functions));
-			}
-		}
-
-		// Add variables that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.variables.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appenedFirstChar == "")
-			{
-				searchResults.push(SearchResult("variable", false, true, document.nameToPath[tkn].exactMatches.variables));
-			}
-		}
-
-		// Add enum values that are perfect matches
-		len = document.nameToPath[tkn].exactMatches.enumValues.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appenedFirstChar == "")
-			{
-				searchResults.push(SearchResult("enumValue", false, true, document.nameToPath[tkn].exactMatches.enumValues));
-			}
-		}
-
-		// Do the same now for partial matches
-
-		// Maps folder path to how many tokens match it
-		// e.g. user searches "max health"
-		// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
-		// The "max" token gets a match and so does the "health" token. 
-		//var pathToNumMatches = new Map();
-
-		// classes
-		len = document.nameToPath[tkn].partialMatches.classes.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("class", false, false, document.nameToPath[tkn].partialMatches.classes));
-			}
-			else if (tokens[i].appendedFirstChar == "A" || tokens[i].appendedFirstChar == "U")
-			{
-				searchResults.push(SearchResult("class", true, false, document.nameToPath[tkn].partialMatches.classes));
-			}
-		}
-
-		// structs
-		len = document.nameToPath[tkn].partialMatches.structs.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("struct", false, false, document.nameToPath[tkn].partialMatches.structs));
-			}
-			else if (tokens[i].appendedFirstChar == "F")
-			{
-				searchResults.push(SearchResult("struct", true, false, document.nameToPath[tkn].partialMatches.structs));
-			}
-		}
-
-		// enums
-		len = document.nameToPath[tkn].partialMatches.enums.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("enum", false, false, document.nameToPath[tkn].partialMatches.enums));
-			}
-			else if (tokens[i].appendedFirstChar == "E")
-			{
-				searchResults.push(SearchResult("enum", true, false, document.nameToPath[tkn].partialMatches.enums));
-			}
-		}
-
-		// functions
-		len = document.nameToPath[tkn].partialMatches.functions.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("function", false, false, document.nameToPath[tkn].partialMatches.functions));
-			}
-		}
-
-		// variables
-		len = document.nameToPath[tkn].partialMatches.variables.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("variable", false, false, document.nameToPath[tkn].partialMatches.variables));
-			}
-		}
-
-		// enum values
-		len = document.nameToPath[tkn].partialMatches.enumValues.length;
-		for (var i = 0; i < len; ++i)
-		{
-			if (tokens[i].appendedFirstChar == "")
-			{
-				searchResults.push(SearchResult("enumValue", false, false, document.nameToPath[tkn].partialMatches.enumValues));
-			}
-		}
-	}
 	    
-	searchResults.sort(function(a, b)
-	{
-		//TODO
-		// Probably want exact matches first, then sort them by whether they were fuzzy or not, then type
-		// Then partial matches come next
-	});
+		//-------------------------------------------------------------------------
+		//	Functions to help with sorting
+		//-------------------------------------------------------------------------
+		
+		function sortByExactMatch(a, b)
+		{
+			return b.bExactMatch - a.bExactMatch;
+		};
+		
+		function sortByFuzzyness(a, b)
+		{
+			return b.bKindaFuzzy - a.bKindaFuzzy;
+		};
+		
+		function sortByType(a, b)
+		{
+			var val = typeToSortValue(b.type) - typeToSortValue(a.type);
+			// Clamp value to -1, 0, or 1. Can't remember if sorting algorithms require the values to be 
+			// one of those 3 or if it's OK to have like -7 or whatever so just being safe for now
+			if (val < 0)
+			{
+				val = -1;	
+			}
+			else if (val > 0)
+			{
+				val = 1;	
+			}
+			
+			return val;
+		};
+		
+		//--------------------------------------------------------------
+		//	Sorting searchResults
+		//--------------------------------------------------------------
+		
+	    if (tokens.length == 1)
+	    {
+			searchResults.sort(function(a, b)
+			{
+				/* Case where user only typed a single token. Sort as follows: 
+				Exact matches come first (matches where the whole word is what the user typed) 
+				e.g. user types "health" 
+				true = the variable "Health" 
+				false = the variable "MaxHealth"
+				Then sort based on whether they were kinda fuzzy or not 
+				Then sort based on type. It goes class --> struct --> enum --> function --> variable --> enumValue
+				Then do the same for partial matches
+				*/
+				var result = sortByExactMatch(a, b))
+				if (result == 0)
+				{
+					result = sortByFuzzyness(a, b);
+					if (result == 0)
+					{
+						result = sortByType(a, b);
+						if (result == 0)
+						{
+							// They are considered the same in terms of importantness. Just return a as being more important
+							return -1;	
+						}
+					}
+				}
+				
+				return result;
+			});
+	    }
+		else
+		{
+			searchResults.sort(function(a, b)
+			{
+				//TODO
+				// Probably want exact matches first, then sort them by whether they were fuzzy or not, then type
+				// Then partial matches come next
+			});
+		}
 		
         return searchResults;
     }

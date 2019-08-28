@@ -50,7 +50,11 @@
         }
     }
     
-    /* @param filename - the path of the file relative to the folder that stores all my auto-generated files in */
+    /** 
+     *	Create HTML to show a search result 
+     *
+     *	@param filename - the path of the file relative to the folder that stores all my auto-generated files in 
+     */
     function createSearchResultHTMLElement(filePath)
     {
         /* Prune filePath and html part e.g. "Classes/ABuilding.html" becomes "ABuilding" */
@@ -276,6 +280,7 @@
 			// e.g. user searches "max health"
 			// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
 			// The "max" token gets a match and so does the "health" token. 
+			// TODO I don't actually use this and consequently SearchResult.NumTokensMatching is never modified
 			var pathToNumMatches = new Map();
 
 			/* Adds key to map if not there and sets value to 1. Otherwise just increments value by 1 */
@@ -290,7 +295,6 @@
 
 			// classes
 			len = document.nameToPath[tkn].partialMatches.classes.length;
-			var mapRef = 
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
@@ -402,6 +406,23 @@
 			return val;
 		};
 		
+	    function sortByNumPartialMatches(a, b)
+	    {
+		    var val = b.numPartialMatches - a.numPartialMatches;
+		    // Clamp value to -1, 0, or 1. Can't remember if sorting algorithms require the values to be 
+			// one of those 3 or if it's OK to have like -7 or whatever so just being safe for now
+			if (val < 0)
+			{
+				val = -1;	
+			}
+			else if (val > 0)
+			{
+				val = 1;	
+			}
+
+			return val;
+	    };
+	    
 		//--------------------------------------------------------------
 		//	Sorting searchResults
 		//--------------------------------------------------------------
@@ -419,7 +440,8 @@
 				Then sort based on type. It goes class --> struct --> enum --> function --> variable --> enumValue
 				Then do the same for partial matches
 				*/
-				var result = sortByExactMatch(a, b))
+				var result;
+				result = sortByExactMatch(a, b))
 				if (result == 0)
 				{
 					result = sortByFuzzyness(a, b);
@@ -441,9 +463,34 @@
 		{
 			searchResults.sort(function(a, b)
 			{
-				//TODO
-				// Probably want exact matches first, then sort them by whether they were fuzzy or not, then type
-				// Then partial matches come next
+				/* Here sort based on: 
+				- if multiple tokens have hits on an item then they come first 
+				e.g. user searches "max health" - the variable MaxHealth has 2 hits so it will come first 
+				over say the variable Health. 
+				Then use exact same criteria as the tokens.length == 1 case
+				*/
+				var result;
+				
+				result = sortByNumPartialMatches(a, b);
+				if (result == 0)
+				{
+					result = sortByExactMatch(a, b))
+					if (result == 0)
+					{
+						result = sortByFuzzyness(a, b);
+						if (result == 0)
+						{
+							result = sortByType(a, b);
+							if (result == 0)
+							{
+								// They are considered the same in terms of importantness. Just return a as being more important
+								return -1;	
+							}
+						}
+					}
+				}
+				
+				return result;
 			});
 		}
 		

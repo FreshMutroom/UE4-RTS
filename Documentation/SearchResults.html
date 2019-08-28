@@ -26,189 +26,6 @@
 </html>
 
 <script>
-/***********************************************************************************************************************************
-************************************************************************************************************************************ 
-*********************************************** Search Result Trie Implementation **************************************************
-************************************************************************************************************************************
-************************************************************************************************************************************/
-/* Trie implementation for helping return search results */
-	
-	
-	/** 
-     *	A single node in a trie
-     */
-   class SearchResultTrieNode 
-   {
-      constructor() 
-      {
-         // The letter attached to this node. Only the root node should keep this empty
-         this.letter = "";
-         // Whether this node is the last letter of a word
-         this.bIsWord = false;
-         // if bIsWord == true then this equals the word
-         this.word = "";
-         // Child nodes
-         this.children = [];
-      }
-  };
-	
-	SearchResultTrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
-   {
-      for (var i = 0; i < this.children.length; ++i)
-      {
-         if (this.children[i].letter == str.charAt(index))
-         {
-            if (index >= str.length)
-            {
-               console.error("recursiveFindChildThenAdd(): index >= str.length");
-            }
-            
-            index++;
-            this.children[i].recursiveFindChildThenAdd(str, index);
-            return;
-         }
-      }
-
-      /* If here then none of the children had the letter. Create a new node with the letter */
-      var newNode = new TrieNode();
-      newNode.letter = str.charAt(index);
-      this.children.push(newNode);
-      
-      // Check if at end of string
-      if (index + 1 == str.length)
-      {
-         newNode.bIsWord = true;
-         newNode.word = str;
-      }
-      else	
-      {
-         index++;
-         newNode.recursiveFindChildThenAdd(str, index);
-      }
-   };
-
-   /** Add a word to the trie. This is intended to be called on the root node */
-   SearchResultTrieNode.prototype.insert = function(str) 
-   {
-      this.recursiveFindChildThenAdd(str, 0);
-   };
-
-   /**
-    * Get words in the trie that prefix a string
-    *
-    * @param str - string to get words for 
-    * @param index - current position in str 
-    * @param words - array of words that str is a prefix for 
-    */
-   SearchResultTrieNode.prototype.recursiveGetPrefixedWords = function(str, index, words)
-   {
-      index++;
-      /* Check if this node is a word and it is the same or greater length than str. If yes then add it */
-      if (this.bIsWord == true && str.length <= index)
-      {
-         words.push(this.word);
-      }
-   
-      if (str.length <= index)
-      {
-         for (var i = 0; i < this.children.length; ++i)
-         {
-             this.children[i].recursiveGetPrefixedWords(str, index, words);
-         }
-      }
-      else
-      {
-         for (var i = 0; i < this.children.length; ++i)
-         {
-            if (this.children[i].letter.toLowerCase() == str.charAt(index).toLowerCase())
-            {
-               this.children[i].recursiveGetPrefixedWords(str, index, words);
-               /* Have commented this return. Reason is the search is case insensitive so if user types "a" 
-               then the entry "apple" and "Apple" are both possibilities so cannot return since one might 
-               get skipped */
-               //return;
-            }
-         }
-      }
-   };
-   
-   
-   /** Class declaration: a trie. Contains a hashset and a root node */
-   class SearchResultTrie
-   {
-      constructor()
-      {
-         // Should I be using new here? Or is there a better way?
-
-         // A container that holds all the words in the trie
-         this.wordsSet = new Set();
-         // The root node of the trie
-         this.RootNode = new SearchResultTrieNode();
-      }
-   };
-
-
-   /** 
-    * Check whether a string has already been added to the trie
-    *
-    *	@return - true if the string has already been added to the trie.
-    */
-   SearchResultTrie.prototype.contains = function(str)
-   {
-      return this.wordsSet.has(str);
-   };
-
-   /**
-    * Try add a string to the trie 
-    *   
-    * @param str - the string to add to the trie 
-    */
-   SearchResultTrie.prototype.insert = function(str)
-   {
-      if (str.length == 0)
-      {
-         // Avoid adding empty string
-         return;
-      }
-   
-      if (this.contains(str))
-      {
-         // Avoid adding string if it's already in the trie
-         return;
-      }
-      
-      this.RootNode.insert(str);
-      this.wordsSet.add(str);
-   };
-
-   /** 
-    * Return all the words in the trie that have str as a prefix 
-    *   
-    * @param str - prefix string
-    * @return - array of words that have str as a prefix 
-    */
-   SearchResultTrie.prototype.getPrefixedWords = function(str)
-   {
-      var words = [];
-
-      if (str.length == 0)
-      {
-         return words;
-      }
-
-      this.RootNode.recursiveGetPrefixedWords(str, -1, words);
-      
-      return words;
-   };
-	
-/***********************************************************************************************************************************
-************************************************************************************************************************************ 
-*********************************************** End Search Result Trie Implementation **********************************************
-************************************************************************************************************************************
-************************************************************************************************************************************/	
-</script>
-	
-<script>
     
     /* Probably don't want this function to be called on refresh. Is that the case? */
     window.onload = function() 
@@ -253,38 +70,57 @@
             }
         }
         
-	/* Create list elements to display the search results */
-	    
-    var li = document.createElement("li");
-	li.setAttribute("class", "searchResultsListElement");
-    var div1 = document.createElement("div");
-	var a = document.createElement("a");
-    a.setAttribute("href", "Docs/ClassTest.html");//TODO, filePath might help 
-    a.appendChild(document.createTextNode(niceName));
-	div1.appendChild(a);
-	    
-	// Add another text field that will show the class'/struct's/enum's comment 
-    var div2 = document.createElement("div");
-	div2.appendChild(document.createTextNode(getSearchResultDescription(niceName)));
-		
-	li.appendChild(div1);
-	li.appendChild(div2);
+		/* Create list elements to display the search results */
 
-	var ul = document.getElementById("searchResultsList");
-	ul.appendChild(li);
+		var li = document.createElement("li");
+		li.setAttribute("class", "searchResultsListElement");
+		var div1 = document.createElement("div");
+		var a = document.createElement("a");
+		a.setAttribute("href", "Docs/ClassTest.html");//TODO, filePath might help 
+		a.appendChild(document.createTextNode(niceName));
+		div1.appendChild(a);
+
+		// Add another text field that will show the class'/struct's/enum's comment 
+		var div2 = document.createElement("div");
+		div2.appendChild(document.createTextNode(getSearchResultDescription(niceName)));
+
+		li.appendChild(div1);
+		li.appendChild(div2);
+
+		var ul = document.getElementById("searchResultsList");
+		ul.appendChild(li);
     }
     
+	class SearchResult
+	{
+		/* @param inType - e.g. "class", "struct", "enum", "function", "variable", "enumValue" 
+		@param bInKindaFuzzy - whether this is a result from adding a "A", "U", "F" or "E" 
+		@param bInExactMatch - */
+		constructor(inType, bInKindaFuzzy, bInExactMatch, inNumTokensMatching, someOtherClass)
+		{
+			// e.g. class, struct, enumValue, etc
+			this.type = inType;
+			this.bKindaFuzzy  = bInKindaFuzzy;
+			// e.g. if the token was "Health", a true would be "Health", a false would be "MaxHealth"
+			this.bExactMatch = bInExactMatch;
+			/**
+			 *	e.g. user types "max health yo"
+			 *	For the token "max health" we will get 2 here. 
+			 *	For the token "health" we'll only get 1
+			 *	For exact matches this will always be 1
+			 */
+			this.NumTokensMatching = inNumTokensMatching;
+			this.name = someOtherClass.name;
+			this.path = someOtherClass.path;
+		}
+	};
+	
     /* Return array of filenames to show for a search request. Lower indicies in the array will appear 
     higher up on the page */
     function getSearchResults(searchText)
     {
 		// Array of search results to return
         var searchResults = [];
-        
-        //TODO
-        searchResults.push("Classes/something1.html");
-        searchResults.push("Classes/building.html");
-        searchResults.push("Classes/infantry.html");
         
 		// ------- Begin my attempt at returning correct results --------
 
@@ -306,36 +142,220 @@
 		str = str.replace(/[^\w\s]/gi, "");
 
 		/* Replace 2+ runs of witespace with a single space */
-			str = str.replace(/\s\s+/g, " ");
+		str = str.replace(/\s\s+/g, " ");
 
 		// Remove space from start and end if any
 		str = str.trim();
-
-		/* Parse the string and split it up into seperate words */
+		
+		class SearchToken
+		{
+			/* @param inAppendedFirstChar - e.g. "A", "U", "F", "E". Can be left empty */
+			constructor(inToken, inAppendedFirstChar)
+			{
+				this.token = inToken;
+				this.appendedFirstChar = inAppendedFirstChar;
+			}
+		};
+		
+		/* Parse the string and split it up into seperate tokens */
 		var tokens = [];
 		for (var i = str.length - 1; i >= 0; --i)
 		{
 			if (str.charAt(i) == " ")
 			{
 				var token = str.substring(i + 1, str.length);
-				tokens.push(token);
+				tokens.push(SearchToken(token, ""));
 				str = str.substring(0, i);
 			}
 			else if (i == 0)
 			{
 				var token = str.substring(i, str.length);
-				tokens.push(token);
+				tokens.push(SearchToken(token, ""));
 			}
 		}
-
-		/* Add "A", "U", "I" and "E" onto each token. This is so if the user searches something like "building" 
-		then "ABuilding" will be included */
-	    
-		for (var i = 0; i < tokens.length; ++i)
+		
+		// Add "A", "U", "F" and "E" onto each token. This is so if the user searches say "building" we 
+		// will get results for "ABuilding". However I will be careful to make sure that only classes will 
+		// have "A" added e.g. user searches for "bat". Add an "a" we get "abat" which turns out to be a function. 
+		// Cause the rules of unreal say that actor classes need an a at the front. However functions have no such requirement.
+		// So we do not add it to searchResults - only if abat is a class would we add it. Similar rules will apply to "U" too and
+		// "F" for structs and "E" for enums
+		for (var i = tokens.length - 1; i >= 0; --i)
 		{
-			//TODO something
+			tokens.push(SearchToken("A" + tokens[i].token, "A"));
+			tokens.push(SearchToken("U" + tokens[i].token, "U"));
+			tokens.push(SearchToken("F" + tokens[i].token, "F"));
+			tokens.push(SearchToken("E" + tokens[i].token, "E"));
+		}
+		
+		for (var i = tokens.length - 1; i >= 0; --i)
+		{
+			var tkn = tokens[i].token;
+			
+			// nameToPath is declared in another file
+			
+			var len;
+			
+			// Add classes that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.classes.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("class", false, true, document.nameToPath[tkn].exactMatches.classes));
+				}
+				else if (tokens[i].appendedFirstChar == "A" || tokens[i].appendedFirstChar == "U")
+				{
+					searchResults.push(SearchResult("class", true, true, document.nameToPath[tkn].exactMatches.classes));
+				}
+			}
+			
+			// Add structs that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.structs.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("struct", false, true, document.nameToPath[tkn].exactMatches.structs));
+				}
+				else if (tokens[i].appendedFirstChar == "F")
+				{
+					searchResults.push(SearchResult("struct", true, true, document.nameToPath[tkn].exactMatches.structs));
+				}
+			}
+			
+			// Add enums that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.enums.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enum", false, true, document.nameToPath[tkn].exactMatches.enums));
+				}
+				else if (tokens[i].appendedFirstChar == "E")
+				{
+					searchResults.push(SearchResult("enum", true, true, document.nameToPath[tkn].exactMatches.enums));
+				}
+			}
+			
+			// Add functions that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.functions.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("function", false, true, document.nameToPath[tkn].exactMatches.functions));
+				}
+			}
+			
+			// Add variables that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.variables.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("variable", false, true, document.nameToPath[tkn].exactMatches.variables));
+				}
+			}
+			
+			// Add enum values that are perfect matches
+			len = document.nameToPath[tkn].exactMatches.enumValues.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enumValue", false, true, document.nameToPath[tkn].exactMatches.enumValues));
+				}
+			}
+			
+			// Do the same now for partial matches
+			
+			// Maps folder path to how many tokens match it
+			// e.g. user searches "max health"
+			// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
+			// The "max" token gets a match and so does the "health" token. 
+			var pathToNumMatches = new Map();
+			
+			// classes
+			len = document.nameToPath[tkn].partialMatches.classes.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("class", false, false, document.nameToPath[tkn].partialMatches.classes));
+				}
+				else if (tokens[i].appendedFirstChar == "A" || tokens[i].appendedFirstChar == "U")
+				{
+					searchResults.push(SearchResult("class", true, false, document.nameToPath[tkn].partialMatches.classes));
+				}
+			}
+			
+			// structs
+			len = document.nameToPath[tkn].partialMatches.structs.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("struct", false, false, document.nameToPath[tkn].partialMatches.structs));
+				}
+				else if (tokens[i].appendedFirstChar == "F")
+				{
+					searchResults.push(SearchResult("struct", true, false, document.nameToPath[tkn].partialMatches.structs));
+				}
+			}
+			
+			// enums
+			len = document.nameToPath[tkn].partialMatches.enums.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enum", false, false, document.nameToPath[tkn].partialMatches.enums));
+				}
+				else if (tokens[i].appendedFirstChar == "E")
+				{
+					searchResults.push(SearchResult("enum", true, false, document.nameToPath[tkn].partialMatches.enums));
+				}
+			}
+			
+			// functions
+			len = document.nameToPath[tkn].partialMatches.functions.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("function", false, false, document.nameToPath[tkn].partialMatches.functions));
+				}
+			}
+			
+			// variables
+			len = document.nameToPath[tkn].partialMatches.variables.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("variable", false, false, document.nameToPath[tkn].partialMatches.variables));
+				}
+			}
+			
+			// enum values
+			len = document.nameToPath[tkn].partialMatches.enumValues.length;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(SearchResult("enumValue", false, false, document.nameToPath[tkn].partialMatches.enumValues));
+				}
+			}
 		}
 	    
+		searchResults.sort(function(a, b)
+		{
+			//TODO
+			// Probably want exact matches first, then sort them by whether they were fuzzy or not, then type
+			// Then partial matches come next
+		});
+		
         return searchResults;
     }
 	

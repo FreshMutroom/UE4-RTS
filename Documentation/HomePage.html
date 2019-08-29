@@ -264,7 +264,7 @@
       if (keyCode == 13) 
       {
          // Set this so the SearchResults.html page can read it to know what the user searched for
-         window.localStorage.setItem("searchText", enteredText);
+         window.localStorage.setItem("searchText", /*enteredText*/ "Test");
          
          // Navigate to the search results page
          location.href = "SearchResults.html";

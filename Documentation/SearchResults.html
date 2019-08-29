@@ -37,65 +37,26 @@
     /* @param searchText - what the user searched for */
     function onWindowLoad(searchText)
     {
+        // Set to ABuilding. For testing only
+        if (searchText == null)
+        {
+            searchText = "struct";   
+        }
+        
         processSearchRequest(searchText);
     }
     
     function processSearchRequest(searchText)
     {
-        var linksToShow = getSearchResults(searchText);
+        var searchResults = getSearchResults(searchText);
         
-        for (var i = 0; i < linksToShow.length; ++i)
+        for (var i = 0; i < searchResults.length; ++i)
         {
-            createSearchResultHTMLElement(linksToShow[i]);
+            createSearchResultHTMLElement(searchResults[i]);
         }
     }
     
-    /** 
-     *	Create HTML to show a search result 
-     *
-     *	@param filename - the path of the file relative to the folder that stores all my auto-generated files in 
-     */
-    function createSearchResultHTMLElement(filePath)
-    {
-        /* Prune filePath and html part e.g. "Classes/ABuilding.html" becomes "ABuilding" */
-        var niceName = filePath;
-        for (var i = niceName.length - 1; i >= 0; --i)
-        {
-            if (niceName.charAt(i) == ".")
-            {
-                // Remove the ".html" part
-                niceName = niceName.substring(0, i);
-            }
-            else if (niceName.charAt(i) == "\/")
-            {
-                // Remove the "Classes/" part
-                niceName = niceName.substring(i + 1, niceName.length);
-                break;
-            }
-        }
-        
-		/* Create list elements to display the search results */
-
-		var li = document.createElement("li");
-		li.setAttribute("class", "searchResultsListElement");
-		var div1 = document.createElement("div");
-		var a = document.createElement("a");
-		a.setAttribute("href", "Docs/ClassTest.html");//TODO, filePath might help 
-		a.appendChild(document.createTextNode(niceName));
-		div1.appendChild(a);
-
-		// Add another text field that will show the class'/struct's/enum's comment 
-		var div2 = document.createElement("div");
-		div2.appendChild(document.createTextNode(getSearchResultDescription(niceName)));
-
-		li.appendChild(div1);
-		li.appendChild(div2);
-
-		var ul = document.getElementById("searchResultsList");
-		ul.appendChild(li);
-    }
-    
-	class SearchResult
+    class SearchResult
 	{
 		/** 
 		 *	@param inType - e.g. "class", "struct", "enum", "function", "variable", "enumValue" 
@@ -104,7 +65,7 @@
 		 *	if there is a function/class/whatever called "max" or "health" then they will have this true. 
 		 *	But say there's a variable called "TempHealth", then this will be false 
 		 */
-		constructor(inType, bInKindaFuzzy, bInExactMatch, inNumTokensMatching, someOtherClass)
+		constructor(inType, bInKindaFuzzy, bInExactMatch, inPath)
 		{
 			// e.g. class, struct, enumValue, etc
 			this.type = inType;
@@ -117,11 +78,43 @@
 			 *	For the token "health" we'll only get 1
 			 *	For exact matches this will always be 1
 			 */
-			this.NumTokensMatching = inNumTokensMatching;
-			this.name = someOtherClass.name;
-			this.path = someOtherClass.path;
+			//this.NumTokensMatching = inNumTokensMatching;
+			this.path = inPath;
 		}
 	};
+    
+    
+    /** 
+     *	Create HTML to show a search result 
+     *
+     *	@param filename - the path of the file relative to the folder that stores all my auto-generated files in 
+     */
+    function createSearchResultHTMLElement(searchResult)
+    {
+        // Note: this variable is decared in another file
+        var resultInfo = pathToBasicInfo.get(searchResult.path);
+        
+		/* Create list elements to display the search results */
+
+		var li = document.createElement("li");
+		li.setAttribute("class", "searchResultsListElement");
+		var div1 = document.createElement("div");
+		var a = document.createElement("a");
+		a.setAttribute("href", searchResult.path);
+		a.appendChild(document.createTextNode(resultInfo.name));
+		div1.appendChild(a);
+
+		// Add another text field that will show the class'/struct's/enum's comment 
+		var div2 = document.createElement("div");
+		div2.appendChild(document.createTextNode(resultInfo.description));
+
+		li.appendChild(div1);
+		li.appendChild(div2);
+
+		var ul = document.getElementById("searchResultsList");
+		ul.appendChild(li);
+    }
+    
 	
     /* Return array of filenames to show for a search request. Lower indicies in the array will appear 
     higher up on the page */
@@ -148,7 +141,7 @@
 		class SearchToken
 		{
 			/** 
-			 *	@param inTOken - string 
+			 *	@param inToken - string 
 			 *	@param inAppendedFirstChar - e.g. "A", "U", "F", "E". Can be left empty 
 			 */
 			constructor(inToken, inAppendedFirstChar)
@@ -166,13 +159,13 @@
 			if (str.charAt(i) == " ")
 			{
 				var token = str.substring(i + 1, str.length);
-				tokens.push(SearchToken(token, ""));
+				tokens.push(new SearchToken(token, ""));
 				str = str.substring(0, i);
 			}
 			else if (i == 0)
 			{
 				var token = str.substring(i, str.length);
-				tokens.push(SearchToken(token, ""));
+				tokens.push(new SearchToken(token, ""));
 			}
 		}
 
@@ -184,107 +177,29 @@
 		// "F" for structs and "E" for enums
 		for (var i = tokens.length - 1; i >= 0; --i)
 		{
-			tokens.push(SearchToken("a" + tokens[i].token, "a"));
-			tokens.push(SearchToken("u" + tokens[i].token, "u"));
-			tokens.push(SearchToken("f" + tokens[i].token, "f"));
-			tokens.push(SearchToken("e" + tokens[i].token, "e"));
+			tokens.push(new SearchToken("a" + tokens[i].token, "a"));
+			tokens.push(new SearchToken("u" + tokens[i].token, "u"));
+			tokens.push(new SearchToken("f" + tokens[i].token, "f"));
+			tokens.push(new SearchToken("e" + tokens[i].token, "e"));
 		}
 
 		//-----------------------------------------------------------------
 		//	Adding to searchResults
 		//-----------------------------------------------------------------
 		
-		for (var i = tokens.length - 1; i >= 0; --i)
+		for (var k = tokens.length - 1; k >= 0; --k)
 		{
-			var tkn = tokens[i].token;
-
-			// Note: nameToPath is declared in another file
-
-			var len;
-
-			// Add classes that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.classes.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appendedFirstChar == "")
-				{
-					searchResults.push(SearchResult("class", false, true, document.nameToPath[tkn].exactMatches.classes));
-				}
-				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
-				{
-					searchResults.push(SearchResult("class", true, true, document.nameToPath[tkn].exactMatches.classes));
-				}
-			}
-
-			// Add structs that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.structs.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appenedFirstChar == "")
-				{
-					searchResults.push(SearchResult("struct", false, true, document.nameToPath[tkn].exactMatches.structs));
-				}
-				else if (tokens[i].appendedFirstChar == "f")
-				{
-					searchResults.push(SearchResult("struct", true, true, document.nameToPath[tkn].exactMatches.structs));
-				}
-			}
-
-			// Add enums that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.enums.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appenedFirstChar == "")
-				{
-					searchResults.push(SearchResult("enum", false, true, document.nameToPath[tkn].exactMatches.enums));
-				}
-				else if (tokens[i].appendedFirstChar == "e")
-				{
-					searchResults.push(SearchResult("enum", true, true, document.nameToPath[tkn].exactMatches.enums));
-				}
-			}
-
-			// Add functions that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.functions.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appenedFirstChar == "")
-				{
-					searchResults.push(SearchResult("function", false, true, document.nameToPath[tkn].exactMatches.functions));
-				}
-			}
-
-			// Add variables that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.variables.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appenedFirstChar == "")
-				{
-					searchResults.push(SearchResult("variable", false, true, document.nameToPath[tkn].exactMatches.variables));
-				}
-			}
-
-			// Add enum values that are perfect matches
-			len = document.nameToPath[tkn].exactMatches.enumValues.length;
-			for (var i = 0; i < len; ++i)
-			{
-				if (tokens[i].appenedFirstChar == "")
-				{
-					searchResults.push(SearchResult("enumValue", false, true, document.nameToPath[tkn].exactMatches.enumValues));
-				}
-			}
-
-			// Do the same now for partial matches
+            var tkn = tokens[k].token;
 
 			// Maps folder path to how many tokens match it
 			// e.g. user searches "max health"
 			// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
 			// The "max" token gets a match and so does the "health" token. 
-			// TODO I don't actually use this and consequently SearchResult.NumTokensMatching is never modified
+            // Gets incremented for both exact matches and partial matches
 			var pathToNumMatches = new Map();
-
+            
 			/* Adds key to map if not there and sets value to 1. Otherwise just increments value by 1 */
-			function incrementpathToNumMatchesValue(key)
+			function incrementPathToNumMatchesValue(key)
 			{
 				if (pathToNumMatches.has(key) == false)
 				{
@@ -292,93 +207,205 @@
 				}
 				pathToNumMatches[key] += 1;
 			};
+            
+			var len;
 
-			// classes
-			len = document.nameToPath[tkn].partialMatches.classes.length;
-			for (var i = 0; i < len; ++i)
+			// Add classes that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.classes.length : 0;
+            for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("class", false, false, document.nameToPath[tkn].partialMatches.classes));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.classes);
+					searchResults.push(new SearchResult("class", false, true, searchTokenToPaths.get(tkn).exactMatches.classes[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
 				{
-					searchResults.push(SearchResult("class", true, false, document.nameToPath[tkn].partialMatches.classes));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.classes);
+					searchResults.push(new SearchResult("class", true, true, searchTokenToPaths.get(tkn).exactMatches.classes[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
+				}
+			}
+
+			// Add structs that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.structs.length : 0;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("struct", false, true, searchTokenToPaths.get(tkn).exactMatches.structs[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
+				}
+				else if (tokens[i].appendedFirstChar == "f")
+				{
+					searchResults.push(new SearchResult("struct", true, true, searchTokenToPaths.get(tkn).exactMatches.structs[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
+				}
+			}
+
+			// Add enums that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.enums.length : 0;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("enum", false, true, searchTokenToPaths.get(tkn).exactMatches.enums[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
+				}
+				else if (tokens[i].appendedFirstChar == "e")
+				{
+					searchResults.push(new SearchResult("enum", true, true, searchTokenToPaths.get(tkn).exactMatches.enums[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
+				}
+			}
+
+			// Add functions that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.functions.length : 0;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("function", false, true, searchTokenToPaths.get(tkn).exactMatches.functions[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.functions[i]);
+				}
+			}
+
+			// Add variables that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.variables.length : 0;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("variable", false, true, searchTokenToPaths.get(tkn).exactMatches.variables[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.variables[i]);
+				}
+			}
+
+			// Add enum values that are perfect matches
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.enumValues.length : 0;
+			for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appenedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("enumValue", false, true, searchTokenToPaths.get(tkn).exactMatches.enumValues[i]));
+                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enumValues[i]);
+				}
+			}
+            
+
+            // ----------- Do the same for partial matches -------------
+            
+			// classes
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.classes.length : 0;
+            for (var i = 0; i < len; ++i)
+			{
+				if (tokens[i].appendedFirstChar == "")
+				{
+					searchResults.push(new SearchResult("class", false, false, searchTokenToPaths.get(tkn).partialMatches.classes[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.classes);
+				}
+				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
+				{
+					searchResults.push(new SearchResult("class", true, false, searchTokenToPaths.get(tkn).partialMatches.classes[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.classes[i]);
 				}
 			}
 
 			// structs
-			len = document.nameToPath[tkn].partialMatches.structs.length;
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.structs.length : 0;
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("struct", false, false, document.nameToPath[tkn].partialMatches.structs));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.structs);
+					searchResults.push(new SearchResult("struct", false, false, searchTokenToPaths.get(tkn).partialMatches.structs[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.structs[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "f")
 				{
-					searchResults.push(SearchResult("struct", true, false, document.nameToPath[tkn].partialMatches.structs));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.structs);
+					searchResults.push(new SearchResult("struct", true, false, searchTokenToPaths.get(tkn).partialMatches.structs[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.structs[i]);
 				}
 			}
 
 			// enums
-			len = document.nameToPath[tkn].partialMatches.enums.length;
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.enums.length : 0;
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("enum", false, false, document.nameToPath[tkn].partialMatches.enums));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enums);
+					searchResults.push(new SearchResult("enum", false, false, searchTokenToPaths.get(tkn).partialMatches.enums[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.enums[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "e")
 				{
-					searchResults.push(SearchResult("enum", true, false, document.nameToPath[tkn].partialMatches.enums));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enums);
+					searchResults.push(new SearchResult("enum", true, false, searchTokenToPaths.get(tkn).partialMatches.enums[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.enums[i]);
 				}
 			}
 
 			// functions
-			len = document.nameToPath[tkn].partialMatches.functions.length;
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.functions.length : 0;
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("function", false, false, document.nameToPath[tkn].partialMatches.functions));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.functions);
+					searchResults.push(new SearchResult("function", false, false, searchTokenToPaths.get(tkn).partialMatches.functions[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.functions[i]);
 				}
 			}
 
 			// variables
-			len = document.nameToPath[tkn].partialMatches.variables.length;
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.variables.length : 0;
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("variable", false, false, document.nameToPath[tkn].partialMatches.variables));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.variables);
+					searchResults.push(new SearchResult("variable", false, false, searchTokenToPaths.get(tkn).partialMatches.variables[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.variables[i]);
 				}
 			}
 
 			// enum values
-			len = document.nameToPath[tkn].partialMatches.enumValues.length;
+			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.enumValues.length : 0;
 			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
-					searchResults.push(SearchResult("enumValue", false, false, document.nameToPath[tkn].partialMatches.enumValues));
-					incrementpathToNumMatchesValue(document.nameToPath[tkn].partialMatches.enumValues);
+					searchResults.push(new SearchResult("enumValue", false, false, searchTokenToPaths.get(tkn).partialMatches.enumValues[i]));
+					incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).partialMatches.enumValues[i]);
 				}
 			}
 		}
 	    
+        //-------------------------------------------------------------------------
+		//	
+		//-------------------------------------------------------------------------
+        
+        /* What this loop does: 
+        It will potentially increment a value from a key/value pair in pathToNumMatches. 
+        It will do this if the "owning" item was also searched for
+        e.g. user searches "abuilding health". The variable ABuilding::Health will end up 
+        getting 2 in pathToNumMatches thanks to this loop (before it running it would have been 1) */
+        var arrayLength = searchResults.length;
+        for (var i = 0; i < arrayLength; ++i)
+        {
+            var elem = searchResults[i];
+            var elemsInfo = pathToBasicInfo.get(elem.path);
+            // An optimized version of this if statement: if (elemsInfo.owner != "")
+            // For readability it is how it is now
+            if (elemsInfo.type == "function" || elemsInfo.type == "variable" || elemsInfo.type == "enumValue")
+            {
+                if (tokens.includes(elemsInfo.owner))
+                {
+                    incrementPathToNumMatchesValue(elem.path);
+                }
+            }
+        }
+        
 		//-------------------------------------------------------------------------
 		//	Functions to help with sorting
 		//-------------------------------------------------------------------------
-		
+		// Negative values basically mean the result will appear higher up on the page
+        
 		function sortByExactMatch(a, b)
 		{
 			return b.bExactMatch - a.bExactMatch;
@@ -386,9 +413,18 @@
 		
 		function sortByFuzzyness(a, b)
 		{
-			return b.bKindaFuzzy - a.bKindaFuzzy;
+			return a.bKindaFuzzy - b.bKindaFuzzy;
 		};
 		
+        /* Maps page type to how unimportant it is. Lower values mean page is more important */
+        var typeToSortValue = new Map();
+        typeToSortValue.set("class",        0);
+        typeToSortValue.set("struct",       1);
+        typeToSortValue.set("enum",         2);
+        typeToSortValue.set("function",     3);
+        typeToSortValue.set("variable",     4);
+        typeToSortValue.set("enumValue",    5);
+        
 		function sortByType(a, b)
 		{
 			var val = typeToSortValue(b.type) - typeToSortValue(a.type);
@@ -441,7 +477,7 @@
 				Then do the same for partial matches
 				*/
 				var result;
-				result = sortByExactMatch(a, b))
+				result = sortByExactMatch(a, b);
 				if (result == 0)
 				{
 					result = sortByFuzzyness(a, b);
@@ -451,7 +487,7 @@
 						if (result == 0)
 						{
 							// They are considered the same in terms of importantness. Just return a as being more important
-							return -1;	
+							result = -1;	
 						}
 					}
 				}
@@ -474,17 +510,17 @@
 				result = sortByNumPartialMatches(a, b);
 				if (result == 0)
 				{
-					result = sortByExactMatch(a, b))
+					result = sortByExactMatch(a, b);
 					if (result == 0)
 					{
 						result = sortByFuzzyness(a, b);
 						if (result == 0)
 						{
-							result = sortByType(a, b);
+							result = sortByType(a, b); 
 							if (result == 0)
 							{
 								// They are considered the same in terms of importantness. Just return a as being more important
-								return -1;	
+								result = -1;	
 							}
 						}
 					}
@@ -496,17 +532,7 @@
 		
         return searchResults;
     }
-	
-/** 
- *	@param name - the name of the item e.g. "ABuilding", "EUnitType" 
- *	@return - the description to show for name when it is a search result 
- */
-function getSearchResultDescription(name)
-{	
-	return "BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH BLAH sjdask lasldlsaldad;sal; " 
-		+ "dsadsak uuuuuuuuu roqwpeqp rpeprpepepeppe ee[[q[[qq[q[q[ lalaskdlklaskldlsad";
-}
-    
+	 
 </script>
 
-
+<script src="SearchData.js"></script>

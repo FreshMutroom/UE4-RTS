@@ -33,7 +33,8 @@ class SearchPaths
 
 class BasicSearchInfo
 {
-	/**	 *	@param inType - "class", "struct", "enum", "function", "variable", "enumValue"
+	/**
+	 *	@param inType - "class", "struct", "enum", "function", "variable", "enumValue"
 	 *	@param inOwner - can be left blank. This is the "item" that owns this item
 	 *	e.g. something of type "function" will usually have an owner that is the name of the
 	 *	class/struct that it was declared in
@@ -111,12 +112,10 @@ searchTokenToPaths.get("struct").partialMatches.structs.push("Docs/Structs/FSome
 pathToBasicInfo.set("Docs/Structs/FSomeTestStruct.html", new BasicSearchInfo("FSomeTestStruct", "A test struct for documentation", "struct", ""));
 
 
-<script>
-	// The trie for search suggestions
-	var searchTrie = new Trie();
 
-	searchTrie.insert("UDocToolTestUObject");
-	searchTrie.insert("FSomeTestStruct");
-</script>
+// The trie for search suggestions
+var searchTrie = new Trie();
 
-<script src="DataStructures/Trie.js"></script>
+searchTrie.insert("UDocToolTestUObject");
+searchTrie.insert("FSomeTestStruct");
+src="DataStructures/Trie.js"

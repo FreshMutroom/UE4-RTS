@@ -345,7 +345,7 @@
       
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName("li");
-      window.searchBoxSuggestions = window.TestTrie.getPrefixedWords(enteredText); 
+      window.searchBoxSuggestions = window.searchTrie.getPrefixedWords(enteredText); 
       
       for (var i = 0; i < li.length; ++i)
       {
@@ -438,14 +438,8 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
 
 <script>
    
-   // Root node of trie for testing only
-   var TestTrie = new Trie();
-   TestTrie.insert("apple");
-   TestTrie.insert("apples");
-   TestTrie.insert("Apple");
-   TestTrie.insert("bat");
-   TestTrie.insert("battle");
-   TestTrie.insert("bbbbbbbbbbbbbbbbbbbbbbbbbb");
+   // The trie for search suggestions
+   var searchTrie = new Trie();
    
    var searchBoxList =  document.getElementById("searchBoxDropdownList");
    var searchBoxListElements = searchBoxList.getElementsByTagName("li");

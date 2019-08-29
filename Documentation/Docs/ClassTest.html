@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 
 <style>
-	
+	/* Inheritance hierarchy list element */
+	.IRli
+	{
+		border-bottom: 1px solid #000000;
+	}
 </style>
 
 <!-- This is a test file to see what a class link would look like e.g. user wants to look at ABuilding. 
@@ -18,10 +22,10 @@ It might apply to structs too. -->
 		<div>
 			<h2>Inheritance Hierarchy</h2>
 			<ul id="inheritance hierarchy">
-				<li><a href="somelink">UObject</a></li>
-				<li> &emsp; <a href="somelink">UActorComponent</a></li>
-				<li> &emsp; &emsp; <a href="somelink">USceneComponent</a></li>
-				<li> &emsp; &emsp; &emsp; UTHISCLASS</li>
+				<li class="IRli"><a href="somelink">UObject</a></li>
+				<li class="IRli"> &emsp; <a href="somelink">UActorComponent</a></li>
+				<li class="IRli"> &emsp; &emsp; <a href="somelink">USceneComponent</a></li>
+				<li class="IRli"> &emsp; &emsp; &emsp; UTHISCLASS</li>
 			</ul>
 			
 			<h2>Syntax</h2>

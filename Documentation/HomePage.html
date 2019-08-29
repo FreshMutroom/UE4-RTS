@@ -168,7 +168,7 @@
       
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName("li");
-      window.searchBoxSuggestions = window.searchTrie.getPrefixedWords(enteredText); 
+      window.searchBoxSuggestions = searchTrie.getPrefixedWords(enteredText); 
       
       for (var i = 0; i < li.length; ++i)
       {

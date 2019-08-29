@@ -110,3 +110,13 @@ if (searchTokenToPaths.has("struct") == false)
 searchTokenToPaths.get("struct").partialMatches.structs.push("Docs/Structs/FSomeTestStruct.html");
 pathToBasicInfo.set("Docs/Structs/FSomeTestStruct.html", new BasicSearchInfo("FSomeTestStruct", "A test struct for documentation", "struct", ""));
 
+
+<script>
+	// The trie for search suggestions
+	var searchTrie = new Trie();
+
+	searchTrie.insert("UDocToolTestUObject");
+	searchTrie.insert("FSomeTestStruct");
+</script>
+
+<script src="DataStructures/Trie.js"></script>

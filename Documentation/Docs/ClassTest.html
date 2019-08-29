@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 
 <style>
-	/* Inheritance hierarchy list element */
-	.IRli
+	/* Table element for the functions table */
+	.table_entry_functions
 	{
 		border-bottom: 1px solid #000000;
+	}
+	.table_entry_functions:last
+	{
+		border-bottom: none;
 	}
 </style>
 
@@ -22,10 +26,10 @@ It might apply to structs too. -->
 		<div>
 			<h2>Inheritance Hierarchy</h2>
 			<ul id="inheritance hierarchy">
-				<li class="IRli"><a href="somelink">UObject</a></li>
-				<li class="IRli"> &emsp; <a href="somelink">UActorComponent</a></li>
-				<li class="IRli"> &emsp; &emsp; <a href="somelink">USceneComponent</a></li>
-				<li class="IRli"> &emsp; &emsp; &emsp; UTHISCLASS</li>
+				<li><a href="somelink">UObject</a></li>
+				<li> &emsp; <a href="somelink">UActorComponent</a></li>
+				<li> &emsp; &emsp; <a href="somelink">USceneComponent</a></li>
+				<li> &emsp; &emsp; &emsp; UTHISCLASS</li>
 			</ul>
 			
 			<h2>Syntax</h2>
@@ -61,7 +65,7 @@ It might apply to structs too. -->
 					<th>Name</th>
 					<th>Description</th>
 				</tr>
-				<tr>
+				<tr class="table_entry_functions">
 					<td><img src="../Images/field-grass-green-65281.jpg" alt="public symbol"></td>
 					<td>SOMECLASS()</td>
 					<td>Default ctor</td>
@@ -76,13 +80,13 @@ It might apply to structs too. -->
 					<th>Name</th>
 					<th>Description</th>
 				</tr>
-				<tr>
+				<tr class="table_entry_functions">
 					<td><div><img src="../Images/field-grass-green-65281.jpg" alt="public symbol"><img src="../Images/color-concrete-design-122458.jpg" alt="protected symbol"></div></td>
 					<td>float</td>
 					<td>GetSomething(Fname Param1)</td>
 					<td>Does something</td>
 				</tr>
-				<tr>
+				<tr class="table_entry_functions">
 					<td><div><img src="../Images/color-concrete-design-122458.jpg" alt="protected symbol"></div></td>
 					<td>const FBlahblahblah</td>
 					<td>GetSomethingElse()</td>

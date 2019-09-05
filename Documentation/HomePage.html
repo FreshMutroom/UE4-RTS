@@ -2,9 +2,15 @@
 
 <style>
    
-   .searchBarForm
+   .searchBoxInput
    {
       length: 350px;
+      width: 75px;
+   }
+   
+   .searchBoxSearchButton
+   {
+      length: 150px;
       width: 75px;
    }
    
@@ -235,8 +241,8 @@
     <!-- Search box. 
 Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough cause copy and paste is a thing -->
      <form class="searchBarForm">
-        <input type="text" id="searchBoxInput" placeholder="Search..." autocomplete="off">
-        <button type="submit">Search</button>
+        <input type="text" class="searchBarInput" id="searchBoxInput" placeholder="Search..." autocomplete="off">
+        <button type="submit" class="searchBoxSearchButton">Search</button>
      </form>
      <!-- Dropdown list that predicts what you could be searching for -->
      <ul id="searchBoxDropdownList" class="searchBoxDropdownList">

@@ -43,6 +43,9 @@
             searchText = "struct";   
         }
         
+    	// Change the title of the document to include what the user searched for
+    	document.title = document.title + " - " + searchText;
+	    
         processSearchRequest(searchText);
     }
     

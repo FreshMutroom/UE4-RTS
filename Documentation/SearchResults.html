@@ -44,7 +44,18 @@
         }
         
     	// Change the title of the document to include what the user searched for
-    	document.title = document.title + " - " + searchText;
+    	var extraTitleText;
+	/* I chose 33 cause that's the limit UE4 imposes on UCLASSes I think (actually I think it can 
+	be easily bypassed but whatever) */
+	if (searchText.length > 33)
+	{
+		extraTitleText = " - " + searchText.substring(0, 33) + "...";
+	}
+	else
+	{
+		extraTitleText = " - " + searchText;
+	}
+    	document.title += extraTitleText;
 	    
         processSearchRequest(searchText);
     }

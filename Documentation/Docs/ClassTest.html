@@ -5,7 +5,7 @@
 	{
 		list-style-type: none;
 		
-		max-height: auto;
+		/*max-height: 0;*/
   		overflow: hidden;
 		/* The transition time is 0 so it happens instantly. Make it greater than 0 for a animated trasition */
   		transition: max-height 0.0s ease-out;
@@ -133,10 +133,12 @@ It might apply to structs too. -->
 			if (content.style.maxHeight) 
 			{
 				content.style.maxHeight = null;
+				console.log("if statement");
 			} 
 			else 
 			{
-				content.style.maxHeight = content.scrollHeight + "px";;
+				content.style.maxHeight = content.scrollHeight + "px";
+				console.log("else statement");
 			}
 	  	});
 	}

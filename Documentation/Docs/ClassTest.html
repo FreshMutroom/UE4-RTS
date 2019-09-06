@@ -4,6 +4,10 @@
 	.inheritanceHierarchyList
 	{
 		list-style-type: none;
+		
+		max-height: 0;
+  		overflow: hidden;
+  		transition: max-height 0.2s ease-out;
 	}
 	
 </style>
@@ -123,14 +127,15 @@ It might apply to structs too. -->
 	{
 		collapsibles[i].addEventListener("click", function() 
 		{
+			// Getting unordered list here... some of the collapsables use tables not lists so probably won't work for them
 			var content = this.getElementsByTagName("ul")[0];
 			if (content.style.display == "block") 
 			{
-				content.style.display = "none";
+				content.style.maxHeight = null;
 			} 
 			else 
 			{
-				content.style.display = "block";
+				content.style.maxHeight = content.scrollHeight + "px";;
 			}
 	  	});
 	}

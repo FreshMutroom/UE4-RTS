@@ -137,7 +137,7 @@ It might apply to structs too. -->
 	function toggleCollapsiblesCollapsyness(collapsible)
 	{
 		// Getting unordered list here... some of the collapsables use tables not lists so probably won't work for them
-		var ul = collapsible.parnetElement.getElementsByTagName("ul")[0];
+		var ul = collapsible.parentElement.getElementsByTagName("ul")[0];
 		if (ul.style.maxHeight) 
 		{
 			ul.style.maxHeight = null;

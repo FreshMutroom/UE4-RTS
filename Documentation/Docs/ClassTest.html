@@ -128,8 +128,14 @@ It might apply to structs too. -->
 	{
 		collapsibles[i].addEventListener("click", function() 
 		{
-			// Getting unordered list here... some of the collapsables use tables not lists so probably won't work for them
-			var content = this.getElementsByTagName("ul")[0];
+			toggleCollapsiblesCollapsyness(this);
+	  	});
+	}
+	
+	function toggleCollapsiblesCollapsyness(collapsible)
+	{
+		// Getting unordered list here... some of the collapsables use tables not lists so probably won't work for them
+			var content = collapsible.getElementsByTagName("ul")[0];
 			if (content.style.maxHeight) 
 			{
 				content.style.maxHeight = null;
@@ -138,7 +144,6 @@ It might apply to structs too. -->
 			{
 				content.style.maxHeight = content.scrollHeight + "px";
 			}
-	  	});
 	}
 	
 </script>

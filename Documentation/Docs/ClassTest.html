@@ -26,7 +26,8 @@ It might apply to structs too. -->
 		<h1>CLASSNAME</h1>
 		
 		<div>
-			<div class="collapsible">
+			<div class="collapsibleDiv">
+				<img src="../Images/plus_symbol.jpg" height="64" width="64" class="collapsibleSymbol">
 				<h2>Inheritance Hierarchy</h2>
 				<ul id="inheritance hierarchy" class="inheritanceHierarchyList">
 					<li><a href="somelink">UObject</a></li>
@@ -124,7 +125,7 @@ It might apply to structs too. -->
 															     
 <script>
 	// Set the "on clicked" behavior for all the collapsables
-	var collapsibles = document.getElementsByClassName("collapsible");
+	var collapsibles = document.getElementsByClassName("collapsibleSymbol");
 	for (var i = 0; i < collapsibles.length; ++i)
 	{
 		collapsibles[i].addEventListener("click", function() 
@@ -136,15 +137,15 @@ It might apply to structs too. -->
 	function toggleCollapsiblesCollapsyness(collapsible)
 	{
 		// Getting unordered list here... some of the collapsables use tables not lists so probably won't work for them
-			var content = collapsible.getElementsByTagName("ul")[0];
-			if (content.style.maxHeight) 
-			{
-				content.style.maxHeight = null;
-			} 
-			else 
-			{
-				content.style.maxHeight = content.scrollHeight + "px";
-			}
+		var ul = collapsible.parnetElement.getElementsByTagName("ul")[0];
+		if (ul.style.maxHeight) 
+		{
+			ul.style.maxHeight = null;
+		} 
+		else 
+		{
+			ul.style.maxHeight = ul.scrollHeight + "px";
+		}
 	}
 	
 </script>

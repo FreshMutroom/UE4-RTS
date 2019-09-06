@@ -7,7 +7,7 @@
 <!-- This is a test file to see what a class link would look like e.g. user wants to look at ABuilding. 
 It might apply to structs too. -->
 
-<html
+<html>
 	<head>
 		<title>UE4 RTS CLASSNAME</title>
 	</head>
@@ -119,7 +119,7 @@ It might apply to structs too. -->
 	{
 		collapsibles[i].addEventListener("click", function() 
 		{
-			var content = this.nextElementSibling;
+			var content = this.firstChild;
 			if (content.style.display === "block") 
 			{
 				content.style.display = "none";

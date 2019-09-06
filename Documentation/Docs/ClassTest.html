@@ -35,6 +35,11 @@
 		font: 1em "Source Code Pro";
 		border: 1px solid #2e2e2e;
 		padding: 30px;
+		
+		/* todo by default the collapsible is collapsed, but I want it to be shown just like how UE4 docs does it */
+		max-height: 0;
+  		overflow: hidden;
+  		transition: max-height 0.2s ease-out;
 	}
 	
 </style>

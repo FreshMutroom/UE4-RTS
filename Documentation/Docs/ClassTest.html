@@ -142,7 +142,7 @@ It might apply to structs too. -->
 					<tr>
 						<td class="tableElement"><img src="../Images/field-grass-green-65281.jpg" alt="public symbol"></td>
 						<td class="tableElement">SOMECLASS()</td>
-						<td class="tableElement"><div class="tableElementDiv">Default ctor blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</div></td>
+						<td class="tableElement">Default ctor blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah</td>
 					</tr>
 				</table>
 			</div>
@@ -237,10 +237,18 @@ It might apply to structs too. -->
 		if (collapsibleContent.style.display != "none") 
 		{
 			collapsibleContent.style.display = "none";
+			
+			// Change image to a plus symbol
+			var img = collapsibleContent.getElementByClass("collapsibleSymbol")[0];
+			img.src = "../Images/plus_symbol.png";
 		} 
 		else 
 		{
 			collapsibleContent.style.display = "block";
+			
+			// Change the image to a minus symbol
+			var img = collapsibleContent.getElementsByClass("collapsibleSymbol")[0];
+			img.src = "../Images/minus_symbol.jpg";
 		}
 	}
 	

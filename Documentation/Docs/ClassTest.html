@@ -261,7 +261,7 @@ It might apply to structs too. -->
 			var img = collapsible.getElementsByClassName("collapsibleSymbol")[0];
 			img.src = "../Images/plus_symbol.png";
 			
-			window.scrollBy(0, 200);
+			collapsible.scrollTop = document.body.scrollTop;
 		} 
 		else 
 		{

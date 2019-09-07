@@ -263,7 +263,14 @@ It might apply to structs too. -->
 		} 
 		else 
 		{
-			collapsibleContent.style.display = "block";
+			if (collapsibleContent.tagName == "table")
+			{
+				collapsibleContent.style.display = "table";
+			}
+			else
+			{
+				collapsibleContent.style.display = "block";
+			}
 			
 			// Change the image to a minus symbol
 			var img = collapsible.getElementsByClassName("collapsibleSymbol")[0];

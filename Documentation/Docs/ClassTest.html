@@ -263,9 +263,8 @@ It might apply to structs too. -->
 		} 
 		else 
 		{
-			if (collapsibleContent.nodeName == "table")
+			if (typeof(collapsibleContent) == "table")
 			{
-				console.log("table");
 				collapsibleContent.style.display = "table";
 			}
 			else

@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 
+<style>
+  
+  @font-face 
+	{
+		font-family: 'Source Code Pro';
+		font-style: normal;
+		font-weight: normal;
+		src: local('Source Code Pro'), url('SourceCodePro-Regular.woff') format('woff');
+	}
+  
+</style>
+
 <html>
   <!-- Test page for a function's doc page -->
   
@@ -12,6 +24,77 @@
       <h2>FUNCTIONNAME</h2>
       Decription blah blah
     </p>
+  
+  <div>
+  		<div class="collapsibleDiv">
+			/* Note: you'll need to go back an extra folder for production version */
+            <img src="../Images/minus_symbol.jpg" alt="Expansion symbol" height="20" width="20" class="collapsibleSymbol">
+            <h2> &ensp; Syntax</h2>
+		</div>
+	  <p class="collapsibleContent_syntaxParagraph">virtial int32 GetBlah() const</p>
+  </div>
+  
   </body>
   
 </html>
+
+
+<script>
+	
+	/* Currently exactly same code as the stuff in ClasTest.html. Consider possibly moving 
+	it all into a single file to reduce code size */
+	
+	// Set the "on clicked" behavior for all the collapsables
+	var collapsibles = document.getElementsByClassName("collapsibleDiv");
+	for (var i = 0; i < collapsibles.length; ++i)
+	{
+		collapsibles[i].addEventListener("mousedown", function() 
+		{
+			toggleCollapsiblesCollapsyness(this);
+	  	});
+	}
+	
+	function toggleCollapsiblesCollapsyness(collapsible)
+	{
+		/* Find the collapsible content */
+		var collapsibleContent;
+		var children = collapsible.parentElement.children;
+		for (var i = 0; i < children.length; ++i)
+		{
+			if (children[i].className.substring(0, 19) == "collapsibleContent_")
+			{
+				collapsibleContent = children[i];
+				break;
+			}
+		}
+		
+		/* Toggle appearance of collapsible content */
+		if (collapsibleContent.style.display != "none") 
+		{
+			collapsibleContent.style.display = "none";
+			
+			// Change image to a plus symbol
+			var img = collapsible.getElementsByClassName("collapsibleSymbol")[0];
+			img.src = "../Images/plus_symbol.png";
+			
+		} 
+		else 
+		{
+			if (collapsibleContent.nodeName == "TABLE")
+			{
+				collapsibleContent.style.display = "table";
+			}
+			else
+			{
+				collapsibleContent.style.display = "block";
+			}
+			
+			// Change the image to a minus symbol
+			var img = collapsible.getElementsByClassName("collapsibleSymbol")[0];
+			img.src = "../Images/minus_symbol.jpg";
+			
+		}
+	}
+	
+</script>
+

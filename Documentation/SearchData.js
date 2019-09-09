@@ -5486,22 +5486,8 @@ TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
 	newNode.letter = str.charAt(index);
 	this.children.push(newNode);
 
-	// Check if at end of string
-	if (index + 1 == str.length)
-	{
-		newNode.bIsWord = true;
-		newNode.word = str;
-	}
-	else
-	{
-		if (index >= str.length)
-		{
-			console.error("index out of range. str = " + str);
-		}
-
-		index++;
-		newNode.recursiveFindChildThenAdd(str, index);
-	}
+	index++;
+	newNode.recursiveFindChildThenAdd(str, index);
 };
 
 /** Add a word to the trie. This is intended to be called on the root node */

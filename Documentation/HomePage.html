@@ -165,10 +165,7 @@
          var li = ul.getElementsByTagName("li");
          
          // Unhighlight the currently highlighted suggestion
-         if (window.searchBoxSuggestionHighlightedIndex != -1)
-         {
-            li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
-         }
+         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
          
          // Move up one item on the list
          window.searchBoxSuggestionHighlightedIndex--;
@@ -178,6 +175,8 @@
             // Need to revert text back to what user typed
             var textBox = document.getElementById("searchBoxInput");
             textBox.value = window.searchBoxUserInputedText;
+            
+            console.log("REVERT");
          }
          else
          {
@@ -266,10 +265,10 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
         <ul id="importantFiles" class="importantFilesList">
            <!-- The classes I put in these list elements are hardcoded here as opposed to having them specified 
             in C++ source or something -->
-           <li class="importantFilesListElement"><a href="Docs/Classes/ABuilding.html">ABuilding</a></li>
-           <li class="importantFilesListElement"><a href="Docs/Classes/AInfantry.html">AInfantry</a></li>
-           <li class="importantFilesListElement"><a href="Docs/Classes/AFactionInfo.html">AFactionInfo</a></li>
-           <li class="importantFilesListElement"><a href="Docs/Classes/URTSGameInstance.html">URTSGameInstance</a></li>
+           <li class="importantFilesListElement"><a href="Docs/Classes/ABuilding/ABuilding.html">ABuilding</a></li>
+           <li class="importantFilesListElement"><a href="Docs/Classes/AInfantry/AInfantry.html">AInfantry</a></li>
+           <li class="importantFilesListElement"><a href="Docs/Classes/AFactionInfo/AFactionInfo.html">AFactionInfo</a></li>
+           <li class="importantFilesListElement"><a href="Docs/Classes/URTSGameInstance/URTSGameInstance.html">URTSGameInstance</a></li>
         </ul>
      </div>
      

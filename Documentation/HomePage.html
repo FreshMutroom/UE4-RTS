@@ -105,7 +105,6 @@
    {
       var input = document.getElementById("searchBoxInput");
       var enteredText = input.value; 
-      window.searchBoxUserInputedText = enteredText;
       
       var keyCode = (keyEvent.keyCode ? keyEvent.keyCode : keyCode.which);
       // Check if enter was the key
@@ -171,17 +170,13 @@
          window.searchBoxSuggestionHighlightedIndex--;
          // Check if have moved off first suggestion and onto the search box 
          if (window.searchBoxSuggestionHighlightedIndex == -1)
-         {
-            console.log(window.searchBoxUserInputedText);
-            
+         {  
             // Need to revert text back to what user typed
             var textBox = document.getElementById("searchBoxInput");
             textBox.value = window.searchBoxUserInputedText;
          }
          else
          {
-            console.log(window.searchBoxSuggestionHighlightedIndex);
-            
             li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionHighlightColor;
          
             // Change the text in the search box to the suggestion
@@ -191,6 +186,8 @@
             
           return false;
       }
+      
+      window.searchBoxUserInputedText = enteredText;
       
       var ul =  document.getElementById("searchBoxDropdownList");
       var li = ul.getElementsByTagName("li");

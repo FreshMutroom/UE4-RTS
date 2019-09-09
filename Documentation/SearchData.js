@@ -5458,6 +5458,14 @@ class TrieNode
 
 TrieNode.prototype.recursiveFindChildThenAdd = function(str, index)
 {
+	// Check if at end of string
+	if (index == str.length)
+	{
+		this.bIsWord = true;
+		this.word = str;
+		return;
+	}
+
 	for (var i = 0; i < this.children.length; ++i)
 	{
 		if (this.children[i].letter == str.charAt(index))

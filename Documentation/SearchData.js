@@ -81,7 +81,7 @@ function addToContainers_class(name, description, relativePath, partialTokens, o
 		searchTokenToPaths.get(name).partialMatches.classes.push(relativePath);
 	}
 	
-	pathToBasicInfo.set(relativePath, new BasicSearchInfo(token, description, "class", owner));
+	pathToBasicInfo.set(relativePath, new BasicSearchInfo(name, description, "class", owner));
 }
 
 function addToContainers_struct(name, description, relativePath, partialTokens, owner)
@@ -102,7 +102,7 @@ function addToContainers_struct(name, description, relativePath, partialTokens, 
 		searchTokenToPaths.get(name).partialMatches.structs.push(relativePath);
 	}
 	
-	pathToBasicInfo.set(relativePath, new BasicSearchInfo(token, description, "struct", owner));
+	pathToBasicInfo.set(relativePath, new BasicSearchInfo(name, description, "struct", owner));
 }
 
 function addToContainers_enum(name, description, relativePath, partialTokens, owner)
@@ -123,7 +123,7 @@ function addToContainers_enum(name, description, relativePath, partialTokens, ow
 		searchTokenToPaths.get(name).partialMatches.enums.push(relativePath);
 	}
 	
-	pathToBasicInfo.set(relativePath, new BasicSearchInfo(token, description, "enum", owner));
+	pathToBasicInfo.set(relativePath, new BasicSearchInfo(name, description, "enum", owner));
 }
 
 function addToContainers_function(name, description, relativePath, partialTokens, owner)
@@ -144,7 +144,7 @@ function addToContainers_function(name, description, relativePath, partialTokens
 		searchTokenToPaths.get(name).partialMatches.functions.push(relativePath);
 	}
 	
-	pathToBasicInfo.set(relativePath, new BasicSearchInfo(token, description, "function", owner));
+	pathToBasicInfo.set(relativePath, new BasicSearchInfo(name, description, "function", owner));
 }
 
 function addToContainers_variable(name, description, relativePath, partialTokens, owner)
@@ -165,7 +165,7 @@ function addToContainers_variable(name, description, relativePath, partialTokens
 		searchTokenToPaths.get(name).partialMatches.variables.push(relativePath);
 	}
 	
-	pathToBasicInfo.set(relativePath, new BasicSearchInfo(token, description, "variable", owner));
+	pathToBasicInfo.set(relativePath, new BasicSearchInfo(name, description, "variable", owner));
 }
 
 function addToContainers_enumValue(name, description, relativePath, partialTokens, owner)
@@ -4452,54 +4452,54 @@ addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
 addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("0", "", "Docs/Enums//Values/0.html", [], "");
 addToContainers_enumValue("revealtilesfrombuildings", "", "Docs/Enums//Values/RevealTilesFromBuildings.html", ["reveal", "tiles", "from", "buildings"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_1.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_1.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_1.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_2.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
 addToContainers_enumValue("revealtilesfrominfantry", "", "Docs/Enums//Values/RevealTilesFromInfantry.html", ["reveal", "tiles", "from", "infantry"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_2.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_3.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_2.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("2", "", "Docs/Enums//Values/2.html", [], "");
 addToContainers_enumValue("tickandrevealtilesfromtemporaryrevealeffects", "", "Docs/Enums//Values/TickAndRevealTilesFromTemporaryRevealEffects.html", ["tick", "and", "reveal", "tiles", "from", "temporary", "reveal", "effects"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_3.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_4.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_3.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("3", "", "Docs/Enums//Values/3.html", [], "");
 addToContainers_enumValue("storetilevisibility", "", "Docs/Enums//Values/StoreTileVisibility.html", ["store", "tile", "visibility"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_4.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_5.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_4.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("4", "", "Docs/Enums//Values/4.html", [], "");
 addToContainers_enumValue("queueuprenderingfogofwar", "", "Docs/Enums//Values/QueueUpRenderingFogOfWar.html", ["queue", "up", "rendering", "fog", "of", "war"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_5.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_6.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_5.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("5", "", "Docs/Enums//Values/5.html", [], "");
 addToContainers_enumValue("storehostileteamselectablevisibility", "", "Docs/Enums//Values/StoreHostileTeamSelectableVisibility.html", ["store", "hostile", "team", "selectable", "visibility"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_6.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_7.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_6.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("6", "", "Docs/Enums//Values/6.html", [], "");
 addToContainers_enumValue("storeprojectilesvisibility", "", "Docs/Enums//Values/StoreProjectilesVisibility.html", ["store", "projectiles", "visibility"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_7.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_8.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_7.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("7", "", "Docs/Enums//Values/7.html", [], "");
 addToContainers_enumValue("storeparticlesystemsvisibility", "", "Docs/Enums//Values/StoreParticleSystemsVisibility.html", ["store", "particle", "systems", "visibility"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_8.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_9.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_8.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("8", "", "Docs/Enums//Values/8.html", [], "");
 addToContainers_enumValue("storeinventoryitemvisibility", "", "Docs/Enums//Values/StoreInventoryItemVisibility.html", ["store", "inventory", "item", "visibility"], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_9.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_10.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_9.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("9", "", "Docs/Enums//Values/9.html", [], "");
 addToContainers_enumValue("finished", "", "Docs/Enums//Values/Finished.html", [], "");
-addToContainers_enumValue("=", "", "Docs/Enums//Values/=_10.html", [], "");
-addToContainers_enumValue("1", "", "Docs/Enums//Values/1_11.html", [], "");
-addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<_10.html", [], "");
+addToContainers_enumValue("=", "", "Docs/Enums//Values/=.html", [], "");
+addToContainers_enumValue("1", "", "Docs/Enums//Values/1.html", [], "");
+addToContainers_enumValue("<<", "", "Docs/Enums//Values/<<.html", [], "");
 addToContainers_enumValue("10", "", "Docs/Enums//Values/10.html", [], "");
 addToContainers_enum("", "", "Docs/Enums/_1/.html", [], "");
 addToContainers_enumValue("researchedfrombuilding", "How the player completed the upgrade", "Docs/Enums/_1/Values/ResearchedFromBuilding.html", ["researched", "from", "building"], "");
@@ -4588,7 +4588,7 @@ addToContainers_enum("enocollisionprojectilemode", "", "Docs/Enums/ENoCollisionP
 addToContainers_enumValue("straightfiringattarget", "Fires straight and is being fired at a actor", "Docs/Enums/ENoCollisionProjectileMode/Values/StraightFiringAtTarget.html", ["straight", "firing", "at", "target"], "ENoCollisionProjectileMode");
 addToContainers_enumValue("straightfiringatlocation", "Fires straight and is being fired at a location", "Docs/Enums/ENoCollisionProjectileMode/Values/StraightFiringAtLocation.html", ["straight", "firing", "at", "location"], "ENoCollisionProjectileMode");
 addToContainers_enumValue("arcedfiringatlocation", "Fires in an arc and is being fired at a location", "Docs/Enums/ENoCollisionProjectileMode/Values/ArcedFiringAtLocation.html", ["arced", "firing", "at", "location"], "ENoCollisionProjectileMode");
-addToContainers_enumValue("arcedfiringatlocation", "Fires in an arc and is being fired at a location", "Docs/Enums/ENoCollisionProjectileMode/Values/ArcedFiringAtLocation_1.html", ["arced", "firing", "at", "location"], "ENoCollisionProjectileMode");
+addToContainers_enumValue("arcedfiringatlocation", "Fires in an arc and is being fired at a location", "Docs/Enums/ENoCollisionProjectileMode/Values/ArcedFiringAtLocation.html", ["arced", "firing", "at", "location"], "ENoCollisionProjectileMode");
 addToContainers_enum("", "", "Docs/Enums/_5/.html", [], "");
 addToContainers_enumValue("hitsomething", "Fill out your copyright notice in the Description page of Project Settings.", "Docs/Enums/_5/Values/HitSomething.html", ["hit", "something"], "");
 addToContainers_enumValue("outsideworldbounds", "", "Docs/Enums/_5/Values/OutsideWorldBounds.html", ["outside", "world", "bounds"], "");
@@ -4632,7 +4632,7 @@ addToContainers_enum("etestreppolicy", "", "Docs/Enums/ETestRepPolicy/ETestRepPo
 addToContainers_enumValue("notrouted", "Fill out your copyright notice in the Description page of Project Settings.", "Docs/Enums/ETestRepPolicy/Values/NotRouted.html", ["not", "routed"], "ETestRepPolicy");
 addToContainers_enumValue("relevantowneronly", "", "Docs/Enums/ETestRepPolicy/Values/RelevantOwnerOnly.html", ["relevant", "owner", "only"], "ETestRepPolicy");
 addToContainers_enumValue("relevantallconnections", "", "Docs/Enums/ETestRepPolicy/Values/RelevantAllConnections.html", ["relevant", "all", "connections"], "ETestRepPolicy");
-addToContainers_enumValue("relevantallconnections", "", "Docs/Enums/ETestRepPolicy/Values/RelevantAllConnections_1.html", ["relevant", "all", "connections"], "ETestRepPolicy");
+addToContainers_enumValue("relevantallconnections", "", "Docs/Enums/ETestRepPolicy/Values/RelevantAllConnections.html", ["relevant", "all", "connections"], "ETestRepPolicy");
 addToContainers_enum("", "", "Docs/Enums/_10/.html", [], "");
 addToContainers_enumValue("playeronly", "------------------------------------------------------------------------------------------------ FIXME Issues in this file: I ran into a crazy bug. The jist of it was that I could not declare function pointer variables in my class otherwise the arrays would not work. That\'s right. Simply declaring the function pointer variable and doing absolutally nothing with it will cause the array to have .Num() of zero or if using regular C arrays the values will be different every time and never the correct ones. But if I simply removed the function pointer variables from the class then it would work. The implications of this bug is that I have to use FName to define the function to call, and every input function in PC must be a UFUNCTION. In PC::SetupInputComponent the functions are bound by name or function pointer. I hope binding input to a UInputComponent with FNames instead of raw function pointers doesn\'t have any effect on performance. But it binds it as a dynamic delegate so I\'m pretty sure it does. ------------------------------------------------------------------------------------------------", "Docs/Enums/_10/Values/PlayerOnly.html", ["player", "only"], "");
 addToContainers_enumValue("observeronly", "", "Docs/Enums/_10/Values/ObserverOnly.html", ["observer", "only"], "");
@@ -4699,7 +4699,7 @@ addToContainers_enumValue("float_isgreaterthanorequalto", "", "Docs/Enums/EDepen
 addToContainers_enum("egamestarttype", "", "Docs/Enums/EGameStartType/EGameStartType.html", ["game", "start", "type"], "");
 addToContainers_enumValue("hasnotstartedgamebefore", "", "Docs/Enums/EGameStartType/Values/HasNotStartedGameBefore.html", ["has", "not", "started", "game", "before"], "EGameStartType");
 addToContainers_enumValue("hasstartedgamebefore", "", "Docs/Enums/EGameStartType/Values/HasStartedGameBefore.html", ["has", "started", "game", "before"], "EGameStartType");
-addToContainers_enumValue("hasstartedgamebefore", "", "Docs/Enums/EGameStartType/Values/HasStartedGameBefore_1.html", ["has", "started", "game", "before"], "EGameStartType");
+addToContainers_enumValue("hasstartedgamebefore", "", "Docs/Enums/EGameStartType/Values/HasStartedGameBefore.html", ["has", "started", "game", "before"], "EGameStartType");
 addToContainers_enum("efaction", "", "Docs/Enums/EFaction/EFaction.html", [], "");
 addToContainers_enumValue("none", "Different playable factions. Examples of factions from RTS games: Terran, Zerg, Soviets, Allies, etc", "Docs/Enums/EFaction/Values/None.html", [], "EFaction");
 addToContainers_enumValue("humans", "=========================================", "Docs/Enums/EFaction/Values/Humans.html", [], "EFaction");
@@ -4873,7 +4873,7 @@ addToContainers_enumValue("upgrade", "~ This should always be 4th last in enum",
 addToContainers_enumValue("z_always_3rd_last_in_enum", "This should always be 3rd last in the enum", "Docs/Enums/EContextButton/Values/z_ALWAYS_3RD_LAST_IN_ENUM.html", ["a", "l", "w", "a", "y", "s_3", "r", "d_", "l", "a", "s", "t_", "i", "n_", "e", "n", "u", "m"], "EContextButton");
 addToContainers_enumValue("placingghost", "", "Docs/Enums/EContextButton/Values/PlacingGhost.html", ["placing", "ghost"], "EContextButton");
 addToContainers_enumValue("recentlyexecuted", "Set in LMB press and changed on LMB release", "Docs/Enums/EContextButton/Values/RecentlyExecuted.html", ["recently", "executed"], "EContextButton");
-addToContainers_enumValue("recentlyexecuted", "Set in LMB press and changed on LMB release", "Docs/Enums/EContextButton/Values/RecentlyExecuted_1.html", ["recently", "executed"], "EContextButton");
+addToContainers_enumValue("recentlyexecuted", "Set in LMB press and changed on LMB release", "Docs/Enums/EContextButton/Values/RecentlyExecuted.html", ["recently", "executed"], "EContextButton");
 addToContainers_enum("ecommanderability", "", "Docs/Enums/ECommanderAbility/ECommanderAbility.html", ["commander", "ability"], "");
 addToContainers_enumValue("none", "Abilities that are instigated by the player as opposed to a selectable e.g. in C&C Generals: fuel air bomb, artillery strike, etc", "Docs/Enums/ECommanderAbility/Values/None.html", [], "ECommanderAbility");
 addToContainers_enumValue("human_artillerystrike_rank1", "=========================================", "Docs/Enums/ECommanderAbility/Values/Human_ArtilleryStrike_Rank1.html", ["human_", "artillery", "strike_", "rank1"], "ECommanderAbility");
@@ -4913,7 +4913,7 @@ addToContainers_enum("ebuildingtargetingability", "", "Docs/Enums/EBuildingTarge
 addToContainers_enumValue("none", "Building targeting abilities are abilities that can only target buildings. This enum was added to do custom behavior when right-clicking on buildings e.g. in C&C engineers will capture the building, spies will show you what is being produced, etc", "Docs/Enums/EBuildingTargetingAbility/Values/None.html", [], "EBuildingTargetingAbility");
 addToContainers_enumValue("stealresources", "=========================================", "Docs/Enums/EBuildingTargetingAbility/Values/StealResources.html", ["steal", "resources"], "EBuildingTargetingAbility");
 addToContainers_enumValue("dealdamage", "", "Docs/Enums/EBuildingTargetingAbility/Values/DealDamage.html", ["deal", "damage"], "EBuildingTargetingAbility");
-addToContainers_enumValue("dealdamage", "", "Docs/Enums/EBuildingTargetingAbility/Values/DealDamage_1.html", ["deal", "damage"], "EBuildingTargetingAbility");
+addToContainers_enumValue("dealdamage", "", "Docs/Enums/EBuildingTargetingAbility/Values/DealDamage.html", ["deal", "damage"], "EBuildingTargetingAbility");
 addToContainers_enum("eabilityrequirement", "", "Docs/Enums/EAbilityRequirement/EAbilityRequirement.html", ["ability", "requirement"], "");
 addToContainers_enumValue("uninitialized", "Default value, never to be used", "Docs/Enums/EAbilityRequirement/Values/Uninitialized.html", [], "EAbilityRequirement");
 addToContainers_enumValue("nomissingrequirement", "This is used as a return value for the requirements checking function and signals that all requirements were met", "Docs/Enums/EAbilityRequirement/Values/NoMissingRequirement.html", ["no", "missing", "requirement"], "EAbilityRequirement");
@@ -4951,7 +4951,7 @@ addToContainers_enumValue("cullingblade_belowthreshold", "======================
 addToContainers_enumValue("cullingblade_abovethreshold", "", "Docs/Enums/EAbilityOutcome/Values/CullingBlade_AboveThreshold.html", ["culling", "blade_", "above", "threshold"], "EAbilityOutcome");
 addToContainers_enumValue("didnotkill", "", "Docs/Enums/EAbilityOutcome/Values/DidNotKill.html", ["did", "not", "kill"], "EAbilityOutcome");
 addToContainers_enumValue("didkill", "", "Docs/Enums/EAbilityOutcome/Values/DidKill.html", ["did", "kill"], "EAbilityOutcome");
-addToContainers_enumValue("didkill", "", "Docs/Enums/EAbilityOutcome/Values/DidKill_1.html", ["did", "kill"], "EAbilityOutcome");
+addToContainers_enumValue("didkill", "", "Docs/Enums/EAbilityOutcome/Values/DidKill.html", ["did", "kill"], "EAbilityOutcome");
 addToContainers_enum("ebuffordebuffapplicationoutcome", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/EBuffOrDebuffApplicationOutcome.html", ["buff", "or", "debuff", "application", "outcome"], "");
 addToContainers_enumValue("failure", "The result of trying to apply a buff/debuff. Can add more values if needed", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/Failure.html", [], "EBuffOrDebuffApplicationOutcome");
 addToContainers_enumValue("resetduration", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/ResetDuration.html", ["reset", "duration"], "EBuffOrDebuffApplicationOutcome");
@@ -4959,7 +4959,7 @@ addToContainers_enumValue("success", "", "Docs/Enums/EBuffOrDebuffApplicationOut
 addToContainers_enumValue("alreadyhasit", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/AlreadyHasIt.html", ["already", "has", "it"], "EBuffOrDebuffApplicationOutcome");
 addToContainers_enumValue("cullingblade_kill", "An example of a couple of values that could be added for axe\'s culling blade if it were to ever be implemented", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/CullingBlade_Kill.html", ["culling", "blade_", "kill"], "EBuffOrDebuffApplicationOutcome");
 addToContainers_enumValue("cullingblade_dealdamage", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/CullingBlade_DealDamage.html", ["culling", "blade_", "deal", "damage"], "EBuffOrDebuffApplicationOutcome");
-addToContainers_enumValue("cullingblade_dealdamage", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/CullingBlade_DealDamage_1.html", ["culling", "blade_", "deal", "damage"], "EBuffOrDebuffApplicationOutcome");
+addToContainers_enumValue("cullingblade_dealdamage", "", "Docs/Enums/EBuffOrDebuffApplicationOutcome/Values/CullingBlade_DealDamage.html", ["culling", "blade_", "deal", "damage"], "EBuffOrDebuffApplicationOutcome");
 addToContainers_enum("ebuffordebufftickoutcome", "", "Docs/Enums/EBuffOrDebuffTickOutcome/EBuffOrDebuffTickOutcome.html", ["buff", "or", "debuff", "tick", "outcome"], "");
 addToContainers_enumValue("standardoutcome", "The result of tick logic of a buff/debuff. Add more values if needed", "Docs/Enums/EBuffOrDebuffTickOutcome/Values/StandardOutcome.html", ["standard", "outcome"], "EBuffOrDebuffTickOutcome");
 addToContainers_enumValue("painovertime_killedtargetandgotheal", "", "Docs/Enums/EBuffOrDebuffTickOutcome/Values/PainOverTime_KilledTargetAndGotHeal.html", ["pain", "over", "time_", "killed", "target", "and", "got", "heal"], "EBuffOrDebuffTickOutcome");
@@ -4970,13 +4970,13 @@ addToContainers_enumValue("failure", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome
 addToContainers_enumValue("success", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome/Values/Success.html", [], "EBuffOrDebuffRemovalOutcome");
 addToContainers_enumValue("cleanse_resetdurationofcleansersmight", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome/Values/Cleanse_ResetDurationOfCleansersMight.html", ["cleanse_", "reset", "duration", "of", "cleansers", "might"], "EBuffOrDebuffRemovalOutcome");
 addToContainers_enumValue("cleanse_freshapplicationofcleansersmight", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome/Values/Cleanse_FreshApplicationOfCleansersMight.html", ["cleanse_", "fresh", "application", "of", "cleansers", "might"], "EBuffOrDebuffRemovalOutcome");
-addToContainers_enumValue("cleanse_freshapplicationofcleansersmight", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome/Values/Cleanse_FreshApplicationOfCleansersMight_1.html", ["cleanse_", "fresh", "application", "of", "cleansers", "might"], "EBuffOrDebuffRemovalOutcome");
+addToContainers_enumValue("cleanse_freshapplicationofcleansersmight", "", "Docs/Enums/EBuffOrDebuffRemovalOutcome/Values/Cleanse_FreshApplicationOfCleansersMight.html", ["cleanse_", "fresh", "application", "of", "cleansers", "might"], "EBuffOrDebuffRemovalOutcome");
 addToContainers_enum("ebuffanddebuffremovalreason", "", "Docs/Enums/EBuffAndDebuffRemovalReason/EBuffAndDebuffRemovalReason.html", ["buff", "and", "debuff", "removal", "reason"], "");
 addToContainers_enumValue("expired", "All ticks have happened", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/Expired.html", [], "EBuffAndDebuffRemovalReason");
 addToContainers_enumValue("targetdied", "Target reached zero health most likely not because of this buff/debuff but because of some other reason", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/TargetDied.html", ["target", "died"], "EBuffAndDebuffRemovalReason");
 addToContainers_enumValue("cleansespell", "=========================================", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/CleanseSpell.html", ["cleanse", "spell"], "EBuffAndDebuffRemovalReason");
 addToContainers_enumValue("test", "", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/Test.html", [], "EBuffAndDebuffRemovalReason");
-addToContainers_enumValue("test", "", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/Test_1.html", [], "EBuffAndDebuffRemovalReason");
+addToContainers_enumValue("test", "", "Docs/Enums/EBuffAndDebuffRemovalReason/Values/Test.html", [], "EBuffAndDebuffRemovalReason");
 addToContainers_enum("eselectablebodysocket", "", "Docs/Enums/ESelectableBodySocket/ESelectableBodySocket.html", ["selectable", "body", "socket"], "");
 addToContainers_enumValue("none", "A point on an actor to know where to attach/spawn things relative to it", "Docs/Enums/ESelectableBodySocket/Values/None.html", [], "ESelectableBodySocket");
 addToContainers_enumValue("floor", "The part of the selectable that makes contact with the ground.", "Docs/Enums/ESelectableBodySocket/Values/Floor.html", [], "ESelectableBodySocket");
@@ -4985,7 +4985,7 @@ addToContainers_enumValue("head", "", "Docs/Enums/ESelectableBodySocket/Values/H
 addToContainers_enumValue("abovehead_doesnotrotate", "", "Docs/Enums/ESelectableBodySocket/Values/AboveHead_DoesNotRotate.html", ["above", "head_", "does", "not", "rotate"], "ESelectableBodySocket");
 addToContainers_enumValue("floor_doesnotrotate", "", "Docs/Enums/ESelectableBodySocket/Values/Floor_DoesNotRotate.html", ["floor_", "does", "not", "rotate"], "ESelectableBodySocket");
 addToContainers_enumValue("nukelaunchsite", "Where to launch nuke from", "Docs/Enums/ESelectableBodySocket/Values/NukeLaunchSite.html", ["nuke", "launch", "site"], "ESelectableBodySocket");
-addToContainers_enumValue("nukelaunchsite", "Where to launch nuke from", "Docs/Enums/ESelectableBodySocket/Values/NukeLaunchSite_1.html", ["nuke", "launch", "site"], "ESelectableBodySocket");
+addToContainers_enumValue("nukelaunchsite", "Where to launch nuke from", "Docs/Enums/ESelectableBodySocket/Values/NukeLaunchSite.html", ["nuke", "launch", "site"], "ESelectableBodySocket");
 addToContainers_enum("estartingresourceamount", "", "Docs/Enums/EStartingResourceAmount/EStartingResourceAmount.html", ["starting", "resource", "amount"], "");
 addToContainers_enumValue("default", "Default value used if no value specified by user", "Docs/Enums/EStartingResourceAmount/Values/Default.html", [], "EStartingResourceAmount");
 addToContainers_enumValue("low", "=========================================", "Docs/Enums/EStartingResourceAmount/Values/Low.html", [], "EStartingResourceAmount");
@@ -5001,7 +5001,7 @@ addToContainers_enumValue("z_always_last_in_enum", "============================
 addToContainers_enum("eselectableresourcetype", "", "Docs/Enums/ESelectableResourceType/ESelectableResourceType.html", ["selectable", "resource", "type"], "");
 addToContainers_enumValue("mana", "=========================================", "Docs/Enums/ESelectableResourceType/Values/Mana.html", [], "ESelectableResourceType");
 addToContainers_enumValue("none", "=========================================", "Docs/Enums/ESelectableResourceType/Values/None.html", [], "ESelectableResourceType");
-addToContainers_enumValue("none", "=========================================", "Docs/Enums/ESelectableResourceType/Values/None_1.html", [], "ESelectableResourceType");
+addToContainers_enumValue("none", "=========================================", "Docs/Enums/ESelectableResourceType/Values/None.html", [], "ESelectableResourceType");
 addToContainers_enum("ebuildingnetworktype", "", "Docs/Enums/EBuildingNetworkType/EBuildingNetworkType.html", ["building", "network", "type"], "");
 addToContainers_enumValue("none", "This values means \'not part of any network\' e.g. terran bunkers, C&C generals china bunkers", "Docs/Enums/EBuildingNetworkType/Values/None.html", [], "EBuildingNetworkType");
 addToContainers_enumValue("humanbarracks", "=========================================", "Docs/Enums/EBuildingNetworkType/Values/HumanBarracks.html", ["human", "barracks"], "EBuildingNetworkType");
@@ -5057,27 +5057,27 @@ addToContainers_enumValue("purchasedfromshop", "Purchased the item from a shop",
 addToContainers_enumValue("combinedfromothers", "The item was created by combining other items e.g. divine rapier, boots of travel", "Docs/Enums/EItemAquireReason/Values/CombinedFromOthers.html", ["combined", "from", "others"], "EItemAquireReason");
 addToContainers_enumValue("pickedupoffground", "Found it in the world and picked it up", "Docs/Enums/EItemAquireReason/Values/PickedUpOffGround.html", ["picked", "up", "off", "ground"], "EItemAquireReason");
 addToContainers_enumValue("magicallycreated", "This is for development. Item was added using the development cheat widget", "Docs/Enums/EItemAquireReason/Values/MagicallyCreated.html", ["magically", "created"], "EItemAquireReason");
-addToContainers_enumValue("magicallycreated", "This is for development. Item was added using the development cheat widget", "Docs/Enums/EItemAquireReason/Values/MagicallyCreated_1.html", ["magically", "created"], "EItemAquireReason");
+addToContainers_enumValue("magicallycreated", "This is for development. Item was added using the development cheat widget", "Docs/Enums/EItemAquireReason/Values/MagicallyCreated.html", ["magically", "created"], "EItemAquireReason");
 addToContainers_enum("eitemremovalreason", "", "Docs/Enums/EItemRemovalReason/EItemRemovalReason.html", ["item", "removal", "reason"], "");
 addToContainers_enumValue("droppedondeath", "The item drops when it\'s weilder dies which is what has happened e.g. divine rapier, gem of true sight", "Docs/Enums/EItemRemovalReason/Values/DroppedOnDeath.html", ["dropped", "on", "death"], "EItemRemovalReason");
 addToContainers_enumValue("ingredient", "The item is being removed because it + other items are being combined to create another item e.g. claymore is removed to make a divine rapier", "Docs/Enums/EItemRemovalReason/Values/Ingredient.html", [], "EItemRemovalReason");
 addToContainers_enumValue("removedonzerocharges", "When item reaches zero charges it is removed which is what happened e.g. clarity potions, TP scrolls", "Docs/Enums/EItemRemovalReason/Values/RemovedOnZeroCharges.html", ["removed", "on", "zero", "charges"], "EItemRemovalReason");
 addToContainers_enumValue("sold", "Item was sold to a shop", "Docs/Enums/EItemRemovalReason/Values/Sold.html", [], "EItemRemovalReason");
-addToContainers_enumValue("sold", "Item was sold to a shop", "Docs/Enums/EItemRemovalReason/Values/Sold_1.html", [], "EItemRemovalReason");
+addToContainers_enumValue("sold", "Item was sold to a shop", "Docs/Enums/EItemRemovalReason/Values/Sold.html", [], "EItemRemovalReason");
 addToContainers_enum("eitementersworldreason", "", "Docs/Enums/EItemEntersWorldReason/EItemEntersWorldReason.html", ["item", "enters", "world", "reason"], "");
 addToContainers_enumValue("droppedondeath", "Item is the type of item that drops when it\'s owner dies which is what has happened", "Docs/Enums/EItemEntersWorldReason/Values/DroppedOnDeath.html", ["dropped", "on", "death"], "EItemEntersWorldReason");
 addToContainers_enumValue("explicitlydropped", "Adding this because I anticipate it will be used at some point. Selectable was commanded to drop the item", "Docs/Enums/EItemEntersWorldReason/Values/ExplicitlyDropped.html", ["explicitly", "dropped"], "EItemEntersWorldReason");
-addToContainers_enumValue("explicitlydropped", "Adding this because I anticipate it will be used at some point. Selectable was commanded to drop the item", "Docs/Enums/EItemEntersWorldReason/Values/ExplicitlyDropped_1.html", ["explicitly", "dropped"], "EItemEntersWorldReason");
+addToContainers_enumValue("explicitlydropped", "Adding this because I anticipate it will be used at some point. Selectable was commanded to drop the item", "Docs/Enums/EItemEntersWorldReason/Values/ExplicitlyDropped.html", ["explicitly", "dropped"], "EItemEntersWorldReason");
 addToContainers_enum("eitemchangesnumchargesreason", "", "Docs/Enums/EItemChangesNumChargesReason/EItemChangesNumChargesReason.html", ["item", "changes", "num", "charges", "reason"], "");
 addToContainers_enumValue("use", "The owner used it which consumed a charge", "Docs/Enums/EItemChangesNumChargesReason/Values/Use.html", [], "EItemChangesNumChargesReason");
-addToContainers_enumValue("use", "The owner used it which consumed a charge", "Docs/Enums/EItemChangesNumChargesReason/Values/Use_1.html", [], "EItemChangesNumChargesReason");
+addToContainers_enumValue("use", "The owner used it which consumed a charge", "Docs/Enums/EItemChangesNumChargesReason/Values/Use.html", [], "EItemChangesNumChargesReason");
 addToContainers_enum("elobbyslotstatus", "", "Docs/Enums/ELobbySlotStatus/ELobbySlotStatus.html", ["lobby", "slot", "status"], "");
 addToContainers_enumValue("justinitialized", "Default value. Never to be used", "Docs/Enums/ELobbySlotStatus/Values/JustInitialized.html", ["just", "initialized"], "ELobbySlotStatus");
 addToContainers_enumValue("human", "Another human player", "Docs/Enums/ELobbySlotStatus/Values/Human.html", [], "ELobbySlotStatus");
 addToContainers_enumValue("cpu", "Computer controlled player", "Docs/Enums/ELobbySlotStatus/Values/CPU.html", ["p", "u"], "ELobbySlotStatus");
 addToContainers_enumValue("open", "Slot is open. Players can occupy it", "Docs/Enums/ELobbySlotStatus/Values/Open.html", [], "ELobbySlotStatus");
 addToContainers_enumValue("closed", "Slot cannot be occupied. Will be made invisible", "Docs/Enums/ELobbySlotStatus/Values/Closed.html", [], "ELobbySlotStatus");
-addToContainers_enumValue("closed", "Slot cannot be occupied. Will be made invisible", "Docs/Enums/ELobbySlotStatus/Values/Closed_1.html", [], "ELobbySlotStatus");
+addToContainers_enumValue("closed", "Slot cannot be occupied. Will be made invisible", "Docs/Enums/ELobbySlotStatus/Values/Closed.html", [], "ELobbySlotStatus");
 addToContainers_enum("ematchtype", "", "Docs/Enums/EMatchType/EMatchType.html", ["match", "type"], "");
 addToContainers_enumValue("none", "Type of match", "Docs/Enums/EMatchType/Values/None.html", [], "EMatchType");
 addToContainers_enumValue("offline", "", "Docs/Enums/EMatchType/Values/Offline.html", [], "EMatchType");
@@ -5217,7 +5217,7 @@ addToContainers_enumValue("protoss", "Like Protoss in Starcraft II. Requires the
 addToContainers_enum("ebuildingrallypointdisplayrule", "", "Docs/Enums/EBuildingRallyPointDisplayRule/EBuildingRallyPointDisplayRule.html", ["building", "rally", "point", "display", "rule"], "");
 addToContainers_enumValue("always", "Show even when being constructed", "Docs/Enums/EBuildingRallyPointDisplayRule/Values/Always.html", [], "EBuildingRallyPointDisplayRule");
 addToContainers_enumValue("onlywhenfullyconstructed", "Do not show when being constructed", "Docs/Enums/EBuildingRallyPointDisplayRule/Values/OnlyWhenFullyConstructed.html", ["only", "when", "fully", "constructed"], "EBuildingRallyPointDisplayRule");
-addToContainers_enumValue("onlywhenfullyconstructed", "Do not show when being constructed", "Docs/Enums/EBuildingRallyPointDisplayRule/Values/OnlyWhenFullyConstructed_1.html", ["only", "when", "fully", "constructed"], "EBuildingRallyPointDisplayRule");
+addToContainers_enumValue("onlywhenfullyconstructed", "Do not show when being constructed", "Docs/Enums/EBuildingRallyPointDisplayRule/Values/OnlyWhenFullyConstructed.html", ["only", "when", "fully", "constructed"], "EBuildingRallyPointDisplayRule");
 addToContainers_enum("eselectabletype", "", "Docs/Enums/ESelectableType/ESelectableType.html", ["selectable", "type"], "");
 addToContainers_enumValue("building", "The type of a selectable", "Docs/Enums/ESelectableType/Values/Building.html", [], "ESelectableType");
 addToContainers_enumValue("unit", "", "Docs/Enums/ESelectableType/Values/Unit.html", [], "ESelectableType");
@@ -5280,13 +5280,13 @@ addToContainers_enum("eattributeadjustmentrule", "", "Docs/Enums/EAttributeAdjus
 addToContainers_enumValue("nochange", "If max health increases by 200 then current health will not change. If max health decreases by 200 then current health will not change unless it is now more than max health in which case it will be set to max health", "Docs/Enums/EAttributeAdjustmentRule/Values/NoChange.html", ["no", "change"], "EAttributeAdjustmentRule");
 addToContainers_enumValue("percentage", "If max health increases by 30% then current health increases by 30%. If max health decreases by 30% then current health decreases by 30%", "Docs/Enums/EAttributeAdjustmentRule/Values/Percentage.html", [], "EAttributeAdjustmentRule");
 addToContainers_enumValue("absolute", "If max health increases by 200 then so does current health. If max health decreases by 200 then current health will not change unless it is now more than max health in which case it will be set to max health", "Docs/Enums/EAttributeAdjustmentRule/Values/Absolute.html", [], "EAttributeAdjustmentRule");
-addToContainers_enumValue("absolute", "If max health increases by 200 then so does current health. If max health decreases by 200 then current health will not change unless it is now more than max health in which case it will be set to max health", "Docs/Enums/EAttributeAdjustmentRule/Values/Absolute_1.html", [], "EAttributeAdjustmentRule");
+addToContainers_enumValue("absolute", "If max health increases by 200 then so does current health. If max health decreases by 200 then current health will not change unless it is now more than max health in which case it will be set to max health", "Docs/Enums/EAttributeAdjustmentRule/Values/Absolute.html", [], "EAttributeAdjustmentRule");
 addToContainers_enum("eselectablecreationmethod", "", "Docs/Enums/ESelectableCreationMethod/ESelectableCreationMethod.html", ["selectable", "creation", "method"], "");
 addToContainers_enumValue("uninitialized", "Currently it is unknown how it was created yet", "Docs/Enums/ESelectableCreationMethod/Values/Uninitialized.html", [], "ESelectableCreationMethod");
 addToContainers_enumValue("startingselectable", "The selectable is a selectable that the player started the match with", "Docs/Enums/ESelectableCreationMethod/Values/StartingSelectable.html", ["starting", "selectable"], "ESelectableCreationMethod");
 addToContainers_enumValue("production", "The selectable was created using a production queue or from a worker", "Docs/Enums/ESelectableCreationMethod/Values/Production.html", [], "ESelectableCreationMethod");
 addToContainers_enumValue("spawned", "Spawned using an ability or something", "Docs/Enums/ESelectableCreationMethod/Values/Spawned.html", [], "ESelectableCreationMethod");
-addToContainers_enumValue("spawned", "Spawned using an ability or something", "Docs/Enums/ESelectableCreationMethod/Values/Spawned_1.html", [], "ESelectableCreationMethod");
+addToContainers_enumValue("spawned", "Spawned using an ability or something", "Docs/Enums/ESelectableCreationMethod/Values/Spawned.html", [], "ESelectableCreationMethod");
 addToContainers_enum("einventoryitemnumchargeschangedbehavior", "", "Docs/Enums/EInventoryItemNumChargesChangedBehavior/EInventoryItemNumChargesChangedBehavior.html", ["inventory", "item", "num", "charges", "changed", "behavior"], "");
 addToContainers_enumValue("alwaysdonothing", "Do nothing e.g. diffusal blade", "Docs/Enums/EInventoryItemNumChargesChangedBehavior/Values/AlwaysDoNothing.html", ["always", "do", "nothing"], "EInventoryItemNumChargesChangedBehavior");
 addToContainers_enumValue("destroyatzerocharges", "Destroy the item when it reaches zero charges e.g. TP scroll", "Docs/Enums/EInventoryItemNumChargesChangedBehavior/Values/DestroyAtZeroCharges.html", ["destroy", "at", "zero", "charges"], "EInventoryItemNumChargesChangedBehavior");
@@ -5320,10 +5320,10 @@ addToContainers_enumValue("instigatingteamonly", "Only the team making the sound
 addToContainers_enumValue("alwaysknownonceheard", "Once the sound is heard once it can be heard forever. Worse performance than DecideOnSpawn", "Docs/Enums/ESoundFogRules/Values/AlwaysKnownOnceHeard.html", ["always", "known", "once", "heard"], "ESoundFogRules");
 addToContainers_enumValue("dynamicexceptforinstigatorsteam", "Sound will become unheard if it is inside fog of war, except for the team that instigated the sound. For them it will always be heard even if the sound\'s location becomes inside fog of war. Worse performance than DecideOnSpawn.", "Docs/Enums/ESoundFogRules/Values/DynamicExceptForInstigatorsTeam.html", ["dynamic", "except", "for", "instigators", "team"], "ESoundFogRules");
 addToContainers_enumValue("dynamic", "Sound will change from being heard/unheard based on its current locations fog status. This has worse performance than all above but it\'s really no biggie.", "Docs/Enums/ESoundFogRules/Values/Dynamic.html", [], "ESoundFogRules");
-addToContainers_enumValue("dynamic", "Sound will change from being heard/unheard based on its current locations fog status. This has worse performance than all above but it\'s really no biggie.", "Docs/Enums/ESoundFogRules/Values/Dynamic_1.html", [], "ESoundFogRules");
+addToContainers_enumValue("dynamic", "Sound will change from being heard/unheard based on its current locations fog status. This has worse performance than all above but it\'s really no biggie.", "Docs/Enums/ESoundFogRules/Values/Dynamic.html", [], "ESoundFogRules");
 addToContainers_enum("eworldwidgetviewmode", "", "Docs/Enums/EWorldWidgetViewMode/EWorldWidgetViewMode.html", ["world", "widget", "view", "mode"], "");
 addToContainers_enumValue("nochange", "Do nothing", "Docs/Enums/EWorldWidgetViewMode/Values/NoChange.html", ["no", "change"], "EWorldWidgetViewMode");
-addToContainers_enumValue("nochange", "Do nothing", "Docs/Enums/EWorldWidgetViewMode/Values/NoChange_1.html", ["no", "change"], "EWorldWidgetViewMode");
+addToContainers_enumValue("nochange", "Do nothing", "Docs/Enums/EWorldWidgetViewMode/Values/NoChange.html", ["no", "change"], "EWorldWidgetViewMode");
 addToContainers_enum("eabilitytargetingmethod", "", "Docs/Enums/EAbilityTargetingMethod/EAbilityTargetingMethod.html", ["ability", "targeting", "method"], "");
 addToContainers_enumValue("doesnotrequireanytarget", "Does not require any target", "Docs/Enums/EAbilityTargetingMethod/Values/DoesNotRequireAnyTarget.html", ["does", "not", "require", "any", "target"], "EAbilityTargetingMethod");
 addToContainers_enumValue("requiresselectable", "Requires another selectable as a target e.g. SCII ghost snipe", "Docs/Enums/EAbilityTargetingMethod/Values/RequiresSelectable.html", ["requires", "selectable"], "EAbilityTargetingMethod");
@@ -5332,7 +5332,7 @@ addToContainers_enumValue("requiresworldlocationorselectable", "Can target eithe
 addToContainers_enumValue("requiresplayer", "Targets a player", "Docs/Enums/EAbilityTargetingMethod/Values/RequiresPlayer.html", ["requires", "player"], "EAbilityTargetingMethod");
 addToContainers_enum("egarrisonunloadallmethod", "", "Docs/Enums/EGarrisonUnloadAllMethod/EGarrisonUnloadAllMethod.html", ["garrison", "unload", "all", "method"], "");
 addToContainers_enumValue("allatonce_grid", "Everyone leaves all at once. I think SCII terran bunkers do it this way. The units are tried to be positioned in a grid on the side of the building", "Docs/Enums/EGarrisonUnloadAllMethod/Values/AllAtOnce_Grid.html", ["all", "at", "once_", "grid"], "EGarrisonUnloadAllMethod");
-addToContainers_enumValue("allatonce_grid", "Everyone leaves all at once. I think SCII terran bunkers do it this way. The units are tried to be positioned in a grid on the side of the building", "Docs/Enums/EGarrisonUnloadAllMethod/Values/AllAtOnce_Grid_1.html", ["all", "at", "once_", "grid"], "EGarrisonUnloadAllMethod");
+addToContainers_enumValue("allatonce_grid", "Everyone leaves all at once. I think SCII terran bunkers do it this way. The units are tried to be positioned in a grid on the side of the building", "Docs/Enums/EGarrisonUnloadAllMethod/Values/AllAtOnce_Grid.html", ["all", "at", "once_", "grid"], "EGarrisonUnloadAllMethod");
 addToContainers_enum("edevelopmentaction", "", "Docs/Enums/EDevelopmentAction/EDevelopmentAction.html", ["development", "action"], "");
 addToContainers_enumValue("none", "Do no action", "Docs/Enums/EDevelopmentAction/Values/None.html", [], "EDevelopmentAction");
 addToContainers_enumValue("closepopupmenu", "Close the secondary popup menu widget if it is showing", "Docs/Enums/EDevelopmentAction/Values/ClosePopupMenu.html", ["close", "popup", "menu"], "EDevelopmentAction");
@@ -5353,7 +5353,7 @@ addToContainers_enumValue("givespecificinventoryitem_selectionphase", "", "Docs/
 addToContainers_enumValue("givespecificinventoryitem_selecttarget", "", "Docs/Enums/EDevelopmentAction/Values/GiveSpecificInventoryItem_SelectTarget.html", ["give", "specific", "inventory", "item_", "select", "target"], "EDevelopmentAction");
 addToContainers_enumValue("cancelgivespecificinventoryitem_selecttarget", "", "Docs/Enums/EDevelopmentAction/Values/CancelGiveSpecificInventoryItem_SelectTarget.html", ["cancel", "give", "specific", "inventory", "item_", "select", "target"], "EDevelopmentAction");
 addToContainers_enumValue("getunitaiinfo", "", "Docs/Enums/EDevelopmentAction/Values/GetUnitAIInfo.html", ["get", "unit", "a", "i", "info"], "EDevelopmentAction");
-addToContainers_enumValue("getunitaiinfo", "", "Docs/Enums/EDevelopmentAction/Values/GetUnitAIInfo_1.html", ["get", "unit", "a", "i", "info"], "EDevelopmentAction");
+addToContainers_enumValue("getunitaiinfo", "", "Docs/Enums/EDevelopmentAction/Values/GetUnitAIInfo.html", ["get", "unit", "a", "i", "info"], "EDevelopmentAction");
 addToContainers_enum("eeditorplayskippingoption", "", "Docs/Enums/EEditorPlaySkippingOption/EEditorPlaySkippingOption.html", ["editor", "play", "skipping", "option"], "");
 addToContainers_enumValue("skipnothing", "Skip nothing so opening movie will play then main menu will be shown", "Docs/Enums/EEditorPlaySkippingOption/Values/SkipNothing.html", ["skip", "nothing"], "EEditorPlaySkippingOption");
 addToContainers_enumValue("skipopeningcutsceneonly", "Skip just the opening movie so main menu will be shown", "Docs/Enums/EEditorPlaySkippingOption/Values/SkipOpeningCutsceneOnly.html", ["skip", "opening", "cutscene", "only"], "EEditorPlaySkippingOption");
@@ -5381,10 +5381,10 @@ addToContainers_enumValue("7", "", "Docs/Enums/EKeyModifiers/Values/7.html", [],
 addToContainers_enum("ecommanderskilltreeanimationplayrule", "", "Docs/Enums/ECommanderSkillTreeAnimationPlayRule/ECommanderSkillTreeAnimationPlayRule.html", ["commander", "skill", "tree", "animation", "play", "rule"], "");
 addToContainers_enumValue("never", "Never play the anim. An alternative is to just never name the anim correctly in editor", "Docs/Enums/ECommanderSkillTreeAnimationPlayRule/Values/Never.html", [], "ECommanderSkillTreeAnimationPlayRule");
 addToContainers_enumValue("canaffordabilityatstartofmatchorlevelup", "The anim will play: - at the start of the match if the player can afford at least one ability on the skill tree - if you level up and can afford at least one ability on the skill tree", "Docs/Enums/ECommanderSkillTreeAnimationPlayRule/Values/CanAffordAbilityAtStartOfMatchOrLevelUp.html", ["can", "afford", "ability", "at", "start", "of", "match", "or", "level", "up"], "ECommanderSkillTreeAnimationPlayRule");
-addToContainers_enumValue("canaffordabilityatstartofmatchorlevelup", "The anim will play: - at the start of the match if the player can afford at least one ability on the skill tree - if you level up and can afford at least one ability on the skill tree", "Docs/Enums/ECommanderSkillTreeAnimationPlayRule/Values/CanAffordAbilityAtStartOfMatchOrLevelUp_1.html", ["can", "afford", "ability", "at", "start", "of", "match", "or", "level", "up"], "ECommanderSkillTreeAnimationPlayRule");
+addToContainers_enumValue("canaffordabilityatstartofmatchorlevelup", "The anim will play: - at the start of the match if the player can afford at least one ability on the skill tree - if you level up and can afford at least one ability on the skill tree", "Docs/Enums/ECommanderSkillTreeAnimationPlayRule/Values/CanAffordAbilityAtStartOfMatchOrLevelUp.html", ["can", "afford", "ability", "at", "start", "of", "match", "or", "level", "up"], "ECommanderSkillTreeAnimationPlayRule");
 addToContainers_enum("eassignedabilitytype", "", "Docs/Enums/EAssignedAbilityType/EAssignedAbilityType.html", ["assigned", "ability", "type"], "");
 addToContainers_enumValue("commanderskill", "What kind of ability is assigned to this button", "Docs/Enums/EAssignedAbilityType/Values/CommanderSkill.html", ["commander", "skill"], "EAssignedAbilityType");
-addToContainers_enumValue("commanderskill", "What kind of ability is assigned to this button", "Docs/Enums/EAssignedAbilityType/Values/CommanderSkill_1.html", ["commander", "skill"], "EAssignedAbilityType");
+addToContainers_enumValue("commanderskill", "What kind of ability is assigned to this button", "Docs/Enums/EAssignedAbilityType/Values/CommanderSkill.html", ["commander", "skill"], "EAssignedAbilityType");
 addToContainers_enum("", "", "Docs/Enums/_11/.html", [], "");
 addToContainers_enumValue("exittomainmenu", "Fill out your copyright notice in the Description page of Project Settings.", "Docs/Enums/_11/Values/ExitToMainMenu.html", ["exit", "to", "main", "menu"], "");
 addToContainers_enumValue("exittooperatingsystem", "", "Docs/Enums/_11/Values/ExitToOperatingSystem.html", ["exit", "to", "operating", "system"], "");
@@ -5410,7 +5410,7 @@ addToContainers_enum("ecloserequestbehavior", "", "Docs/Enums/ECloseRequestBehav
 addToContainers_enumValue("donotsave", "Load from disk and apply those, so any unsaved changes are not saved", "Docs/Enums/ECloseRequestBehavior/Values/DoNotSave.html", ["do", "not", "save"], "ECloseRequestBehavior");
 addToContainers_enumValue("save", "Apply unsaved changes and save them to disk", "Docs/Enums/ECloseRequestBehavior/Values/Save.html", [], "ECloseRequestBehavior");
 addToContainers_enumValue("ask", "Ask the user what to do", "Docs/Enums/ECloseRequestBehavior/Values/Ask.html", [], "ECloseRequestBehavior");
-addToContainers_enumValue("ask", "Ask the user what to do", "Docs/Enums/ECloseRequestBehavior/Values/Ask_1.html", [], "ECloseRequestBehavior");
+addToContainers_enumValue("ask", "Ask the user what to do", "Docs/Enums/ECloseRequestBehavior/Values/Ask.html", [], "ECloseRequestBehavior");
 addToContainers_enum("esettingssubmenutype", "", "Docs/Enums/ESettingsSubmenuType/ESettingsSubmenuType.html", ["settings", "submenu", "type"], "");
 addToContainers_enumValue("videosettings", "", "Docs/Enums/ESettingsSubmenuType/Values/VideoSettings.html", ["video", "settings"], "ESettingsSubmenuType");
 addToContainers_enumValue("audiosettings", "", "Docs/Enums/ESettingsSubmenuType/Values/AudioSettings.html", ["audio", "settings"], "ESettingsSubmenuType");

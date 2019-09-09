@@ -172,11 +172,11 @@
          // Check if have moved off first suggestion and onto the search box 
          if (window.searchBoxSuggestionHighlightedIndex == -1)
          {
+            console.log(window.searchBoxUserInputedText);
+            
             // Need to revert text back to what user typed
             var textBox = document.getElementById("searchBoxInput");
             textBox.value = window.searchBoxUserInputedText;
-            
-            console.log("REVERT");
          }
          else
          {

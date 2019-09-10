@@ -254,6 +254,10 @@
    function onSearchBoxBlur(searchBox)
    {
       hideSearchBoxDropdownMenu();
+      
+      var input = document.getElementById("searchBoxInput");
+      /* Revert text back to what the user typed */
+      input.value = window.searchBoxUserInputedText;
    }
    
    function onSearchBoxListElementMouseMove(li)

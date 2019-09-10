@@ -225,7 +225,7 @@
    function onSearchBoxListElementMouseOver(li)
    {
       // Figure out position of element in list
-      var listElems = li.parentNode.getElementsByClassName("searchBoxListElement");
+      var listElems = li.parentElement.getElementsByClassName("searchBoxListElement");
       var idx;
       for (idx = 0; idx < listElems.length; ++idx)
       {
@@ -350,7 +350,8 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");
    for (var i = 0; i < searchBoxListElements.length; ++i)
    {
-      searchBoxListElements[i].addEventListener("mouseover", function(li)
+      var elem = searchBoxListElements[i];
+      elem.addEventListener("mouseover", function(elem)
       {
          onSearchBoxListElementMouseOver(li);
       }, false);

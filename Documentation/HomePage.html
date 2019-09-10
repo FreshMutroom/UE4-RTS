@@ -277,7 +277,7 @@
       textBox.value = listElems[idx].textContent;
    }
    
-   function onSearchBoxListElementMouseClick(li)
+   function onSearchBoxListElementMouseDown(li)
    {
       performSearch(li.textContent);
    }
@@ -386,11 +386,7 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    
    searchBoxInput.addEventListener("blur", function()
    {
-      /* Commented. Reason is when you click on a list element search box gets blurred so list becomes 
-      hidden, then I think click misses the list element now because it is now hidden. SOlution: perhaps 
-      make the list element addEventListener "mousepress" or whatever it's called instead of "click". 
-      But I have to go now so cannot test this now */
-      //onSearchBoxBlur(this);
+      onSearchBoxBlur(this);
    }, false);
    
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");
@@ -402,9 +398,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
          onSearchBoxListElementMouseMove(this); 
       }, false);
       
-      elem.addEventListener("click", function()
+      elem.addEventListener("mousedown", function()
       {
-         onSearchBoxListElementMouseClick(this);
+         onSearchBoxListElementMouseDown(this);
       }, false);
    }
    

@@ -386,7 +386,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    
    searchBoxInput.addEventListener("blur", function()
    {
-      onSearchBoxBlur(this);
+      /* Commented. Reason is when you click on a list element search box gets blurred so list becomes 
+      hidden, then I think click misses the list element now because it is now hidden. SOlution: perhaps 
+      make the list element addEventListener "mousepress" or whatever it's called instead of "click". 
+      But I have to go now so cannot test this now */
+      //onSearchBoxBlur(this);
    }, false);
    
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");

@@ -110,11 +110,6 @@
          location.href = "SearchResults.html";
    }
    
-   function onDocumentMouseClick()
-   {
-      console.log("Doc mouse click");  
-   }
-   
    function onSearchBoxTextBoxKeyUp(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
@@ -230,6 +225,11 @@
       }
       
       return true;
+   }
+   
+   function onSearchBoxBlur(searchBox)
+   {
+      hideSearchBoxDropdownMenu();
    }
    
    function onSearchBoxListElementMouseMove(li)
@@ -352,11 +352,6 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    // Just using the first one - I assume they're all the same
    window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
    
-   document.addEventListener("click", function()
-   {
-      onDocumentMouseClick();
-   }, false);
-   
    var searchBoxInput = document.getElementById("searchBoxInput");
    searchBoxInput.addEventListener("keydown", function(e)
    {
@@ -365,6 +360,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    searchBoxInput.addEventListener("keyup", function(e)
    {
       onSearchBoxTextBoxKeyUp(e);
+   }, false);
+   
+   searchBoxInput.addEventListener("blur", function()
+   {
+      onSearchBoxBlur(this);
    }, false);
    
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");

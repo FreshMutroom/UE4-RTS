@@ -94,7 +94,6 @@
          li[i].style.visibility = "hidden";
       }
    }
-   
   
    function OnSearchBoxTextBoxKeyDown(keyEvent)
    {
@@ -229,7 +228,20 @@
    
    function onSearchBoxFocus(searchBox)
    {
-      console.log("searchBox focus");
+      /* Check if any text is entered in the search box */
+      if (searchBox.value.length > 0)
+      {
+         /* Show the drop down suggestions menu. We just show it and assume that is hasn't changed 
+         since when it was hidden for performance, but if it has changed then will have to get 
+         suggestions */
+          var ul =  document.getElementById("searchBoxDropdownList");
+          var li = ul.getElementsByTagName("li");
+      
+         for (var i = 0; i < li.length; ++i)
+         {
+            li[i].style.visibility = "visible";
+         }
+      }
    }
    
    function onSearchBoxBlur(searchBox)

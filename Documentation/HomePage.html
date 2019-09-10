@@ -227,7 +227,7 @@
       return true;
    }
    
-   function onSearchBoxListElementMouseOver(li)
+   function onSearchBoxListElementMouseMove(li)
    {
       // Figure out position of element in list
       var listElems = li.parentElement.getElementsByClassName("searchBoxListElement");
@@ -361,9 +361,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    for (var i = 0; i < searchBoxListElements.length; ++i)
    {
       var elem = searchBoxListElements[i];
-      elem.addEventListener("mouseover", function()
+      elem.addEventListener("mousemove", function()
       {
-         onSearchBoxListElementMouseOver(this); 
+         onSearchBoxListElementMouseMove(this); 
       }, false);
       
       elem.addEventListener("click", function()

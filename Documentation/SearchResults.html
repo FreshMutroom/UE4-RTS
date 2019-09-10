@@ -226,17 +226,17 @@
 
 			// Add classes that are perfect matches
 			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).exactMatches.classes.length : 0;
-            for (var i = 0; i < len; ++i)
+            		for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("class", false, true, searchTokenToPaths.get(tkn).exactMatches.classes[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "a" || tokens[i].appendedFirstChar == "u")
 				{
 					searchResults.push(new SearchResult("class", true, true, searchTokenToPaths.get(tkn).exactMatches.classes[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.classes[i]);
 				}
 			}
 
@@ -247,12 +247,12 @@
 				if (tokens[i].appenedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("struct", false, true, searchTokenToPaths.get(tkn).exactMatches.structs[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "f")
 				{
 					searchResults.push(new SearchResult("struct", true, true, searchTokenToPaths.get(tkn).exactMatches.structs[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.structs[i]);
 				}
 			}
 
@@ -263,12 +263,12 @@
 				if (tokens[i].appenedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("enum", false, true, searchTokenToPaths.get(tkn).exactMatches.enums[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
 				}
 				else if (tokens[i].appendedFirstChar == "e")
 				{
 					searchResults.push(new SearchResult("enum", true, true, searchTokenToPaths.get(tkn).exactMatches.enums[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enums[i]);
 				}
 			}
 
@@ -279,7 +279,7 @@
 				if (tokens[i].appenedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("function", false, true, searchTokenToPaths.get(tkn).exactMatches.functions[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.functions[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.functions[i]);
 				}
 			}
 
@@ -290,7 +290,7 @@
 				if (tokens[i].appenedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("variable", false, true, searchTokenToPaths.get(tkn).exactMatches.variables[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.variables[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.variables[i]);
 				}
 			}
 
@@ -301,7 +301,7 @@
 				if (tokens[i].appenedFirstChar == "")
 				{
 					searchResults.push(new SearchResult("enumValue", false, true, searchTokenToPaths.get(tkn).exactMatches.enumValues[i]));
-                    incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enumValues[i]);
+                    			incrementPathToNumMatchesValue(searchTokenToPaths.get(tkn).exactMatches.enumValues[i]);
 				}
 			}
             
@@ -310,7 +310,7 @@
             
 			// classes
 			len = searchTokenToPaths.has(tkn) ? searchTokenToPaths.get(tkn).partialMatches.classes.length : 0;
-            for (var i = 0; i < len; ++i)
+			for (var i = 0; i < len; ++i)
 			{
 				if (tokens[i].appendedFirstChar == "")
 				{
@@ -390,7 +390,7 @@
 			}
 		}
 	    
-        //-------------------------------------------------------------------------
+        	//-------------------------------------------------------------------------
 		//	
 		//-------------------------------------------------------------------------
         
@@ -544,6 +544,8 @@
 			});
 		}
 		
+	    console.log(searchResults);
+	    
         return searchResults;
     }
 	 

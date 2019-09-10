@@ -201,26 +201,26 @@
 		//	Adding to searchResults
 		//-----------------------------------------------------------------
 		
+		// Maps folder path to how many tokens match it
+		// e.g. user searches "max health"
+		// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
+		// The "max" token gets a match and so does the "health" token. 
+		// Gets incremented for both exact matches and partial matches
+		var pathToNumMatches = new Map();
+            
+		/* Adds key to map if not there and sets value to 1. Otherwise just increments value by 1 */
+		function incrementPathToNumMatchesValue(key)
+		{
+			if (pathToNumMatches.has(key) == false)
+			{
+				pathToNumMatches.set(key, 0);
+			}
+			pathToNumMatches[key] += 1;
+		};
+		
 		for (var k = tokens.length - 1; k >= 0; --k)
 		{
             var tkn = tokens[k].token;
-
-			// Maps folder path to how many tokens match it
-			// e.g. user searches "max health"
-			// the file /Classes/AInfantry/MaxHealth.html or whatever will have a value of 2 by the time the search is complete. 
-			// The "max" token gets a match and so does the "health" token. 
-            // Gets incremented for both exact matches and partial matches
-			var pathToNumMatches = new Map();
-            
-			/* Adds key to map if not there and sets value to 1. Otherwise just increments value by 1 */
-			function incrementPathToNumMatchesValue(key)
-			{
-				if (pathToNumMatches.has(key) == false)
-				{
-					pathToNumMatches.set(key, 0);
-				}
-				pathToNumMatches[key] += 1;
-			};
             
 			var len;
 

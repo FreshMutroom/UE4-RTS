@@ -227,6 +227,11 @@
       return true;
    }
    
+   function onSearchBoxFocus(searchBox)
+   {
+      console.log("searchBox focus");
+   }
+   
    function onSearchBoxBlur(searchBox)
    {
       hideSearchBoxDropdownMenu();
@@ -360,6 +365,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    searchBoxInput.addEventListener("keyup", function(e)
    {
       onSearchBoxTextBoxKeyUp(e);
+   }, false);
+   
+   searchBoxInput.addEventListener("focus", function()
+   {
+      onSearchBoxFocus(this);
    }, false);
    
    searchBoxInput.addEventListener("blur", function()

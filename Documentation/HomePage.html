@@ -110,6 +110,11 @@
          location.href = "SearchResults.html";
    }
    
+   function onDocumentMouseClick()
+   {
+      console.log("Doc mouse click");  
+   }
+   
    function onSearchBoxTextBoxKeyUp(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
@@ -346,6 +351,11 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxSuggestionOriginalColor = undefined;
    // Just using the first one - I assume they're all the same
    window.searchBoxSuggestionOriginalColor = searchBoxListElements[0].style.backgroundColor;
+   
+   document.addEventListener("click", function()
+   {
+      onDocumentMouseClick();
+   }. false);
    
    var searchBoxInput = document.getElementById("searchBoxInput");
    searchBoxInput.addEventListener("keydown", function(e)

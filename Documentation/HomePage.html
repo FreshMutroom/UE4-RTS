@@ -101,6 +101,15 @@
       
    }
    
+   function performSearch(searchText)
+   {
+         // Set this so the SearchResults.html page can read it to know what the user searched for
+         window.localStorage.setItem("searchText", searchText);
+         
+         // Navigate to the search results page
+         location.href = "SearchResults.html";
+   }
+   
    function onSearchBoxTextBoxKeyUp(keyEvent)
    {
       var input = document.getElementById("searchBoxInput");
@@ -110,11 +119,7 @@
       // Check if enter was the key
       if (keyCode == 13) 
       {
-         // Set this so the SearchResults.html page can read it to know what the user searched for
-         window.localStorage.setItem("searchText", enteredText);
-         
-         // Navigate to the search results page
-         location.href = "SearchResults.html";
+         performSearch("searchText", enteredText);
          return true;
       }
       // Check if left/right arrow was the key
@@ -250,6 +255,11 @@
       textBox.value = listElems[idx].textContent;
    }
    
+   function onSearchBoxListElementMouseClick(li)
+   {
+      performSearch(li.textContent);
+   }
+   
 </script>
 
 
@@ -350,9 +360,15 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");
    for (var i = 0; i < searchBoxListElements.length; ++i)
    {
-      searchBoxListElements[i].addEventListener("mouseover", function()
+      var elem = searchBoxListElements[i];
+      elem.addEventListener("mouseover", function()
       {
          onSearchBoxListElementMouseOver(this); 
+      }, false);
+      
+      elem.addEventListener("click", function()
+      {
+         onSearchBoxListElementMouseClick(this);
       }, false);
    }
    

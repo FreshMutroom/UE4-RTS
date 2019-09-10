@@ -350,10 +350,9 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");
    for (var i = 0; i < searchBoxListElements.length; ++i)
    {
-      var elem = searchBoxListElements[i];
-      elem.addEventListener("mouseover", function(elem)
+      searchBoxListElements[i].addEventListener("mouseover", function()
       {
-         onSearchBoxListElementMouseOver(elem); 
+         onSearchBoxListElementMouseOver(this); 
       }, false);
    }
    

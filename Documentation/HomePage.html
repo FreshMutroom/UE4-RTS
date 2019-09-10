@@ -228,15 +228,22 @@
    
    function onSearchBoxFocus(searchBox)
    {
+      var ul =  document.getElementById("searchBoxDropdownList");
+      var li = ul.getElementsByTagName("li");
+      
+      /* Unhighlight a list element if it is highlighted */
+      if (window.searchBoxSuggestionHighlightedIndex != -1)
+      {
+         li[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
+         window.searchBoxSuggestionHighlightedIndex = -1;
+      }
+      
       /* Check if any text is entered in the search box */
       if (searchBox.value.length > 0)
       {
          /* Show the drop down suggestions menu. We just show it and assume that is hasn't changed 
          since when it was hidden for performance, but if it has changed then will have to get 
          suggestions */
-          var ul =  document.getElementById("searchBoxDropdownList");
-          var li = ul.getElementsByTagName("li");
-      
          for (var i = 0; i < li.length; ++i)
          {
             li[i].style.visibility = "visible";

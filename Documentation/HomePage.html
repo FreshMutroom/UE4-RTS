@@ -222,6 +222,34 @@
       return true;
    }
    
+   function onSearchBoxListElementMouseOver(li)
+   {
+      // Figure out position of element in list
+      var listElems = li.parentElement.getElementsByClassName("searchBoxListElement");
+      var idx;
+      for (idx = 0; idx < listElems.length; ++idx)
+      {
+         if (listElems[idx] == li)
+         {
+            break;
+         }
+      }
+      
+      if (window.searchBoxSuggestionHighlightedIndex != -1)
+      {
+         // Unhighlight what was previously highlighted
+         listElems[window.searchBoxSuggestionHighlightedIndex].style.backgroundColor = window.searchBoxSuggestionOriginalColor;
+      }
+      
+      // Highlight moused over element
+      listElems[idx].style.backgroundColor = window.searchBoxSuggestionHighlightColor;
+      window.searchBoxSuggestionHighlightedIndex = idx;
+      
+      // Change text box text to the list elements value 
+      var textBox = document.getElementById("searchBoxInput");
+      textBox.value = listElems[idx].textContent;
+   }
+   
 </script>
 
 
@@ -318,6 +346,15 @@ Note: only onkeyup is bound to onSearchBoxTextChanged() which isn't good enough 
    {
       onSearchBoxTextBoxKeyUp(e);
    }, false);
+   
+   var searchBoxListElements = document.getElementsByClassName("searchBoxListElement");
+   for (var i = 0; i < searchBoxListElements.length; ++i)
+   {
+      searchBoxListElements[i].addEventListener("onmouseover", function(li)
+      {
+         onSearchBoxListElementMouseOver(li);
+      }, false);
+   }
    
 </script>
 

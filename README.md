@@ -1,4 +1,4 @@
 # UE4-RTS
-Project for creating RTS games using Unreal Engine 4
+UE4 plugin for creating RTS games
 
 [Github pages site](https://freshmutroom.github.io/UE4-RTS/)
